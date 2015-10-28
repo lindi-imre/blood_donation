@@ -4,11 +4,8 @@ class Person():
     name = ""
     weight = 0
     gender = ""
-    expiration = ""
 
-    @staticmethod
-    def get_name():
-        pass
-
-    
-
+    def __init__(self,name,weight,gender):
+        self.name = name
+        self.weight = weight
+        self.weight = gender
