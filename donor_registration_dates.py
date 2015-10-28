@@ -8,5 +8,5 @@ class donor_dates:
         return datetime.datetime.strptime(input(" (year.month.day): "), "%Y.%m.%d.").date()
 
     @staticmethod
-    def get_last_donation_date():
-        return datetime.datetime.strptime(input(" (year.month.day): "), "%Y.%m.%d.").date()
+    def get_time():
+        return datetime.datetime.strptime(input(" (hour.minutes.): "), "%H.%M.").time()

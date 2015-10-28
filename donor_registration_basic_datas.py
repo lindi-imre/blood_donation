@@ -8,4 +8,7 @@ class Person():
 
     @staticmethod
     def get_name(name):
+        pass    
+    def get_weight(weight):
         pass
+
