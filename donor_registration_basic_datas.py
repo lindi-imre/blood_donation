@@ -7,6 +7,5 @@ class Person():
     gender = ""
 
     @staticmethod
-
-if __name__ == "__main__":
-    pass
+    def get_name(name):
+        pass
