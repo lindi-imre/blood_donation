@@ -2,21 +2,21 @@ __author__ = 'Péter'
 
 class Validations(object):
     @staticmethod
-    def parse_name(name):
+    def check_name(name):
         splitted = name.split()
-        full_name = []
-        if not str.isalpha(name):
-            print("Only strings is valid!")
-            return False
-        else:
-            if len(splitted) > 0:
-                full_name['first_name'] = splitted[0]
-            if len(splitted) > 1:
-                full_name['last_name'] = splitted[1]
-        return True
+        for i in splitted:
+            if not splitted[i].isalpha:
+                print("Enter valid name!")
+                return False
+            elif not splitted[i] > 1:
+                print("Enter your full name again!")
+                return False
+            else:
+                return True
+
 
     @staticmethod
-    def check_weight():
+    def check_weight(weight):
         if not weight.isdigit():
              print("Weight should be numbers only!")
              return False
@@ -27,5 +27,19 @@ class Validations(object):
             return True
 
     @staticmethod
-    def check_gender():
-        pass
+    def validate_gender(gender):
+        enable_genders = ["male", "m", "female", "f"]
+        if not gender.lower() in enable_genders:
+            print("Enter your gender like an example: 'm', 'male', 'f', 'female'")
+            return False
+        return True
+
+    @staticmethod
+    def validate_uniqeid(uniqeid):
+        if personal_document[:6].isdigit() and personal_document[6:8].isalpha() and len(personal_document) == 8:
+            return ["Identity card", uniqeid]
+        elif personal_document[:6].isalpha() and personal_document[6:8].isdigit() and len(personal_document) == 8:
+            return ["Passport", uniqeid]
+        else:
+            return False
+
