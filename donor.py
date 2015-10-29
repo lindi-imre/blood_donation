@@ -3,7 +3,7 @@ __author__ = 'Péter'
 from switch import Switch
 from donor_validations import Validations
 
-class Person():
+class Person(object):
     @staticmethod
     def donor_register_app():
         name = Switch.general_data_inputer(["Name"])

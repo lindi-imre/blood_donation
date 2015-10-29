@@ -42,6 +42,8 @@ class Switch(object):
                     return input_data
                 else:
                     return False
+            else:
+                return False
         elif get_data[0] == "City":
             if Address.validate_city(input_data):
                 return NameFormat.name_corr_format(input_data)
