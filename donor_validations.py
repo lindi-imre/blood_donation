@@ -36,10 +36,11 @@ class Validations(object):
 
     @staticmethod
     def validate_uniqeid(uniqeid):
-        if personal_document[:6].isdigit() and personal_document[6:8].isalpha() and len(personal_document) == 8:
+        if uniqeid[:6].isdigit() and uniqeid[6:8].isalpha() and len(uniqeid) == 8:
             return ["Identity card", uniqeid]
-        elif personal_document[:6].isalpha() and personal_document[6:8].isdigit() and len(personal_document) == 8:
+        elif uniqeid[:6].isalpha() and uniqeid[6:8].isdigit() and len(uniqeid) == 8:
             return ["Passport", uniqeid]
         else:
+            print("ID should contain 6 digits and 2 letters, the passport should contain 6 letters and 2 numbers.")
             return False
 
