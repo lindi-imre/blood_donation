@@ -107,10 +107,12 @@ class Person:
 
     @staticmethod
     def get_personal_document_type(personal_document):
-        if personal_document[:6].isdigit() and personal_document[6:].isalpha():
+        if personal_document[:6].isdigit() and personal_document[6:8].isalpha() and len(personal_document) == 8:
             return "Identity card"
-        else:
+        elif personal_document[:6].isalpha() and personal_document[6:8].isdigit() and len(personal_document) == 8:
             return "Passport"
+        else:
+            return False
 
     @staticmethod
     def print_donor_info(donor_info):
