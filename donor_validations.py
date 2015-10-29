@@ -52,7 +52,7 @@ class Validations(object):
         healthy_words = ["n", "no"]
         if sick.lower() in sick_words:
             print("Not suitable because you were sick at last month.")
-            return exit()
+            exit()
         elif sick.lower() in healthy_words:
             return True
         else:
@@ -88,19 +88,22 @@ class Validations(object):
 
     @staticmethod
     def rnd_hmg_generate():
-        hmg_lvl = random.randint(80, 201)
+        hmg_lvl = randint(80, 201)
         return hmg_lvl
 
     @staticmethod
     def validate_hmg():
-        if not rnd_hmg_generate(hmg_lvl) > 110:
-            print("Our hemogoblin level " + rnd_hemogoblin_generate(hmg_lvl) + " not suitable!")
-            return False
-        return True
+        hmg_lvl = Validations.rnd_hmg_generate()
+        if hmg_lvl <= 110:
+            print("Your hemogoblin level is %s which is not suitable!" % hmg_lvl)
+            exit()
+        else:
+            return hmg_lvl
 
     @staticmethod
     def validate_email(email):
-        is_valid = (email.find("@") == 1) and (email.endswith(".hu") or email.endswith(".com"))
+        is_valid = (email.find("@") == 1) and email[0].isalpha() and \
+                   ((email.endswith(".hu") and len(email) > 5) or (email.endswith(".com") and len(email) > 6))
         if not is_valid:
             print("Email address is not valid!")
             return False

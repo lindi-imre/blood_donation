@@ -62,10 +62,33 @@ class TestValidations(unittest.TestCase):
         self.assertTrue(Validations.validate_mobil_number("+36701234567"))
 
     def test_hmg_generate80(self):
-        self.assertGreater(80, Validations.rnd_hmg_generate())
+        self.assertLess(79, Validations.rnd_hmg_generate())
 
     def test_hmg_generate200(self):
-        self.assertGreater(200, Validations.rnd_hmg_generate())
+        self.assertGreater(201, Validations.rnd_hmg_generate())
+
+    # def test_hmg_valid_yes(self):
+    #     self.assertTrue(Validations.validate_hmg())
+
+    def test_email_incorrect(self):
+        self.assertFalse(Validations.validate_email("sadf"))
+
+    def test_email_not_enough_charhu(self):
+        self.assertFalse(Validations.validate_email("a@.hu"))
+
+    def test_email_not_enough_charcom(self):
+        self.assertFalse(Validations.validate_email("a@.com"))
+
+    def test_email_correcthu(self):
+        self.assertTrue(Validations.validate_email("a@a.hu"))
+
+    def test_email_correctcom(self):
+        self.assertTrue(Validations.validate_email("a@a.com"))
+
+
+
+    # def test_hmg_valid_no(self):
+    #     self.assertFalse(Validations.validate_hmg("109"))
 
 if __name__ == '__main__':
     unittest.main()
