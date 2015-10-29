@@ -7,4 +7,5 @@ class CheckIfPositiveInteger(object):
         if (str(positive_integer).isdigit()) and (int(positive_integer) > 0):
             return True
         else:
+            print("Invalid input. Input should be a positive integer.")
             return False
