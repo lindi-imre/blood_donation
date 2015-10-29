@@ -3,12 +3,14 @@ __author__ = 'Slezak Attila'
 
 from donor_validations import Validations
 from check_date_format import CheckDateFormat
+from check_time_format import CheckTimeFormat
 from donor_registration_dates import donor_dates
 from address import Address
 from check_if_positive_int import CheckIfPositiveInteger
 from name_correct_form import NameFormat
 from date_ten_day_before_event import DateTenDayBeforeEvent
 from date_is_weekday import DateIsWeekday
+from event_calculations import EventCalculations
 
 class Switch(object):
     @staticmethod
@@ -56,6 +58,20 @@ class Switch(object):
                     return False
             else:
                 return False
+        elif get_data[0] == "Start time":
+            if CheckTimeFormat.check_time_form(input_data):
+                return donor_dates.get_time(input_data)
+            else:
+                return False
+        elif get_data[0] == "End time":
+            if CheckTimeFormat.check_time_form(input_data):
+                input_data = donor_dates.get_time(input_data)
+                if EventCalculations.end_time_after_start_time(input_data, get_data):
+                    return input_data
+                else:
+                    return False
+            else:
+                return False
         elif get_data[0] == "City":
             if Address.validate_city(input_data):
                 return NameFormat.name_corr_format(input_data)
@@ -63,10 +79,6 @@ class Switch(object):
                 return False
         elif get_data[0] == "Zip code":
             return Address.check_zip_code(input_data)
-        # elif get_data[0] == "Start time":
-        #     return check_time(input_data)
-        # elif get_data[0] == "End time":
-        #     return (check_time(input_data))
         elif get_data[0] == "Available beds" or get_data[0] == "Planned donor number":
             return CheckIfPositiveInteger.check_if_positive_integer(input_data)
         elif get_data[0] == "Address":

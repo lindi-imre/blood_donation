@@ -12,7 +12,7 @@ class Person(object):
         uniqeid = Switch.general_data_inputer(["Uniqeid"])
 
         sick = Switch.general_data_inputer(["Sick"])
-        phone_number = Switch.general_data_inputer(["Phone_number"])
+        phone_number = Switch.general_data_inputer(["Phone number"])
 
         email = Switch.general_data_inputer(["Email"])
         hemoglobin = Validations.validate_hmg()

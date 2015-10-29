@@ -23,6 +23,18 @@ class TestEvent(unittest.TestCase):
     def test_weekend(self):
         self.assertFalse(Event.test_mod(["Date of the event", "2045.02.11", "Test"]))
 
+    def test_time_text(self):
+        self.assertFalse(Event.test_mod(["Start time", "aa:aa", "Test"]))
+
+    def test_time_too_big_hours(self):
+        self.assertFalse(Event.test_mod(["Start time", "24:00", "Test"]))
+
+    def test_time_too_big_minutes(self):
+        self.assertFalse(Event.test_mod(["Start time", "12:60", "Test"]))
+
+    def test_time_correct(self):
+        self.assertTrue(Event.test_mod(["Start time", "12:34", "Test"]))
+
     def test_zip_code(self):
         self.assertEqual("1234", Event.test_mod(["Zip code", "1234", "Test"]))
 

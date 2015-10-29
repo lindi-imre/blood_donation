@@ -1,7 +1,7 @@
 __author__ = 'Slezak Attila'
 # -- coding: utf-8 --
 
-class CheckDateTime(object):
+class CheckTimeFormat(object):
     @staticmethod
     def check_time_form(get_time):
         time_parts = get_time.split(":")

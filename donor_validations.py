@@ -5,7 +5,7 @@ from random import randint
 class Validations(object):
     @staticmethod
     def check_name(name):
-        splitted = name.split(" ")
+        splitted = name.split( )
         if len(splitted) < 2:
             print("Please enter your full name!")
             return False

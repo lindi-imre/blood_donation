@@ -8,10 +8,10 @@ class TestValidations(unittest.TestCase):
         self.assertFalse(Validations.check_name("123"))
 
     def test_name_one_name(self):
-        self.assertFalse(Validations.check_name("John"))
+        self.assertFalse(Validations.check_name("John "))
 
     def test_name_correct(self):
-        self.assertTrue(Validations.check_name("Abraham Lincoln"))
+        self.assertTrue(Validations.check_name(" Abraham  Lincoln "))
 
     def test_weight_alpha(self):
         self.assertFalse(Validations.check_weight("Fifty kilo"))
@@ -48,6 +48,9 @@ class TestValidations(unittest.TestCase):
 
     # def test_sick_yes(self):
     #     self.assertTrue(Validations.check_arusicklastmonth("Yes"))
+
+    def test_mobile_number_incorrect_one_letter(self):
+        self.assertFalse(Validations.validate_mobil_number("a"))
 
     def test_mobile_number_incorrect(self):
         self.assertFalse(Validations.validate_mobil_number("abcdefghijk"))
