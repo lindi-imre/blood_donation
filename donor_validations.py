@@ -43,6 +43,7 @@ class Validations(object):
         elif uniqeid[:6].isalpha() and uniqeid[6:8].isdigit() and len(uniqeid) == 8:
             return ["Passport", uniqeid]
         else:
+            print("ID should contain 6 digits and 2 letters, the passport should contain 6 letters and 2 numbers.")
             return False
 
     @staticmethod
