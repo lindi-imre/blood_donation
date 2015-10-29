@@ -17,3 +17,12 @@ class Person(object):
         email = Switch.general_data_inputer(["Email"])
         hemoglobin = Validations.validate_hmg()
 
+        print(name)
+        print(weight)
+        print(gender)
+        print(uniqeid)
+        print(sick)
+        print(phone_number)
+        print(email)
+        print(hemoglobin)
+

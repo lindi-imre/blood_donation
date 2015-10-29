@@ -35,6 +35,18 @@ class Switch(object):
     def switcher(input_data, get_data):
         if get_data[0] == "Name":
             return Validations.check_name(input_data)
+        elif get_data[0] == "Weight":
+            return Validations.check_weight(input_data)
+        elif get_data[0] == "Gender":
+            return Validations.validate_gender(input_data)
+        elif get_data[0] == "Uniqeid":
+            return Validations.validate_uniqeid(input_data)
+        elif get_data[0] == "Sick":
+            return Validations.check_arusicklastmonth(input_data)
+        elif get_data[0] == "Phone number":
+            return Validations.validate_mobil_number(input_data)
+        elif get_data[0] == "Email":
+            return Validations.validate_email(input_data)
         elif get_data[0] == "Date of the event":
             if CheckDateFormat.check_date_format(input_data):
                 input_data = donor_dates.get_date(input_data)
