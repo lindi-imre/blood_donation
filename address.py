@@ -23,7 +23,7 @@ class Address(object):
 
     @staticmethod
     def validate_address(address):
-        if (len(address) <= 25) and (len(address) > 3):
+        if (len(address) <= 25) and (len(address) >= 3):
             return True
         else:
             print("Invalid street name. It should contain at least 3, maximum 25 characters.")
