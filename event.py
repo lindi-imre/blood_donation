@@ -23,8 +23,11 @@ class Event(object):
         # success_rate =
         # success_text =
 
-        print(date_of_event)
-        print(zip_code)
-        print(city)
-        print(available_beds)
-        print(planned_donor_number)
+        print("\n" + "-" * 32 + "\n")
+        print("Details of the planned event:\n")
+        print("Date of the event: ", date_of_event)
+        print("Zip code: ", zip_code)
+        print("City: ", city)
+        print("Available beds: ", available_beds)
+        print("Planned donor number: ", planned_donor_number)
+        print("\n" + "-" * 32)
