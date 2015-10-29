@@ -1,9 +1,12 @@
-from donor_registration_basic_datas import Person
+from donor import Person
+from event import Event
+
 
 print("Welcome in the blood donor and location register application!")
 print("Please select what would you register: 1 - Donor registration, 2 - Donor location registration")
-if int(input()) == 1:
+menu = input(">> ")
+if menu == 1:
     Person.donor_register_app()
 
-elif int(input) == 2:
-    pass
+elif int(menu) == 2:
+    Event.event_data()

@@ -1,7 +1,7 @@
 __author__ = 'Slezak Attila'
 # -- coding: utf-8 --
 
-# from donor_validations import Validations
+from donor_validations import Validations
 from check_date_format import CheckDateFormat
 from donor_registration_dates import donor_dates
 from address import Address
@@ -33,7 +33,9 @@ class Switch(object):
 
     @staticmethod
     def switcher(input_data, get_data):
-        if get_data[0] == "Date of the event":
+        if get_data[0] == "Name":
+            return Validations.check_name(input_data)
+        elif get_data[0] == "Date of the event":
             if CheckDateFormat.check_date_format(input_data):
                 input_data = donor_dates.get_date(input_data)
                 if DateIsWeekday.is_date_weekday(input_data) and DateTenDayBeforeEvent.is_date_ten_day_before_event(input_data):

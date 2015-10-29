@@ -5,16 +5,16 @@ from random import randint
 class Validations(object):
     @staticmethod
     def check_name(name):
-        splitted = name.split()
-        for i in splitted:
-            if not splitted[i].isalpha:
-                print("Enter valid name!")
-                return False
-            elif not splitted[i] > 1:
-                print("Enter your full name again!")
-                return False
-            else:
+        splitted = name.split(" ")
+        if len(splitted) < 2:
+            print("Please enter your full name!")
+            return False
+        for one_name in splitted:
+            if one_name.isalpha():
                 return True
+            else:
+                print("Please enter valid name!")
+                return False
 
 
     @staticmethod
@@ -23,7 +23,7 @@ class Validations(object):
              print("Weight should be numbers only!")
              return False
         else:
-            if not weight > 50:
+            if not int(weight) >= 50:
                 print("You are too skinny!")
                 return False
             return True
@@ -43,16 +43,21 @@ class Validations(object):
         elif uniqeid[:6].isalpha() and uniqeid[6:8].isdigit() and len(uniqeid) == 8:
             return ["Passport", uniqeid]
         else:
-            print("ID should contain 6 digits and 2 letters, the passport should contain 6 letters and 2 numbers.")
+            print("ID should contains 6 digits and 2 letters, the passport should contains 6 letters and 2 numbers.")
             return False
 
     @staticmethod
     def check_arusicklastmonth(sick):
         sick_words = ["y","yes"]
+        healthy_words = ["n", "no"]
         if sick.lower() in sick_words:
-            print("Not suitable because you are sick at last month.")
+            print("Not suitable because you were sick at last month.")
             return exit()
-        return True
+        elif sick.lower() in healthy_words:
+            return True
+        else:
+            print("Please give a correct answer like yes or no!")
+            return False
 
     @staticmethod
     def validate_mobil_number(phone_number):
@@ -74,12 +79,16 @@ class Validations(object):
                    len(phone_number) in [11, 12] \
                    and ending_is_digit
 
-        if not is_valid:
+        if is_valid:
+            return True
+        else:
             print("Mobil number is not valid!")
+            return False
+
 
     @staticmethod
-    def rnd_hmg_generate(hmg_lvl):
-        hmg_lvl = random.randint(80, 200)
+    def rnd_hmg_generate():
+        hmg_lvl = random.randint(80, 201)
         return hmg_lvl
 
     @staticmethod
