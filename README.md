@@ -6,4 +6,4 @@ Team usernames:
 	-mezeiuser: 	Bagoly Péter
 	-lindi-imre: 	Lindi Imre
 	-ccKbalazs:	Kozma Balázs
-	-Werther84:	Székely Attila
+	-Werther84:	Slezák Attila

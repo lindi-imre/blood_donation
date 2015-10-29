@@ -20,6 +20,15 @@ class CheckDateFormatTest(unittest.TestCase):
     def test_too_big_day_number(self):
         self.assertFalse(CheckDateFormat.check_date_format("2014.02.32"))
 
+    def test_month_one_char(self):
+        self.assertFalse(CheckDateFormat.check_date_format("2014.2.03"))
+
+    def test_day_one_char(self):
+        self.assertFalse(CheckDateFormat.check_date_format("2014.02.2"))
+
+    def test_month_and_day_one_char(self):
+        self.assertFalse(CheckDateFormat.check_date_format("2014.1.2"))
+
     def test_correct(self):
         self.assertTrue(CheckDateFormat.check_date_format("2016.02.01"))
 
