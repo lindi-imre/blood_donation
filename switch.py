@@ -20,7 +20,7 @@ class Switch(object):
             if len(get_data) > 2 and get_data[len(get_data)-1] == "Test":
                 input_data = get_data[len(get_data)-2]
             else:
-                input_data = input(get_data[0] + ": ")
+                input_data = input(get_data[1] + ": ")
             if input_data == "":
                 Switch.empty_field_error_message(get_data[0])
             elif input_data != "":
@@ -49,7 +49,7 @@ class Switch(object):
             return Validations.validate_mobil_number(input_data)
         elif get_data[0] == "Email":
             return Validations.validate_email(input_data)
-        elif get_data[0] == "Date of the event":
+        elif get_data[0] == "Event date":
             if CheckDateFormat.check_date_format(input_data):
                 input_data = donor_dates.get_date(input_data)
                 if DateIsWeekday.is_date_weekday(input_data) and DateTenDayBeforeEvent.is_date_ten_day_before_event(input_data):
@@ -66,7 +66,7 @@ class Switch(object):
         elif get_data[0] == "End time":
             if CheckTimeFormat.check_time_form(input_data):
                 input_data = donor_dates.get_time(input_data)
-                if EventCalculations.end_time_after_start_time(input_data, get_data):
+                if EventCalculations.end_time_after_start_time(input_data, get_data[2]):
                     return input_data
                 else:
                     return False
@@ -79,7 +79,7 @@ class Switch(object):
                 return False
         elif get_data[0] == "Zip code":
             return Address.check_zip_code(input_data)
-        elif get_data[0] == "Available beds" or get_data[0] == "Planned donor number":
+        elif get_data[0] == "Available beds" or get_data[0] == "Planned donor num":
             return CheckIfPositiveInteger.check_if_positive_integer(input_data)
         elif get_data[0] == "Address":
             if Address.validate_address(input_data):
