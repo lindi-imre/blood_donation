@@ -96,7 +96,7 @@ class Validations(object):
     def validate_hmg():
         hmg_lvl = Validations.rnd_hmg_generate()
         if hmg_lvl <= 110:
-            print("Your hemogoblin level is %s which is not suitable!" % hmg_lvl)
+            print("Your hemoglobin level is %s which is not suitable!" % hmg_lvl)
             exit()
         else:
             return hmg_lvl
