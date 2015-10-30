@@ -48,7 +48,7 @@ class Validations(object):
 
     @staticmethod
     def check_arusicklastmonth(sick):
-        sick_words = ["y","yes"]
+        sick_words = ["y", "yes"]
         healthy_words = ["n", "no"]
         if sick.lower() in sick_words:
             print("Not suitable because you were sick at last month.")
@@ -102,14 +102,21 @@ class Validations(object):
 
     @staticmethod
     def validate_email(email):
-        is_valid = (email.find("@") > 0) and email[0].isalpha() and \
+        is_valid = (email.count("@") == 1) and email[0].isalpha() and \
                    ((email.endswith(".hu") and len(email) > 5) or (email.endswith(".com") and len(email) > 6))
         if not is_valid:
             print("Email address is not valid!")
             return False
         return True
 
-
-
+    @staticmethod
+    def validate_blood_type(blood_type):
+        valid_blood_types = ["A+", "A-", "B+", "B-", "AB+", "AB-", "0+", "0-"]
+        blood_type = blood_type.upper()
+        if blood_type in valid_blood_types:
+            return blood_type
+        else:
+            print("Enter a valid blood type(example: A+):")
+            return False
 
 
