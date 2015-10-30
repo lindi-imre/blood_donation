@@ -45,11 +45,11 @@ class Switch(object):
             return Validations.check_weight(input_data)
         elif get_data[0] == "Gender":
             return Validations.validate_gender(input_data)
-        elif get_data[0] == "Uniqeid":
+        elif get_data[0] == "Unique ID":
             return Validations.validate_uniqeid(input_data)
         elif get_data[0] == "Sickness":
             return Validations.check_arusicklastmonth(input_data)
-        elif get_data[0] == "Phone number":
+        elif get_data[0] == "Mobile number":
             return Validations.validate_mobil_number(input_data)
         elif get_data[0] == "Email":
             return Validations.validate_email(input_data)

@@ -3,6 +3,7 @@ __author__ = 'Péter'
 from random import randint
 from check_date_format import CheckDateFormat
 from datetime import datetime
+from name_correct_form import NameFormat
 
 class Validations(object):
     @staticmethod
@@ -36,15 +37,16 @@ class Validations(object):
         if not gender.lower() in enable_genders:
             print("Enter your gender like an example: 'm', 'male', 'f', 'female'")
             return False
-        gender_new = (gender[0]).upper() + gender[1:].lower()
-        return gender_new
+        elif len(gender) == 1:
+            gender = enable_genders[enable_genders.index(gender)-1]
+        return NameFormat.name_corr_format(gender)
 
     @staticmethod
     def validate_uniqeid(uniqeid):
         if uniqeid[:6].isdigit() and uniqeid[6:8].isalpha() and len(uniqeid) == 8:
-            return ["Identity card", uniqeid]
+            return ["Identity card", uniqeid.upper()]
         elif uniqeid[:6].isalpha() and uniqeid[6:8].isdigit() and len(uniqeid) == 8:
-            return ["Passport", uniqeid]
+            return ["Passport", uniqeid.upper()]
         else:
             print("ID should contain 6 digits and 2 letters, the passport should contain 6 letters and 2 numbers.")
             return False
@@ -57,7 +59,7 @@ class Validations(object):
             print("Not suitable because you were sick at last month.")
             exit()
         elif sick.lower() in healthy_words:
-            return True
+            return "No"
         else:
             print("Please give a correct answer like yes or no!")
             return False

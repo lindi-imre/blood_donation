@@ -18,7 +18,8 @@ class TestValidations(unittest.TestCase):
         self.assertFalse(Validations.check_weight("Fifty kilo"))
 
     def test_weight_fourtynine(self):
-        self.assertFalse(Validations.check_weight("49"))
+        with self.assertRaises(SystemExit):
+            Validations.check_weight("49")
 
     def test_weight_fifty(self):
         self.assertTrue(Validations.check_weight("50"))
@@ -30,7 +31,13 @@ class TestValidations(unittest.TestCase):
         self.assertFalse(Validations.validate_gender("12"))
 
     def test_gender_male(self):
-        self.assertTrue(Validations.validate_gender("male"))
+        self.assertEqual("Male", Validations.validate_gender("male"))
+
+    def test_gender_male_short(self):
+        self.assertEqual("Male", Validations.validate_gender("m"))
+
+    def test_gender_female_short(self):
+        self.assertEqual("Female", Validations.validate_gender("f"))
 
     def test_uniqueid_incorrect(self):
         self.assertFalse(Validations.validate_uniqeid("never"))
@@ -47,8 +54,9 @@ class TestValidations(unittest.TestCase):
     def test_sick_no(self):
         self.assertTrue(Validations.check_arusicklastmonth("No"))
 
-    # def test_sick_yes(self):
-    #     self.assertTrue(Validations.check_arusicklastmonth("Yes"))
+    def test_sick_yes(self):
+        with self.assertRaises(SystemExit):
+            Validations.check_arusicklastmonth("yes")
 
     def test_mobile_number_incorrect_one_letter(self):
         self.assertFalse(Validations.validate_mobil_number("a"))
@@ -71,9 +79,6 @@ class TestValidations(unittest.TestCase):
     def test_hmg_generate200(self):
         self.assertGreater(201, Validations.rnd_hmg_generate())
 
-    # def test_hmg_valid_yes(self):
-    #     self.assertTrue(Validations.validate_hmg())
-
     def test_email_incorrect(self):
         self.assertFalse(Validations.validate_email("sadf"))
 
@@ -90,9 +95,15 @@ class TestValidations(unittest.TestCase):
         self.assertTrue(Validations.validate_email("a@af.com"))
 
     def test_birthdate(self):
-        self.assertTrue(Validations.validate_birthdate("1990 07 26"))
+        self.assertTrue(Validations.validate_birthdate("1990.07.26"))
 
 
+    # def test_hmg_valid_yes(self):
+    #     self.assertTrue(Validations.validate_hmg())
+
+    # def test_hmg_valid_yes(self):
+    #     with self.assertRaises(SystemExit):
+    #         Validations.validate_hmg()
 
     # def test_hmg_valid_no(self):
     #     self.assertFalse(Validations.validate_hmg("109"))

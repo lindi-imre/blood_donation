@@ -1,3 +1,4 @@
+# -- coding: utf-8 --
 from donor import Person
 from event import Event
 

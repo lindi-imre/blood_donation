@@ -1,5 +1,5 @@
 __author__ = 'Kozma Balazs'
-
+# -- coding: utf-8 --
 
 class NameFormat(object):
     @staticmethod
@@ -15,3 +15,8 @@ class NameFormat(object):
         if not is_list:
             get_name = " ".join(get_name)
         return get_name
+
+    @staticmethod
+    def upper_case_letters(get_data):
+        if type(get_data) is str:
+            return get_data.upper()
