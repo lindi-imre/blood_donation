@@ -119,7 +119,7 @@ class Validations(object):
         if ((today - birthdate) // 365) > 18:
             return True
         else:
-            print("Registration must valid if You are not under 18 years!")
+            print("If You are under 18 years you must not be donor!")
             return False
 
 
