@@ -12,7 +12,7 @@ class Person(object):
         uniqeid = Switch.general_data_inputer(["Uniqeid", "Unique identifier number"])
         sick = Switch.general_data_inputer(["Sick", "Were you sick in the last month?"])
         phone_number = Switch.general_data_inputer(["Phone number", "Mobile number"])
-        email = Switch.general_data_inputer(["Email", "E-mail adress"])
+        email = Switch.general_data_inputer(["Email", "E-mail address"])
         hemoglobin = Validations.validate_hmg()
 
         print("\n" + "-" * 32 + "\n")
