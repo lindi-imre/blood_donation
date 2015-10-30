@@ -3,6 +3,7 @@ __author__ = 'Slezak Attila'
 
 from datetime import datetime, timedelta
 
+
 class EventCalculations(object):
     @staticmethod
     def end_time_after_start_time(input_data, get_data):
