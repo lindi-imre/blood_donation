@@ -102,7 +102,7 @@ class Validations(object):
 
     @staticmethod
     def validate_email(email):
-        is_valid = (email.find("@") == 1) and email[0].isalpha() and \
+        is_valid = (email.find("@") > 0) and email[0].isalpha() and \
                    ((email.endswith(".hu") and len(email) > 5) or (email.endswith(".com") and len(email) > 6))
         if not is_valid:
             print("Email address is not valid!")
