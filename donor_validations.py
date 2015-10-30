@@ -26,7 +26,7 @@ class Validations(object):
         else:
             if not int(weight) >= 50:
                 print("You are too skinny!")
-                return False
+                exit()
             return True
 
     @staticmethod
