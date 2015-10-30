@@ -2,10 +2,11 @@ __author__ = 'Péter'
 
 from random import randint
 
+
 class Validations(object):
     @staticmethod
     def check_name(name):
-        splitted = name.split( )
+        splitted = name.split()
         if len(splitted) < 2:
             print("Please enter your full name!")
             return False
@@ -71,8 +72,8 @@ class Validations(object):
             start_is_valid = True
             provider_index = 3
 
-        provider_is_valid = phone_number[provider_index:provider_index+2] in providers
-        ending_is_digit = phone_number[provider_index+2:].isdigit()
+        provider_is_valid = phone_number[provider_index:provider_index + 2] in providers
+        ending_is_digit = phone_number[provider_index + 2:].isdigit()
 
         is_valid = start_is_valid and \
                    provider_is_valid and \
@@ -102,21 +103,14 @@ class Validations(object):
 
     @staticmethod
     def validate_email(email):
-        is_valid = (email.count("@") == 1) and email[0].isalpha() and \
+        is_valid = (email.find("@") > 0) and email[0].isalpha() and \
                    ((email.endswith(".hu") and len(email) > 5) or (email.endswith(".com") and len(email) > 6))
         if not is_valid:
             print("Email address is not valid!")
             return False
         return True
 
-    @staticmethod
-    def validate_blood_type(blood_type):
-        valid_blood_types = ["A+", "A-", "B+", "B-", "AB+", "AB-", "0+", "0-"]
-        blood_type = blood_type.upper()
-        if blood_type in valid_blood_types:
-            return blood_type
-        else:
-            print("Enter a valid blood type(example: A+):")
-            return False
+
+
 
 
