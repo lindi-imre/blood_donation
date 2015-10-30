@@ -106,7 +106,7 @@ class Validations(object):
         is_valid = (email.find("@") > 0) and email[0].isalpha() and \
                    ((email.endswith(".hu") and len(email) > 5) or (email.endswith(".com") and len(email) > 6))
         if not is_valid:
-            print("Email address is not valid!")
+            print("Email address not valid!")
             return False
         return True
 
