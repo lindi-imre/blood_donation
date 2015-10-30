@@ -89,14 +89,8 @@ class TestValidations(unittest.TestCase):
     def test_email_correctcom(self):
         self.assertTrue(Validations.validate_email("a@af.com"))
 
-    def test_blood_types_upper(self):
-        self.assertEquals(Validations.validate_blood_type("a+"), "A+")
-
-    def test_blood_types_lower(self):
-        self.assertTrue(Validations.validate_blood_type("a+"))
-
-    def test_invalid_blood_type(self):
-        self.assertFalse(Validations.validate_blood_type("qw"))
+    def test_birthdate(self):
+        self.assertTrue(Validations.validate_birthdate("1990 07 26"))
 
 
 
