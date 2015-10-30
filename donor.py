@@ -10,10 +10,8 @@ class Person(object):
         weight = Switch.general_data_inputer(["Weight", "Weight"])
         gender = Switch.general_data_inputer(["Gender", "Gender"])
         uniqeid = Switch.general_data_inputer(["Uniqeid", "Unique identifier number"])
-
         sick = Switch.general_data_inputer(["Sick", "Were you sick in the last month?"])
         phone_number = Switch.general_data_inputer(["Phone number", "Mobile number"])
-
         email = Switch.general_data_inputer(["Email", "E-mail adress"])
         hemoglobin = Validations.validate_hmg()
 
