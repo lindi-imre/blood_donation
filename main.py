@@ -16,6 +16,9 @@ while not menu == "1" or not menu == "2":
                 exit()
             elif menu2 == "2":
                 exit()
+            else:
+                print("Please select a valid menu number!")
+                menu2 = input(">> ")
     elif menu == "2":
         Event.event_data()
         print("Please select what would you like to register:\n1 - Donor registration\n2 - Exit")
@@ -26,6 +29,9 @@ while not menu == "1" or not menu == "2":
                 exit()
             elif menu3 == "2":
                 exit()
+            else:
+                print("Please select a valid menu number!")
+                menu3 = input(">> ")
     else:
         print("Please select a valid menu number!")
         menu = input(">> ")
