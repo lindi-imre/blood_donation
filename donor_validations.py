@@ -1,7 +1,8 @@
 __author__ = 'Péter'
 
 from random import randint
-
+from check_date_format import CheckDateFormat
+from datetime import datetime
 
 class Validations(object):
     @staticmethod
@@ -103,12 +104,18 @@ class Validations(object):
 
     @staticmethod
     def validate_email(email):
-        is_valid = (email.find("@") > 0) and email[0].isalpha() and \
+        is_valid = (email.count("@") == 1) and email[0].isalpha() and \
                    ((email.endswith(".hu") and len(email) > 5) or (email.endswith(".com") and len(email) > 6))
         if not is_valid:
             print("Email address not valid!")
             return False
         return True
+
+    @staticmethod
+    def validate_birthdate(birthdate):
+        if CheckDateFormat.check_date_format(birthdate):
+            pass
+
 
 
 
