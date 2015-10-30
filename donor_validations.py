@@ -1,7 +1,8 @@
 __author__ = 'Péter'
 
 from random import randint
-
+from check_date_format import CheckDateFormat
+from datetime import datetime
 
 class Validations(object):
     @staticmethod
@@ -17,15 +18,16 @@ class Validations(object):
                 print("Please enter valid name!")
                 return False
 
+
     @staticmethod
     def check_weight(weight):
         if not weight.isdigit():
-            print("Weight should be numbers only!")
-            return False
+             print("Weight should be numbers only!")
+             return False
         else:
             if not int(weight) >= 50:
                 print("You are too skinny!")
-                return False
+                exit()
             return True
 
     @staticmethod
@@ -85,6 +87,7 @@ class Validations(object):
             print("Mobil number is not valid!")
             return False
 
+
     @staticmethod
     def rnd_hmg_generate():
         hmg_lvl = randint(80, 201)
@@ -101,9 +104,20 @@ class Validations(object):
 
     @staticmethod
     def validate_email(email):
-        is_valid = (email.find("@") > 0) and email[0].isalpha() and \
+        is_valid = (email.count("@") == 1) and email[0].isalpha() and \
                    ((email.endswith(".hu") and len(email) > 5) or (email.endswith(".com") and len(email) > 6))
         if not is_valid:
-            print("Email address is not valid!")
+            print("Email address not valid!")
             return False
         return True
+
+    @staticmethod
+    def validate_birthdate(birthdate):
+        if CheckDateFormat.check_date_format(birthdate):
+            pass
+
+
+
+
+
+
