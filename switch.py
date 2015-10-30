@@ -11,6 +11,7 @@ from name_correct_form import NameFormat
 from date_ten_day_before_event import DateTenDayBeforeEvent
 from date_is_weekday import DateIsWeekday
 from event_calculations import EventCalculations
+from name_correct_form import NameFormat
 
 class Switch(object):
     @staticmethod
@@ -35,21 +36,24 @@ class Switch(object):
 
     @staticmethod
     def switcher(input_data, get_data):
-        if get_data[0] == "Name":
-            return Validations.check_name(input_data)
+        if get_data[0] == "Donor's name":
+            if Validations.check_name(input_data):
+                return NameFormat.name_corr_format(input_data)
+            else:
+                return False
         elif get_data[0] == "Weight":
             return Validations.check_weight(input_data)
         elif get_data[0] == "Gender":
             return Validations.validate_gender(input_data)
         elif get_data[0] == "Uniqeid":
             return Validations.validate_uniqeid(input_data)
-        elif get_data[0] == "Sick":
+        elif get_data[0] == "Sickness":
             return Validations.check_arusicklastmonth(input_data)
         elif get_data[0] == "Phone number":
             return Validations.validate_mobil_number(input_data)
         elif get_data[0] == "Email":
             return Validations.validate_email(input_data)
-        elif get_data[0] == "Event date":
+        elif get_data[0] == "Date of the event":
             if CheckDateFormat.check_date_format(input_data):
                 input_data = donor_dates.get_date(input_data)
                 if DateIsWeekday.is_date_weekday(input_data) and DateTenDayBeforeEvent.is_date_ten_day_before_event(input_data):
@@ -79,7 +83,7 @@ class Switch(object):
                 return False
         elif get_data[0] == "Zip code":
             return Address.check_zip_code(input_data)
-        elif get_data[0] == "Available beds" or get_data[0] == "Planned donor num":
+        elif get_data[0] == "Available beds" or get_data[0] == "Planned donor number":
             return CheckIfPositiveInteger.check_if_positive_integer(input_data)
         elif get_data[0] == "Address":
             if Address.validate_address(input_data):

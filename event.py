@@ -12,13 +12,13 @@ class Event(object):
 
     @staticmethod
     def event_data():
-        date_of_event = Switch.general_data_inputer(["Event date", "Date of the event (YYYY.MM.DD)"])
+        date_of_event = Switch.general_data_inputer(["Date of the event", "Date of the event (YYYY.MM.DD)"])
         start_time = Switch.general_data_inputer(["Start time", "Start time"])
         end_time = Switch.general_data_inputer(["End time", "End time", start_time])
         zip_code = Switch.general_data_inputer(["Zip code", "Zip code"])
         city = Switch.general_data_inputer(["City", "City"])
         available_beds = Switch.general_data_inputer(["Available beds", "Available beds"])
-        planned_donor_number = Switch.general_data_inputer(["Planned donor num", "Planned donor number"])
+        planned_donor_number = Switch.general_data_inputer(["Planned donor number", "Planned donor number"])
         event_duration_time = EventCalculations.duration_in_time(start_time, end_time)
         colon_in_duration_time = str(event_duration_time).find(":")
         max_donor_number = EventCalculations.maximum_donor_number(available_beds, start_time, end_time)
