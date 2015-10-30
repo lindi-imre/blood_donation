@@ -10,6 +10,7 @@ while not menu == "1" or not menu == "2":
         Person.donor_register_app()
     elif menu == "2":
         Event.event_data()
+
     else:
         print("Please select a valid menu number!")
         menu = input(">> ")
