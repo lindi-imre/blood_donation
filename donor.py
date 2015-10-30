@@ -5,11 +5,16 @@ from donor_validations import Validations
 
 class Person(object):
     @staticmethod
+    def test_mod(test_data):
+        test_variable = Switch.general_data_inputer(test_data)
+        return test_variable
+
+    @staticmethod
     def donor_register_app():
         name = Switch.general_data_inputer(["Donor's name", "Enter your full name"])
         weight = Switch.general_data_inputer(["Weight", "Weight"])
         gender = Switch.general_data_inputer(["Gender", "Gender"])
-        uniqeid = Switch.general_data_inputer(["Uniqeid", "Unique identifier number"])
+        uniqeid = Switch.general_data_inputer(["Unique ID", "Unique identifier number"])
         sick = Switch.general_data_inputer(["Sickness", "Were you sick in the last month?"])
         phone_number = Switch.general_data_inputer(["Phone number", "Mobile number"])
         email = Switch.general_data_inputer(["Email", "E-mail address"])
