@@ -36,7 +36,8 @@ class Validations(object):
         if not gender.lower() in enable_genders:
             print("Enter your gender like an example: 'm', 'male', 'f', 'female'")
             return False
-        return True
+        gender_new = (gender[0]).upper() + gender[1:].lower()
+        return gender_new
 
     @staticmethod
     def validate_uniqeid(uniqeid):
@@ -84,9 +85,8 @@ class Validations(object):
         if is_valid:
             return True
         else:
-            print("Mobil number is not valid!")
+            print("Mobile number is not valid!")
             return False
-
 
     @staticmethod
     def rnd_hmg_generate():
