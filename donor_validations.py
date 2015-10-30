@@ -113,8 +113,14 @@ class Validations(object):
 
     @staticmethod
     def validate_birthdate(birthdate):
+        today = datetime.today()
         if CheckDateFormat.check_date_format(birthdate):
-            pass
+            birthdate = datetime.strptime(birthdate, "%Y %m %d").date()
+        if ((today - birthdate) // 365) > 18:
+            return True
+        else:
+            print("Registration must valid if You are not under 18 years!")
+            return False
 
 
 
