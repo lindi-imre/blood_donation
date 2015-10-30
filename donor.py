@@ -6,17 +6,14 @@ from donor_validations import Validations
 class Person(object):
     @staticmethod
     def donor_register_app():
-        name = Switch.general_data_inputer(["Name"])
-        weight = Switch.general_data_inputer(["Weight"])
-        gender = Switch.general_data_inputer(["Gender"])
-        uniqeid = Switch.general_data_inputer(["Uniqeid"])
-
-        sick = Switch.general_data_inputer(["Sick"])
-        phone_number = Switch.general_data_inputer(["Phone number"])
-
-        email = Switch.general_data_inputer(["Email"])
+        name = Switch.general_data_inputer(["Name", "Enter your full name"])
+        weight = Switch.general_data_inputer(["Weight", "Weight"])
+        gender = Switch.general_data_inputer(["Gender", "Gender"])
+        uniqeid = Switch.general_data_inputer(["Uniqeid", "Unique identifier number"])
+        sick = Switch.general_data_inputer(["Sick", "Were you sick in the last month?"])
+        phone_number = Switch.general_data_inputer(["Phone number", "Mobile number"])
+        email = Switch.general_data_inputer(["Email", "E-mail address"])
         hemoglobin = Validations.validate_hmg()
-
 
         print("\n" + "-" * 32 + "\n")
         print("Donor's data:\n")
@@ -27,6 +24,6 @@ class Person(object):
         print("Were donor sick last month: ", sick)
         print("Phone number: ", phone_number)
         print("Email: ", email)
-        print("Haemoglobin level: ", hemoglobin)
+        print("Hemoglobin level: ", hemoglobin)
         print("\n" + "-" * 32)
 
