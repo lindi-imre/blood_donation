@@ -3,6 +3,7 @@ __author__ = 'Slezak Attila'
 import unittest
 from donor_validations import Validations
 
+
 class TestValidations(unittest.TestCase):
     def test_name_incorrect(self):
         self.assertFalse(Validations.check_name("123"))
@@ -83,10 +84,10 @@ class TestValidations(unittest.TestCase):
         self.assertFalse(Validations.validate_email("a@.com"))
 
     def test_email_correcthu(self):
-        self.assertTrue(Validations.validate_email("a@a.hu"))
+        self.assertTrue(Validations.validate_email("asdf@dfgaf.hu"))
 
     def test_email_correctcom(self):
-        self.assertTrue(Validations.validate_email("a@a.com"))
+        self.assertTrue(Validations.validate_email("a@af.com"))
 
 
 

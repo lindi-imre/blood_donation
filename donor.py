@@ -17,6 +17,7 @@ class Person(object):
         email = Switch.general_data_inputer(["Email"])
         hemoglobin = Validations.validate_hmg()
 
+
         print("\n" + "-" * 32 + "\n")
         print("Donor's data:\n")
         print("Name: ", name)

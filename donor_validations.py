@@ -2,10 +2,11 @@ __author__ = 'Péter'
 
 from random import randint
 
+
 class Validations(object):
     @staticmethod
     def check_name(name):
-        splitted = name.split( )
+        splitted = name.split()
         if len(splitted) < 2:
             print("Please enter your full name!")
             return False
@@ -16,12 +17,11 @@ class Validations(object):
                 print("Please enter valid name!")
                 return False
 
-
     @staticmethod
     def check_weight(weight):
         if not weight.isdigit():
-             print("Weight should be numbers only!")
-             return False
+            print("Weight should be numbers only!")
+            return False
         else:
             if not int(weight) >= 50:
                 print("You are too skinny!")
@@ -48,7 +48,7 @@ class Validations(object):
 
     @staticmethod
     def check_arusicklastmonth(sick):
-        sick_words = ["y","yes"]
+        sick_words = ["y", "yes"]
         healthy_words = ["n", "no"]
         if sick.lower() in sick_words:
             print("Not suitable because you were sick at last month.")
@@ -71,8 +71,8 @@ class Validations(object):
             start_is_valid = True
             provider_index = 3
 
-        provider_is_valid = phone_number[provider_index:provider_index+2] in providers
-        ending_is_digit = phone_number[provider_index+2:].isdigit()
+        provider_is_valid = phone_number[provider_index:provider_index + 2] in providers
+        ending_is_digit = phone_number[provider_index + 2:].isdigit()
 
         is_valid = start_is_valid and \
                    provider_is_valid and \
@@ -84,7 +84,6 @@ class Validations(object):
         else:
             print("Mobil number is not valid!")
             return False
-
 
     @staticmethod
     def rnd_hmg_generate():
@@ -102,14 +101,9 @@ class Validations(object):
 
     @staticmethod
     def validate_email(email):
-        is_valid = (email.find("@") == 1) and email[0].isalpha() and \
+        is_valid = (email.find("@") > 0) and email[0].isalpha() and \
                    ((email.endswith(".hu") and len(email) > 5) or (email.endswith(".com") and len(email) > 6))
         if not is_valid:
             print("Email address is not valid!")
             return False
         return True
-
-
-
-
-
