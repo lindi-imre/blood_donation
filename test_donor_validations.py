@@ -66,6 +66,23 @@ class TestValidations(unittest.TestCase):
         ninetyfive_days_ago = datetime.now().date() - timedelta(days=95)
         self.assertTrue(Validations.last_donation_more_than_three_month_ago(ninetyfive_days_ago))
 
+    def test_last_donation_today_is_dec31(self):
+        last_donation_date = datetime.strptime("2015.09.30", "%Y.%m.%d").date()
+        today_dec31 = datetime.strptime("2015.12.31", "%Y.%m.%d").date()
+        self.assertTrue(Validations.last_donation_more_than_three_month_ago([last_donation_date, today_dec31]))
+
+    def test_last_donation_today_is_may29(self):
+        last_donation_date = datetime.strptime("2015.02.28", "%Y.%m.%d").date()
+        today_may29 = datetime.strptime("2015.05.29", "%Y.%m.%d").date()
+        self.assertTrue(Validations.last_donation_more_than_three_month_ago([last_donation_date, today_may29]))
+
+    def test_last_donation_today_is_may31_exit(self):
+        ninetyfive_days_ago = datetime.now().date() - timedelta(days=95)
+        today_may31 = datetime.strptime("2015.05.31", "%Y.%m.%d").date()
+        with self.assertRaises(SystemExit):
+            Validations.last_donation_more_than_three_month_ago([ninetyfive_days_ago, today_may31])
+
+
     def test_sick_incorrect(self):
         self.assertFalse(Validations.check_arusicklastmonth("asdf"))
 

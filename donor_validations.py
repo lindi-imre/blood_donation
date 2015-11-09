@@ -61,12 +61,28 @@ class Validations(object):
 
     @staticmethod
     def last_donation_more_than_three_month_ago(last_donation_date):
-        if datetime.now().date().month > 3:
-            date_three_month_ago = datetime.now().date().replace(month=datetime.now().date().month - 3)
+        today = datetime.now().date()
+
+        # This if statement only runs in unit test case:
+        if type(last_donation_date) is list:
+            today = last_donation_date[1]
+            last_donation_date = last_donation_date[0]
+
+        if today.month > 3:
+            modifier = -3
         else:
-            date_three_month_ago = datetime.now().date().replace(month=datetime.now().date().month + 9)\
-                .replace(year=datetime.now().date().year - 1)
-        if last_donation_date < date_three_month_ago:
+            modifier = 9
+        if str(today.month + modifier) in "4,6,9,11" and today.day > 30:
+            today = today.replace(day=30)
+        elif today.month + modifier == 2 and today.year % 4 == 0 and today.day > 29:
+            today = today.replace(day=29)
+        elif today.month + modifier == 2 and today.year % 4 != 0 and today.day > 28:
+            today = today.replace(day=28)
+        if modifier == 9:
+            today = today.replace(year=today.year - 1)
+        date_three_month_ago = today.replace(month=today.month + modifier)
+
+        if last_donation_date <= date_three_month_ago:
             return True
         else:
             print("You are not suitable because your last donation was within 3 months!")
@@ -136,7 +152,10 @@ class Validations(object):
 
     @staticmethod
     def validate_birthdate(birthdate):
-        eighteen_years_ago = datetime.now().date().replace(year=datetime.now().date().year - 18)
+        today = datetime.now().date()
+        if today.month == 2 and today.day == 29:
+            today = today.replace(day=today.day - 1)
+        eighteen_years_ago = today.replace(year=today.year - 18)
         if birthdate <= eighteen_years_ago:
             return True
         else:
