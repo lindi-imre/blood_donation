@@ -56,7 +56,7 @@ class Validations(object):
         if uniqeid >= datetime.now().date():
             return True
         else:
-            print("The expiration of your ID is out of date!\nYou are not suitable!")
+            print("You are not suitable because your ID is out of date!")
             exit()
 
     @staticmethod
