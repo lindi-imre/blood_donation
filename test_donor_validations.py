@@ -57,6 +57,15 @@ class TestValidations(unittest.TestCase):
         today = datetime.now().date()
         self.assertTrue(Validations.exp_uniqueid(today))
 
+    def test_last_donation_within_threemonth(self):
+        eighty_eight_days_ago = datetime.now().date() - timedelta(days=88)
+        with self.assertRaises(SystemExit):
+            Validations.last_donation_more_than_three_month_ago(eighty_eight_days_ago)
+
+    def test_last_donation_out_of_threemonth(self):
+        ninetyfive_days_ago = datetime.now().date() - timedelta(days=95)
+        self.assertTrue(Validations.last_donation_more_than_three_month_ago(ninetyfive_days_ago))
+
     def test_sick_incorrect(self):
         self.assertFalse(Validations.check_arusicklastmonth("asdf"))
 

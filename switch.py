@@ -54,6 +54,19 @@ class Switch(object):
                     return input_data
                 else:
                     return False
+            else:
+                return False
+        elif get_data[0] == "Last donation date":
+            if "never" in input_data.lower() or input_data.lower() == "n":
+                return "Never"
+            elif CheckDateFormat.check_date_format(input_data):
+                input_data = donor_dates.get_date(input_data)
+                if Validations.last_donation_more_than_three_month_ago(input_data):
+                    return input_data
+                else:
+                    return False
+            else:
+                return False
         elif get_data[0] == "Sickness":
             return Validations.check_arusicklastmonth(input_data)
         elif get_data[0] == "Mobile number":

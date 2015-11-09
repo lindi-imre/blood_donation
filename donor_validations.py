@@ -60,6 +60,19 @@ class Validations(object):
             exit()
 
     @staticmethod
+    def last_donation_more_than_three_month_ago(last_donation_date):
+        if datetime.now().date().month > 3:
+            date_three_month_ago = datetime.now().date().replace(month=datetime.now().date().month - 3)
+        else:
+            date_three_month_ago = datetime.now().date().replace(month=datetime.now().date().month + 9)\
+                .replace(year=datetime.now().date().year - 1)
+        if last_donation_date < date_three_month_ago:
+            return True
+        else:
+            print("You are not suitable because your last donation was within 3 months!")
+            exit()
+
+    @staticmethod
     def check_arusicklastmonth(sick):
         sick_words = ["y", "yes"]
         healthy_words = ["n", "no"]
