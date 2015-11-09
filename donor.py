@@ -13,6 +13,7 @@ class Person(object):
     @staticmethod
     def donor_register_app():
         name = Switch.general_data_inputer(["Donor's name", "Enter your full name"])
+        birth_date = Switch.general_data_inputer(["Birth date", "Birth date (YYYY.MM.DD)"])
         weight = Switch.general_data_inputer(["Weight", "Weight"])
         gender = Switch.general_data_inputer(["Gender", "Gender"])
         uniqeid = Switch.general_data_inputer(["Unique ID", "Unique identifier number"])
@@ -21,11 +22,13 @@ class Person(object):
         sick = Switch.general_data_inputer(["Sickness", "Were you sick in the last month?"])
         phone_number = Switch.general_data_inputer(["Mobile number", "Mobile number"])
         email = Switch.general_data_inputer(["Email", "E-mail address"])
+        age_of_donor = Validations.count_age_of_donor(birth_date)
         hemoglobin = Validations.validate_hmg()
 
         print("\n" + "-" * 32 + "\n")
         print("Donor's data:\n")
         print("Name:", name)
+        print("Birth date: %s - %d years old" % (birth_date, age_of_donor))
         print("Weight:", weight, "kg")
         print("Gender:", gender)
         print("Type of donor's ID: %s\nNumber of donor's ID: %s" % (uniqeid[0], uniqeid[1]))

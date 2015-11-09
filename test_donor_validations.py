@@ -113,7 +113,27 @@ class TestValidations(unittest.TestCase):
         self.assertTrue(Validations.validate_email("a@af.com"))
 
     def test_birthdate(self):
-        self.assertTrue(Validations.validate_birthdate("1990.07.26"))
+        test_date = datetime.strptime("1997.11.09", "%Y.%m.%d").date()
+        self.assertTrue(Validations.validate_birthdate(test_date))
+
+    def test_birthdate2(self):
+        test_date = datetime.now().date().replace(year=datetime.now().date().year - 18)
+        self.assertTrue(Validations.validate_birthdate(test_date))
+
+    def test_birthdate3(self):
+        test_date = datetime.now().date().replace(year=datetime.now().date().year - 18)
+        test_date += timedelta(days=1)
+        with self.assertRaises(SystemExit):
+            Validations.validate_birthdate(test_date)
+
+    def test_age_of_donor_one_day_to_eightteen(self):
+        test_date = datetime.now().date().replace(year=datetime.now().date().year - 18)
+        test_date += timedelta(days=1)
+        self.assertEqual(17, Validations.count_age_of_donor(test_date))
+
+    def test_age_of_donor_just_eightteen(self):
+        test_date = datetime.now().date().replace(year=datetime.now().date().year - 18)
+        self.assertEqual(18, Validations.count_age_of_donor(test_date))
 
 
     # def test_hmg_valid_yes(self):

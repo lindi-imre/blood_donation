@@ -41,6 +41,15 @@ class Switch(object):
                 return NameFormat.name_corr_format(input_data)
             else:
                 return False
+        elif get_data[0] == "Birth date":
+            if CheckDateFormat.check_date_format(input_data):
+                input_data = donor_dates.get_date(input_data)
+                if Validations.validate_birthdate(input_data):
+                    return input_data
+                else:
+                    return False
+            else:
+                return False
         elif get_data[0] == "Weight":
             return Validations.check_weight(input_data)
         elif get_data[0] == "Gender":

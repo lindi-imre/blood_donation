@@ -136,14 +136,23 @@ class Validations(object):
 
     @staticmethod
     def validate_birthdate(birthdate):
-        today = datetime.now()
-        if CheckDateFormat.check_date_format(birthdate):
-            birthdate = datetime.strptime(birthdate, "%Y.%m.%d")
-        if ((today - birthdate).days // 365) >= 18:
+        eighteen_years_ago = datetime.now().date().replace(year=datetime.now().date().year - 18)
+        if birthdate <= eighteen_years_ago:
             return True
         else:
             print("If You are under 18 years you must not be donor!")
             exit()
+
+    @staticmethod
+    def count_age_of_donor(birth_date):
+        today = datetime.now().date()
+        year_diff = today.year - birth_date.year
+        if today.month < birth_date.month:
+            year_diff -= 1
+        elif today.month == birth_date.month and today.day < birth_date.day:
+            year_diff -= 1
+        return year_diff
+
 
 
 
