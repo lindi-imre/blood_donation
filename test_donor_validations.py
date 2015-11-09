@@ -2,7 +2,7 @@ __author__ = 'Slezak Attila'
 
 import unittest
 from donor_validations import Validations
-
+from datetime import datetime, timedelta
 
 class TestValidations(unittest.TestCase):
     def test_name_incorrect(self):
@@ -47,6 +47,15 @@ class TestValidations(unittest.TestCase):
 
     def test_uniqueid_passport(self):
         self.assertEqual(["Passport", "ABCDEF12"], Validations.validate_uniqeid("ABCDEF12"))
+
+    def test_exp_uniqueid_old(self):
+        yesterday = datetime.now().date() - timedelta(days=1)
+        with self.assertRaises(SystemExit):
+            Validations.exp_uniqueid(yesterday)
+
+    def test_exp_uniqueid_valid(self):
+        today = datetime.now().date()
+        self.assertTrue(Validations.exp_uniqueid(today))
 
     def test_sick_incorrect(self):
         self.assertFalse(Validations.check_arusicklastmonth("asdf"))

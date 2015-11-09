@@ -47,6 +47,13 @@ class Switch(object):
             return Validations.validate_gender(input_data)
         elif get_data[0] == "Unique ID":
             return Validations.validate_uniqeid(input_data)
+        elif get_data[0] == "Expiration of ID":
+            if CheckDateFormat.check_date_format(input_data):
+                input_data = donor_dates.get_date(input_data)
+                if Validations.exp_uniqueid(input_data):
+                    return input_data
+                else:
+                    return False
         elif get_data[0] == "Sickness":
             return Validations.check_arusicklastmonth(input_data)
         elif get_data[0] == "Mobile number":

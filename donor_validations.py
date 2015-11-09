@@ -2,7 +2,7 @@ __author__ = 'Péter'
 
 from random import randint
 from check_date_format import CheckDateFormat
-from datetime import datetime
+from datetime import datetime, timedelta
 from name_correct_form import NameFormat
 
 class Validations(object):
@@ -50,6 +50,14 @@ class Validations(object):
         else:
             print("ID should contain 6 digits and 2 letters, the passport should contain 6 letters and 2 numbers.")
             return False
+
+    @staticmethod
+    def exp_uniqueid(uniqeid):
+        if uniqeid >= datetime.now().date():
+            return True
+        else:
+            print("The expiration of your ID is out of date!\nYou are not suitable!")
+            exit()
 
     @staticmethod
     def check_arusicklastmonth(sick):
