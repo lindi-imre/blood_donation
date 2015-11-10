@@ -11,6 +11,13 @@ class Person(object):
         return test_variable
 
     @staticmethod
+    def write_in_file(name,birth_date,uniqeid):
+        file = open("Data/donors.csv", "a", encoding='utf-8')
+        file.write(str(name) + "," + str(birth_date) + "," + str(uniqeid) + "\n")
+        file.close()
+        return
+
+    @staticmethod
     def donor_register_app():
         name = Switch.general_data_inputer(["Donor's name", "Enter your full name"])
         birth_date = Switch.general_data_inputer(["Birth date", "Birth date (YYYY.MM.DD)"])
@@ -25,6 +32,8 @@ class Person(object):
         email = Switch.general_data_inputer(["Email", "E-mail address"])
         age_of_donor = Validations.count_age_of_donor(birth_date)
         hemoglobin = Validations.validate_hmg()
+
+        Person.write_in_file(name,birth_date,uniqeid)
 
         print("\n" + "-" * 32 + "\n")
         print("Donor's data:\n")
