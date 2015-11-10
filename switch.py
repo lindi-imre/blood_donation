@@ -65,6 +65,8 @@ class Switch(object):
                     return False
             else:
                 return False
+        elif get_data[0] == "Blood type":
+            return Validations.blood_type_validation(input_data)
         elif get_data[0] == "Last donation date":
             if "never" in input_data.lower() or input_data.lower() == "n":
                 return "Never"

@@ -172,6 +172,15 @@ class Validations(object):
             year_diff -= 1
         return year_diff
 
+    @staticmethod
+    def blood_type_validation(blood_type):
+        types = ("A+", "A-" "B+", "B-",  "AB+", "AB-", "0+", "0-")
+        if blood_type.upper() in types:
+            return blood_type.upper()
+        else:
+            print("Invalid blood type, please choose one of the following: A+, A-, B+, B-, AB+, AB-, 0+, 0-")
+            return False
+
 
 
 
