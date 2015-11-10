@@ -7,6 +7,9 @@ import calendar
 class CheckDateFormat(object):
     @staticmethod
     def check_date_format(get_date):
+        get_date = get_date.replace(" ", "")
+        if get_date[len(get_date)-1] == ".":
+            get_date = get_date[0:len(get_date)-1]
         date_parts = get_date.split(".")
         if len(date_parts) == 3:
             if date_parts[1] == 1:
