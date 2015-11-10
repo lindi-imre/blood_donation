@@ -57,6 +57,15 @@ class TestValidations(unittest.TestCase):
         today = datetime.now().date()
         self.assertTrue(Validations.exp_uniqueid(today))
 
+    def test_blood_type_false(self):
+        self.assertFalse(Validations.blood_type_validation("6"))
+
+    def test_blood_type_false2(self):
+        self.assertFalse(Validations.blood_type_validation("A"))
+
+    def test_blood_type_true(self):
+        self.assertEqual("A+", Validations.blood_type_validation("a+"))
+
     def test_last_donation_within_threemonth(self):
         eighty_eight_days_ago = datetime.now().date() - timedelta(days=88)
         with self.assertRaises(SystemExit):

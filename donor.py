@@ -18,6 +18,7 @@ class Person(object):
         gender = Switch.general_data_inputer(["Gender", "Gender"])
         uniqeid = Switch.general_data_inputer(["Unique ID", "Unique identifier number"])
         expuniqeid = Switch.general_data_inputer(["Expiration of ID", "Expiration date of your ID"])
+        blood_type = Switch.general_data_inputer(["Blood type", "Blood type (A, B, AB, 0 with +/-)"])
         last_donation = Switch.general_data_inputer(["Last donation date", "Last donation date (type 'never' if never before)"])
         sick = Switch.general_data_inputer(["Sickness", "Were you sick in the last month?"])
         phone_number = Switch.general_data_inputer(["Mobile number", "Mobile number"])
