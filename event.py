@@ -11,6 +11,13 @@ class Event(object):
         return test_variable
 
     @staticmethod
+    def write_in_file(city, address, zip_code):
+        file = open("Data/donations.csv", "a", encoding='utf-8')
+        file.write(str(city) + "," + str(address) + "," + str(zip_code) + "\n")
+        file.close()
+        return
+
+    @staticmethod
     def event_data():
         date_of_event = Switch.general_data_inputer(["Date of the event", "Date of the event (YYYY.MM.DD)"])
         start_time = Switch.general_data_inputer(["Start time", "Start time"])
@@ -25,6 +32,8 @@ class Event(object):
         max_donor_number = EventCalculations.maximum_donor_number(available_beds, start_time, end_time)
         success_rate = EventCalculations.success_rate(planned_donor_number, max_donor_number)
         success_text = EventCalculations.success_text(success_rate)
+
+        Event.write_in_file(city, address, zip_code)
 
         print("\n" + "-" * 32 + "\n")
         print("Details of the planned event:\n")
