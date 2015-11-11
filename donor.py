@@ -11,7 +11,7 @@ class Person(object):
         return test_variable
 
     @staticmethod
-    def write_in_file(name,birth_date,uniqeid):
+    def write_in_file(name, birth_date, uniqeid):
         file = open("Data/donors.csv", "a", encoding='utf-8')
         file.write(str(name) + "," + str(birth_date) + "," + str(uniqeid) + "\n")
         file.close()

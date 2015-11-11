@@ -14,7 +14,14 @@ class TestEvent(unittest.TestCase):
         self.assertFalse(Event.test_mod(["Date of the event", str(test_date).replace("-","."), "Test"]))
 
     def test_ten_day(self):
-        test_date = datetime.now().date() + timedelta(days = 11)
+        is_weekend = True
+        number_of_days = 11
+        while is_weekend:
+            test_date = datetime.now().date() + timedelta(days = number_of_days)
+            if test_date.isoweekday() > 5:
+                number_of_days += 1
+            else:
+                is_weekend = False
         self.assertTrue(Event.test_mod(["Date of the event", str(test_date).replace("-","."), "Test"]))
 
     def test_weekday(self):

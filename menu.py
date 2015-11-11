@@ -1,6 +1,8 @@
 from colorama import Back, Fore, Style, init
 import os
 from msvcrt import getch
+from donor import Person
+from event import Event
 
 init()
 
@@ -97,6 +99,10 @@ class Menu:
                 exit()
             if menu == 6:
                 pass
+            if menu == 1:
+                Person.donor_register_app()
+            if menu == 2:
+                Event.event_data()
 
         Menu.select_menu(menu)
 
