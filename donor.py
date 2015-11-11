@@ -61,5 +61,5 @@ class Person(object):
         save = SaveMenu.save_menu(2)
         if save:
             Person.write_in_file(name,weight,gender,birth_date,last_donation,sick,uniqeid,expuniqeid,blood_type,hemoglobin,email,phone_number)
-            print("Save is successful!")
+            print("Save was successful!")
             time.sleep(3)

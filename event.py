@@ -90,5 +90,5 @@ class Event(object):
         if save:
             every_file_data = [str(date_of_event).replace("-", "."), str(start_time)[:len(str(start_time))-3], str(end_time)[:len(str(end_time))-3], zip_code, city, address, available_beds, planned_donor_number, final_donor_number]
             Event.write_in_file(every_file_data)
-            print("*** Save was successfull ***")
+            print("Save was successful!")
             time.sleep(3)
