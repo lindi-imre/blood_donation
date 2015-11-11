@@ -151,7 +151,6 @@ class Menu:
                     menu = 7
                 if menu == 8:
                     menu = 1
-                Menu.select_menu(menu)
             elif key == 13:
                 if menu == 7:
                     #clear()         #print("Press any key to exit!")
@@ -164,6 +163,7 @@ class Menu:
                     Event.event_data()
                 if menu == 5:
                     Menu.listing_menu(1)
+            Menu.select_menu(menu)
 
         elif menu_type == "search":
             if key != 13:
