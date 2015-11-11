@@ -3,6 +3,9 @@ __author__ = 'Péter'
 
 from switch import Switch
 from donor_validations import Validations
+import os
+from save_menu import SaveMenu
+
 
 class Person(object):
     @staticmethod
@@ -19,6 +22,7 @@ class Person(object):
 
     @staticmethod
     def donor_register_app():
+        print("Please enter the following informations!")
         name = Switch.general_data_inputer(["Donor's name", "Enter your full name"])
         birth_date = Switch.general_data_inputer(["Birth date", "Birth date (YYYY.MM.DD)"])
         weight = Switch.general_data_inputer(["Weight", "Weight"])
@@ -33,7 +37,7 @@ class Person(object):
         age_of_donor = Validations.count_age_of_donor(birth_date)
         hemoglobin = Validations.validate_hmg()
 
-        Person.write_in_file(name,birth_date,uniqeid)
+        os.system('cls')
 
         print("\n" + "-" * 32 + "\n")
         print("Donor's data:\n")
@@ -49,4 +53,8 @@ class Person(object):
         print("Email:", email)
         print("Hemoglobin level:", hemoglobin)
         print("\n" + "-" * 32)
+
+        save = SaveMenu.save_menu(1)
+        if save:
+            Person.write_in_file(name, birth_date, uniqeid)
 
