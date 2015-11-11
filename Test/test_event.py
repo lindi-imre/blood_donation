@@ -57,5 +57,8 @@ class TestEvent(unittest.TestCase):
     def test_planned_donor_number(self):
         self.assertEqual("31", Event.test_mod(["Planned donor number", "31", "Test"]))
 
+    # def test_fejlec(self):
+    #     self.assertTrue(Event.write_in_file([22, 22, 23]))
+
 if __name__ == '__main__':
     unittest.main()

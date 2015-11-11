@@ -1,6 +1,7 @@
 __author__ = 'Slezak Attila'
 # -- coding: utf-8 --
 
+import os.path
 from switch import Switch
 from event_calculations import EventCalculations
 
@@ -11,11 +12,40 @@ class Event(object):
         return test_variable
 
     @staticmethod
-    def write_in_file(city, address, zip_code):
+    def write_in_file(every_file_data):
+        header = "id,date_of_event,start_time,end_time,zip_code,city,address,number_of_available_beds,planned_donor_number,final_donor_number\n"
+        header_exists = True
+        next_id = 1
+        id_s = []
+        file = open("Data/donations.csv", "r", encoding='utf-8')
+        one_line = file.readline()
+        for line in file:
+            first_colon = line.find(",")
+            id_s.append(line[0:first_colon])
+        while str(next_id) in id_s:
+            next_id += 1
+        file.seek(0)
+        whole_file = file.read()
+        file.close()
+        if one_line != header:
+            header_exists = False
+        if not header_exists:
+            file = open("Data/donations.csv", "w", encoding='utf-8')
+            file.write(header)
+            file.write(whole_file)
+            file.close()
         file = open("Data/donations.csv", "a", encoding='utf-8')
-        file.write(str(city) + "," + str(address) + "," + str(zip_code) + "\n")
+        first = True
+        for one_date in every_file_data:
+            if first:
+                file.write(str(next_id) + "," + str(one_date))
+                first = False
+            else:
+                file.write("," + str(one_date))
+        file.write("\n")
         file.close()
         return
+
 
     @staticmethod
     def event_data():
@@ -29,11 +59,12 @@ class Event(object):
         planned_donor_number = Switch.general_data_inputer(["Planned donor number", "Planned donor number"])
         event_duration_time = EventCalculations.duration_in_time(start_time, end_time)
         colon_in_duration_time = str(event_duration_time).find(":")
-        max_donor_number = EventCalculations.maximum_donor_number(available_beds, start_time, end_time)
-        success_rate = EventCalculations.success_rate(planned_donor_number, max_donor_number)
+        final_donor_number = EventCalculations.maximum_donor_number(available_beds, start_time, end_time)
+        success_rate = EventCalculations.success_rate(planned_donor_number, final_donor_number)
         success_text = EventCalculations.success_text(success_rate)
 
-        Event.write_in_file(city, address, zip_code)
+        every_file_data = [str(date_of_event).replace("-", "."), str(start_time)[:len(str(start_time))-3], str(end_time)[:len(str(end_time))-3], zip_code, city, address, available_beds, planned_donor_number, final_donor_number]
+        Event.write_in_file(every_file_data)
 
         print("\n" + "-" * 32 + "\n")
         print("Details of the planned event:\n")
@@ -47,7 +78,7 @@ class Event(object):
         print("Address:", address)
         print("Available beds:", available_beds)
         print("Planned donor number:", planned_donor_number)
-        print("Maximum donor number:", max_donor_number)
+        print("Maximum donor number:", final_donor_number)
         print("Percent of success:", success_rate, "%")
         print("Efficiency:", success_text)
         print("\n" + "-" * 32)
