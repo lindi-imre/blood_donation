@@ -173,7 +173,7 @@ class Validations(object):
 
     @staticmethod
     def blood_type_validation(blood_type):
-        types = ("A+", "A-" "B+", "B-",  "AB+", "AB-", "0+", "0-")
+        types = ("A+", "A-", "B+", "B-",  "AB+", "AB-", "0+", "0-")
         if blood_type.upper() in types:
             return blood_type.upper()
         else:
