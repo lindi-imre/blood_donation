@@ -4,8 +4,8 @@ __author__ = 'Péter'
 from switch import Switch
 from donor_validations import Validations
 import os
+import time
 from save_menu import SaveMenu
-
 
 class Person(object):
     @staticmethod
@@ -58,6 +58,8 @@ class Person(object):
         """
         print("\n" + "-" * 32)
 
-        save = SaveMenu.save_menu(1)
+        save = SaveMenu.save_menu(2)
         if save:
             Person.write_in_file(name,weight,gender,birth_date,last_donation,sick,uniqeid,expuniqeid,blood_type,hemoglobin,email,phone_number)
+            print("Save is successful!")
+            time.sleep(3)
