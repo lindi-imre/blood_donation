@@ -28,7 +28,7 @@ class Validations(object):
         else:
             if not int(weight) >= 50:
                 print("You are too skinny!")
-                exit()
+                return weight
             return True
 
     @staticmethod
@@ -57,7 +57,7 @@ class Validations(object):
             return True
         else:
             print("You are not suitable because your ID is out of date!")
-            exit()
+            return uniqeid
 
     @staticmethod
     def last_donation_more_than_three_month_ago(last_donation_date):
@@ -86,17 +86,16 @@ class Validations(object):
             return True
         else:
             print("You are not suitable because your last donation was within 3 months!")
-            exit()
+            return last_donation_date
 
     @staticmethod
     def check_arusicklastmonth(sick):
         sick_words = ["y", "yes"]
         healthy_words = ["n", "no"]
         if sick.lower() in sick_words:
-            print("Not suitable because you were sick at last month.")
-            exit()
+            return "yes"
         elif sick.lower() in healthy_words:
-            return "No"
+            return "no"
         else:
             print("Please give a correct answer like yes or no!")
             return False
@@ -136,8 +135,8 @@ class Validations(object):
     def validate_hmg():
         hmg_lvl = Validations.rnd_hmg_generate()
         if hmg_lvl <= 110:
-            print("Your hemoglobin level is %s which is not suitable!" % hmg_lvl)
-            exit()
+            print("Your hemoglobin level is %s which is not suitable!")
+            return hmg_lvl
         else:
             return hmg_lvl
 
@@ -160,7 +159,7 @@ class Validations(object):
             return True
         else:
             print("If You are under 18 years you must not be donor!")
-            exit()
+            return birthdate
 
     @staticmethod
     def count_age_of_donor(birth_date):
@@ -180,10 +179,3 @@ class Validations(object):
         else:
             print("Invalid blood type, please choose one of the following: A+, A-, B+, B-, AB+, AB-, 0+, 0-")
             return False
-
-
-
-
-
-
-

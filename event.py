@@ -4,6 +4,9 @@ __author__ = 'Slezak Attila'
 import os.path
 from switch import Switch
 from event_calculations import EventCalculations
+import os
+from save_menu import SaveMenu
+import time
 
 class Event(object):
     @staticmethod
@@ -49,6 +52,7 @@ class Event(object):
 
     @staticmethod
     def event_data():
+        print("Please enter the following informations!")
         date_of_event = Switch.general_data_inputer(["Date of the event", "Date of the event (YYYY.MM.DD)"])
         start_time = Switch.general_data_inputer(["Start time", "Start time"])
         end_time = Switch.general_data_inputer(["End time", "End time", start_time])
@@ -63,8 +67,7 @@ class Event(object):
         success_rate = EventCalculations.success_rate(planned_donor_number, final_donor_number)
         success_text = EventCalculations.success_text(success_rate)
 
-        every_file_data = [str(date_of_event).replace("-", "."), str(start_time)[:len(str(start_time))-3], str(end_time)[:len(str(end_time))-3], zip_code, city, address, available_beds, planned_donor_number, final_donor_number]
-        Event.write_in_file(every_file_data)
+        os.system('cls')
 
         print("\n" + "-" * 32 + "\n")
         print("Details of the planned event:\n")
@@ -82,3 +85,10 @@ class Event(object):
         print("Percent of success:", success_rate, "%")
         print("Efficiency:", success_text)
         print("\n" + "-" * 32)
+
+        save = SaveMenu.save_menu(2)
+        if save:
+            every_file_data = [str(date_of_event).replace("-", "."), str(start_time)[:len(str(start_time))-3], str(end_time)[:len(str(end_time))-3], zip_code, city, address, available_beds, planned_donor_number, final_donor_number]
+            Event.write_in_file(every_file_data)
+            print("*** Save was successfull ***")
+            time.sleep(3)
