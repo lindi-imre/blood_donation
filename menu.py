@@ -3,7 +3,6 @@ import os
 from msvcrt import getch
 from donor import Person
 from event import Event
-#from menutwo import MenuTwo
 
 init()
 
@@ -13,9 +12,49 @@ pos = lambda y, x: '\x1b[%d;%dH' % (y, x)
 
 class Menu:
     @staticmethod
+    def search_menu(menu):
+        clear()
+        print("*** Welcome in blood donation and event register application ***\n*\n* Please select:\n*")
+        if menu == 1:
+            print("*   " + Back.WHITE + Fore.BLACK + "1. Donors" + Back.RESET + Fore.RESET + "")
+            print("*   2. Events")
+            print("*   3. Back to menu")
+        elif menu == 2:
+            print("*   1. Donors")
+            print("*   " + Back.WHITE + Fore.BLACK + "2. Events" + Back.RESET + Fore.RESET + "")
+            print("*   3. Back to menu")
+        elif menu == 3:
+            print("*   1. Donors")
+            print("*   2. Events")
+            print("*   " + Back.WHITE + Fore.BLACK + "3. Back to menu" + Back.RESET + Fore.RESET + "")
+        print("*\n****************************************************************")
+        Menu.draw_menu("search")
+        Menu.enter_menu("search", menu)
+
+    @staticmethod
+    def listing_menu(menu):
+        clear()
+        print("********* Please choose from the listing options below. ********\n*")
+        if menu == 1:
+            print("*   " + Back.WHITE + Fore.BLACK + "1. List donors" + Back.RESET + Fore.RESET + "")
+            print("*   2. List event locations")
+            print("*   3. Back to menu")
+        elif menu == 2:
+            print("*   1. List donors")
+            print("*   " + Back.WHITE + Fore.BLACK + "2. List event locations" + Back.RESET + Fore.RESET + "")
+            print("*   3. Back to menu")
+        elif menu == 3:
+            print("*   1. List donors")
+            print("*   2. List event locations")
+            print("*   " + Back.WHITE + Fore.BLACK + "3. Back to menu" + Back.RESET + Fore.RESET + "")
+        print("*\n****************************************************************")
+        Menu.draw_menu("listing")
+        Menu.enter_menu("listing", menu)
+
+    @staticmethod
     def select_menu(menu):
         clear()
-        print("*** Welcome in blood donation and event register application ***\n*")
+        print("*** Welcome in blood donation and event register application ***\n*\n* Please select:\n*")
         if menu == 1:
             print("*   " + Back.WHITE + Fore.BLACK + "1. Add new donor" + Back.RESET + Fore.RESET + "")
             print("*   2. Add new donation event")
@@ -73,24 +112,30 @@ class Menu:
             print("*   6. Search")
             print("*   " + Back.WHITE + Fore.BLACK + "7. Exit" + Back.RESET + Fore.RESET + "")
         print("*\n****************************************************************")
-        i = 2
-        while i < 11:
-            print('%s%s%s%s' % (pos(i, 64), Fore.WHITE, Back.BLACK, Style.NORMAL), end='*')
-            i += 1
-        print('%s%s%s%s' % (pos(12, 1), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
+        Menu.draw_menu("main")
+        Menu.enter_menu("main", menu)
 
-        #billentyuleutes
-        key = ord(getch())
+    @staticmethod
+    def draw_menu(menu_type):
+        if menu_type == "main":
+            i = 2
+            while i < 13:
+                print('%s%s%s%s' % (pos(i, 64), Fore.WHITE, Back.BLACK, Style.NORMAL), end='*')
+                i += 1
+            print('%s%s%s%s' % (pos(14, 1), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
+        elif menu_type == "search":
+            i = 2
+            while i < 10:
+                print('%s%s%s%s' % (pos(i, 64), Fore.WHITE, Back.BLACK, Style.NORMAL), end='*')
+                i += 1
+            print('%s%s%s%s' % (pos(10, 1), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
+        elif menu_type == "listing":
+            i = 2
+            while i < 7:
+                print('%s%s%s%s' % (pos(i, 64), Fore.WHITE, Back.BLACK, Style.NORMAL), end='*')
+                i += 1
+            print('%s%s%s%s' % (pos(12, 1), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
 
-        #menuszam tulcsordulas ellen
-        if key == 72:
-            menu -= 1
-        elif key == 80:
-            menu += 1
-        if menu == 0:
-            menu = 7
-        if menu == 8:
-            menu = 1
 
         if key == 13:
             if menu == 7:
@@ -107,8 +152,60 @@ class Menu:
             #if menu == 5:
                 #MenuTwo.select_menu_two()
 
-        Menu.select_menu(menu)
+    @staticmethod
+    def enter_menu(menu_type, menu):
+        key = ord(getch())  #billentyuleutes
 
+        if menu_type == "main":
+            if key != 13:
+                if key == 72:   #menuszam tulcsordulas ellen
+                    menu -= 1
+                elif key == 80:
+                    menu += 1
+                if menu == 0:
+                    menu = 7
+                if menu == 8:
+                    menu = 1
+                Menu.select_menu(menu)
+            elif key == 13:
+                if menu == 7:
+                    #clear()         #print("Press any key to exit!")
+                    exit()          #getch()
+                if menu == 6:
+                    Menu.search_menu(1)
+                if menu == 1:
+                    Person.donor_register_app()
+                if menu == 2:
+                    Event.event_data()
 
+        elif menu_type == "search":
+            if key != 13:
+                if key == 72:
+                    menu -= 1
+                elif key == 80:
+                    menu += 1
+                if menu == 0:
+                    menu = 3
+                if menu == 4:
+                    menu = 1
+                Menu.search_menu(menu)
+            elif key == 13:
+                if menu == 3:
+                    Menu.select_menu(1)
+
+        elif menu_type == "listing":
+            if key != 13:
+                if key == 72:
+                    menu -= 1
+                elif key == 80:
+                    menu += 1
+                if menu == 0:
+                    menu = 3
+                if menu == 4:
+                    menu = 1
+                Menu.search_menu(menu)
+            elif key == 13:
+                if menu == 3:
+                    Menu.select_menu(1)
 
 Menu.select_menu(1)

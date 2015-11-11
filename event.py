@@ -3,6 +3,8 @@ __author__ = 'Slezak Attila'
 
 from switch import Switch
 from event_calculations import EventCalculations
+import os
+from save_menu import SaveMenu
 
 class Event(object):
     @staticmethod
@@ -22,6 +24,7 @@ class Event(object):
 
     @staticmethod
     def event_data():
+        print("Please enter the following informations!")
         date_of_event = Switch.general_data_inputer(["Date of the event", "Date of the event (YYYY.MM.DD)"])
         start_time = Switch.general_data_inputer(["Start time", "Start time"])
         end_time = Switch.general_data_inputer(["End time", "End time", start_time])
@@ -39,6 +42,8 @@ class Event(object):
         Event.write_in_file(date_of_event, start_time, end_time, zip_code, city, address, available_beds,\
                             planned_donor_number)
 
+        os.system('cls')
+
         print("\n" + "-" * 32 + "\n")
         print("Details of the planned event:\n")
         print("Date of the event:", date_of_event)
@@ -55,3 +60,7 @@ class Event(object):
         print("Percent of success:", success_rate, "%")
         print("Efficiency:", success_text)
         print("\n" + "-" * 32)
+
+        save = SaveMenu.save_menu(1)
+        if save:
+            Event.write_in_file(city, address, zip_code)
