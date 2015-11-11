@@ -162,6 +162,8 @@ class Menu:
                     Person.donor_register_app()
                 if menu == 2:
                     Event.event_data()
+                if menu == 5:
+                    Menu.listing_menu(1)
 
         elif menu_type == "search":
             if key != 13:
@@ -188,7 +190,7 @@ class Menu:
                     menu = 3
                 if menu == 4:
                     menu = 1
-                Menu.search_menu(menu)
+                Menu.listing_menu(menu)
             elif key == 13:
                 if menu == 3:
                     Menu.select_menu(1)
