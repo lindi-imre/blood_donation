@@ -194,5 +194,7 @@ class Menu:
             elif key == 13:
                 if menu == 3:
                     Menu.select_menu(1)
+                if menu == 1:
+                    pass
 
 Menu.select_menu(1)
