@@ -137,21 +137,6 @@ class Menu:
             print('%s%s%s%s' % (pos(12, 1), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
 
 
-        if key == 13:
-            if menu == 7:
-                clear()
-                #print("Press any key to exit!")
-                #getch()
-                exit()
-            if menu == 6:
-                pass
-            if menu == 1:
-                Person.donor_register_app()
-            if menu == 2:
-                Event.event_data()
-            #if menu == 5:
-                #MenuTwo.select_menu_two()
-
     @staticmethod
     def enter_menu(menu_type, menu):
         key = ord(getch())  #billentyuleutes
