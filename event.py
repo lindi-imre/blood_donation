@@ -11,9 +11,12 @@ class Event(object):
         return test_variable
 
     @staticmethod
-    def write_in_file(city, address, zip_code):
+    def write_in_file(date_of_event, start_time, end_time, available_beds, planned_donor_numbers,\
+                      city, address, zip_code):
         file = open("Data/donations.csv", "a", encoding='utf-8')
-        file.write(str(city) + "," + str(address) + "," + str(zip_code) + "\n")
+        file.write(str(date_of_event) + "," + str(start_time) + "," + str(end_time) + "," + str(zip_code) + ","\
+                   + str(city) + "," + str(address) + "," + str(available_beds) + "," + str(planned_donor_numbers) \
+                   + "\n")
         file.close()
         return
 
@@ -33,7 +36,8 @@ class Event(object):
         success_rate = EventCalculations.success_rate(planned_donor_number, max_donor_number)
         success_text = EventCalculations.success_text(success_rate)
 
-        Event.write_in_file(city, address, zip_code)
+        Event.write_in_file(date_of_event, start_time, end_time, zip_code, city, address, available_beds,\
+                            planned_donor_number)
 
         print("\n" + "-" * 32 + "\n")
         print("Details of the planned event:\n")

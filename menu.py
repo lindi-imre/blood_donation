@@ -3,6 +3,7 @@ import os
 from msvcrt import getch
 from donor import Person
 from event import Event
+#from menutwo import MenuTwo
 
 init()
 
@@ -103,6 +104,8 @@ class Menu:
                 Person.donor_register_app()
             if menu == 2:
                 Event.event_data()
+            #if menu == 5:
+                #MenuTwo.select_menu_two()
 
         Menu.select_menu(menu)
 
