@@ -57,4 +57,3 @@ class Person(object):
         save = SaveMenu.save_menu(1)
         if save:
             Person.write_in_file(name, birth_date, uniqeid)
-

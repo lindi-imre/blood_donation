@@ -64,3 +64,4 @@ class Event(object):
         save = SaveMenu.save_menu(1)
         if save:
             Event.write_in_file(city, address, zip_code)
+            print("*** Save was successfull ***")
