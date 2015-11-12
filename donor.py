@@ -5,7 +5,8 @@ from switch import Switch
 from donor_validations import Validations
 import os
 import time
-from save_menu import SaveMenu
+if os.path.isfile("C:/Users/Slezak Attila/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+    from save_menu import SaveMenu
 
 
 class Person(object):

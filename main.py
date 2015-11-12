@@ -1,24 +1,22 @@
-# -- coding: utf-8 --
-from donor import Person
-from event import Event
+__author__ = 'Slezak Attila'
+import os
+import time
 
-while True:
-    print("<~~~~~~~~----------------------^^^^^^^----------------------~~~~~~~>")
-    print("Welcome in the blood donor and event location register application!")
-    print("Please select what would you like to register:\n1 - Donor registration\n2 - Donor event location registration"
-          "\n3 - Exit")
-    menu = ""
-    while not menu == "1" or not menu == "2":
-        menu = input(">> ")
-        if menu == "1":
-            Person.donor_register_app()
-            print("\n")
-            break
-        elif menu == "2":
-            Event.event_data()
-            print("\n")
-            break
-        elif menu == "3":
-            exit()
-        else:
-            print("Please select a valid menu number!")
+os.system('cls')
+if not os.path.isfile("C:/Users/Slezak Attila/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+    print("You have to install the colorama module first!")
+    save = input("Do you want it? ('Yes' or 'No'): ")
+    if save.lower() == "yes" or save.lower() == "y":
+        os.chdir('colorama-0.3.3')
+        os.system("python setup.py install")
+        print("\nInstallation has been successfully finished!")
+        time.sleep(3)
+        os.chdir('..')
+        os.system('cls')
+        os.system("python menu.py")
+    else:
+        os.system('cls')
+        os.system("python main_old.py")
+else:
+    os.system('cls')
+    os.system("python menu.py")
