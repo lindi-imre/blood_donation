@@ -5,8 +5,9 @@ import os.path
 from switch import Switch
 from event_calculations import EventCalculations
 import os
-from save_menu import SaveMenu
 import time
+if os.path.isfile("C:/Users/Slezak Attila/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+    from save_menu import SaveMenu
 
 class Event(object):
     @staticmethod

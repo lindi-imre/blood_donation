@@ -1,8 +1,10 @@
+# -- coding: utf-8 --
 from colorama import Back, Fore, Style, init
 import os
 from msvcrt import getch
 from donor import Person
 from event import Event
+from search import Search
 
 init()
 
@@ -177,8 +179,15 @@ class Menu:
                     menu = 1
                 Menu.search_menu(menu)
             elif key == 13:
-                if menu == 3:
+                if menu == 1:
+                    Search.search_in_file("Data/donors.csv")
+                    waiting = input()
+                elif menu == 2:
+                    Search.search_in_file("Data/donations.csv")
+                    waiting = input()
+                elif menu == 3:
                     Menu.select_menu(1)
+                Menu.search_menu(menu)
 
         elif menu_type == "listing":
             if key != 13:
