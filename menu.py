@@ -5,7 +5,7 @@ from msvcrt import getch
 from donor import Person
 from event import Event
 from search import Search
-from listing import ListingDonors
+from listing import ListingDataBase
 
 init()
 
@@ -17,7 +17,7 @@ class Menu:
     @staticmethod
     def search_menu(menu):
         clear()
-        print("*** Welcome in blood donation and event register application ***\n*\n* Please select:\n*")
+        print("******** Please choose from the searching options below ********\n*\n* Please select:\n*")
         if menu == 1:
             print("*   " + Back.WHITE + Fore.BLACK + "1. Donors" + Back.RESET + Fore.RESET + "")
             print("*   2. Events")
@@ -205,10 +205,11 @@ class Menu:
                 if menu == 3:
                     Menu.select_menu(1)
                 if menu == 1:
-                    ListingDonors.open_donors("Data/donors.csv")
+                    ListingDataBase.listing_database("Data/donors.csv")
                     input()
                 if menu == 2:
-                    ListingDonors.open_donations("Data/donations.csv")
+                    ListingDataBase.listing_database("Data/donations.csv")
                     input()
+                Menu.listing_menu(menu)
 
 Menu.select_menu(1)

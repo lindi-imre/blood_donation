@@ -9,6 +9,7 @@ class MainOld:
     @staticmethod
     def select_menu():
         while True:
+            os.system('cls')
             print("<~~~~~~~~----------------------^^^^^^^----------------------~~~~~~~>")
             print("Welcome in the blood donor and event location register application!")
             print("Please select what would you like to register:\n1 - Donor registration\n2 - Donor event location registration"
@@ -27,6 +28,5 @@ class MainOld:
             else:
                 print("Please select a valid menu number!")
                 time.sleep(1.4)
-                os.system('cls')
 
 MainOld.select_menu()

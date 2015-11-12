@@ -3,16 +3,32 @@ __author__ = 'Kozma Balazs'
 import csv
 
 
-class ListingDonors(object):
+class ListingDataBase(object):
     @staticmethod
-    def open_donors(which_file):
+    def listing_database(which_file):
+        print("-" * 52)
+        is_there_any_data = False
         with open(which_file, "r", encoding="utf-8") as csvfile:
-            donours = csv.reader(csvfile, delimiter="|", quotechar='|')
-            for row in donours:
-                print(row)
+            filereader = csv.reader(csvfile, delimiter=",", quotechar='"')
+            is_first_row = True
 
-    def open_donations(which_file):
-        with open(which_file, "r", encoding="utf-8") as csvfile:
-            donours = csv.reader(csvfile, delimiter="|", quotechar='|')
-            for row in donours:
-                print(row)
+            for i, row in enumerate(filereader):
+                if is_first_row:
+                    first_row = row
+                    for i, header in enumerate(first_row):
+                        header = header.replace("_", " ")
+                        first_row[i] = header[0].upper() + header[1:]
+                    is_first_row = False
+                    continue
+
+                is_there_any_data = True
+                is_first_element = True
+                for (header, one_element) in zip(first_row, row):
+                    if is_first_element:
+                        print(str(i) + "." + " " * (24 - len(str(i)) - len(header)) + header + ": " + one_element)
+                        is_first_element = False
+                    else:
+                        print(" " * (25 - len(header)) + header + ": " + one_element)
+                print("-" * 52)
+            if not is_there_any_data:
+                print("Sorry, the database is empty...")
