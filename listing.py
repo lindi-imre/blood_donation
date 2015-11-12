@@ -7,13 +7,12 @@ class ListingDonors(object):
     @staticmethod
     def open_donors(which_file):
         with open(which_file, "r", encoding="utf-8") as csvfile:
-            donours = csv.reader(csvfile, delimiter=",", quotechar='"')
+            donours = csv.reader(csvfile, delimiter="|", quotechar='|')
             for row in donours:
                 print(row)
 
-
     def open_donations(which_file):
         with open(which_file, "r", encoding="utf-8") as csvfile:
-            donours = csv.reader(csvfile, delimiter=",", quotechar='"')
+            donours = csv.reader(csvfile, delimiter="|", quotechar='|')
             for row in donours:
                 print(row)
