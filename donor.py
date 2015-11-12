@@ -4,6 +4,7 @@ __author__ = 'Péter'
 from switch import Switch
 from donor_validations import Validations
 import os
+import time
 from save_menu import SaveMenu
 
 
@@ -14,9 +15,12 @@ class Person(object):
         return test_variable
 
     @staticmethod
-    def write_in_file(name, birth_date, uniqeid):
+    def write_in_file(name, weight, gender, birth_date, last_donation, sick, uniqeid, expuniqeid, blood_type, \
+                      hemoglobin, email, phone_number):
         file = open("Data/donors.csv", "a", encoding='utf-8')
-        file.write(str(name) + "," + str(birth_date) + "," + str(uniqeid) + "\n")
+        file.write(str(name) + "," + str(weight) + "," + str(gender) + "," + str(birth_date) + "," +\
+                   str(last_donation) + "," + str(sick) + "," + str(uniqeid[1]) + "," + str(expuniqeid) + "," +\
+                   str(blood_type) + "," + str(hemoglobin) + "," + str(email) + "," + str(phone_number) + "\n")
         file.close()
         return
 
@@ -38,7 +42,8 @@ class Person(object):
         hemoglobin = Validations.validate_hmg()
 
         os.system('cls')
-
+        #Useless prints actual moment
+        """
         print("\n" + "-" * 32 + "\n")
         print("Donor's data:\n")
         print("Name:", name)
@@ -48,13 +53,17 @@ class Person(object):
         print("Type of donor's ID: %s\nNumber of donor's ID: %s" % (uniqeid[0], uniqeid[1]))
         print("Expiration of donor's ID: %s" % expuniqeid)
         print("Last donation date: %s" % last_donation)
-        print("Were donor sick last month:", sick)
+        print("Were donor sick last month:", Validations.check_arusicklastmonth(sick))
         print("Phone number:", phone_number)
         print("Email:", email)
-        print("Hemoglobin level:", hemoglobin)
+        print("Hemoglobin level:", Validations.validate_hmg())
+        """
         print("\n" + "-" * 32)
 
-        save = SaveMenuOne.save_menu(1)
+        save = SaveMenu.save_menu(2)
         if save:
-            Person.write_in_file(name, birth_date, uniqeid)
-            print("*** Save was successfull ***")
+            Person.write_in_file(name, weight, gender, birth_date, last_donation, sick, uniqeid, expuniqeid, blood_type\
+                                 , hemoglobin, email, phone_number)
+            print("Save was successful!")
+            time.sleep(3)
+
