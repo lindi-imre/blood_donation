@@ -44,7 +44,7 @@ class Person(object):
 
         os.system('cls')
         #Useless prints actual moment
-        """
+
         print("\n" + "-" * 32 + "\n")
         print("Donor's data:\n")
         print("Name:", name)
@@ -54,11 +54,11 @@ class Person(object):
         print("Type of donor's ID: %s\nNumber of donor's ID: %s" % (uniqeid[0], uniqeid[1]))
         print("Expiration of donor's ID: %s" % expuniqeid)
         print("Last donation date: %s" % last_donation)
-        print("Were donor sick last month:", Validations.check_arusicklastmonth(sick))
+        print("Were donor sick last month:", sick)
         print("Phone number:", phone_number)
         print("Email:", email)
-        print("Hemoglobin level:", Validations.validate_hmg())
-        """
+        print("Hemoglobin level:", hemoglobin)
+
         print("\n" + "-" * 32)
 
         save = SaveMenu.save_menu(2)

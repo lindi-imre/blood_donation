@@ -16,6 +16,9 @@ class Search(object):
             for row in filereader:
                 if first:
                     first_row = row
+                    for i, header in enumerate(first_row):
+                        header = header.replace("_", " ")
+                        first_row[i] = header[0].upper() + header[1:]
                     first = False
                     continue
                 for (header, one_element) in zip(first_row, row):
@@ -33,7 +36,7 @@ class Search(object):
                         if found.get(header) is not None:
                             results = found[header].split(",")
                             print_digit = 0
-                            print(header + ": ", end="")
+                            print(" " * (25-len(header)) + header + ": ", end="")
                             for next_result in results:
                                 one_result = int(next_result)
                                 print(one_element[print_digit:one_result] + Fore.RED + \
@@ -41,8 +44,7 @@ class Search(object):
                                 print_digit = one_result + len(search_term)
                             print(one_element[print_digit:])
                         else:
-                            print(header + ": " + one_element)
-                    print(found)
+                            print(" " * (25-len(header)) + header + ": " + one_element)
                     found = {}
                     print("-" * 40)
         return True
