@@ -197,7 +197,9 @@ class Menu:
                     Menu.select_menu(1)
                 if menu == 1:
                     ListingDonors.open_donors("Data/donors.csv")
+                    input()
                 if menu == 2:
                     ListingDonors.open_donations("Data/donations.csv")
+                    input()
 
 Menu.select_menu(1)
