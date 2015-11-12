@@ -54,6 +54,7 @@ class Person(object):
         print("Hemoglobin level:", hemoglobin)
         print("\n" + "-" * 32)
 
-        save = SaveMenu.save_menu(1)
+        save = SaveMenuOne.save_menu(1)
         if save:
             Person.write_in_file(name, birth_date, uniqeid)
+            print("*** Save was successfull ***")

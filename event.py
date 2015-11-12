@@ -39,9 +39,6 @@ class Event(object):
         success_rate = EventCalculations.success_rate(planned_donor_number, max_donor_number)
         success_text = EventCalculations.success_text(success_rate)
 
-        Event.write_in_file(date_of_event, start_time, end_time, zip_code, city, address, available_beds,\
-                            planned_donor_number)
-
         os.system('cls')
 
         print("\n" + "-" * 32 + "\n")
@@ -63,5 +60,6 @@ class Event(object):
 
         save = SaveMenu.save_menu(1)
         if save:
-            Event.write_in_file(city, address, zip_code)
+            Event.write_in_file(date_of_event, start_time, end_time, zip_code, city, address, available_beds,\
+                            planned_donor_number)
             print("*** Save was successfull ***")
