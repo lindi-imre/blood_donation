@@ -10,10 +10,10 @@ class ColoramaMenu:
             print("If You would like to use the colored menu, You should install Colorama.\nDo you want to install it?\n")
             if menu == 1:
                 print("* 1. Yes, I want install Colorama")
-                print("  2. No, I don't install")
+                print("  2. No, I don't want to install Colorama")
             elif menu == 2:
                 print("  1. Yes, I want install Colorama")
-                print("* 2. No, I don't install")
+                print("* 2. No, I don't want to install Colorama")
             key = ord(getch())
             if key == 224:
                 menu += 1

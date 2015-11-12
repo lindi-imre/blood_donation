@@ -1,4 +1,3 @@
-
 id,date_of_event,start_time,end_time,zip_code,city,address,number_of_available_beds,planned_donor_number,final_donor_number
 
 1,2015.11.02.,8:00,14:00,3525,Miskolc,Regi posta utca 9.,3,45,48
