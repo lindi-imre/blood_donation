@@ -1,9 +1,11 @@
 __author__ = 'Slezak Attila'
 import os
 import time
+import getpass
 
 os.system('cls')
-if not os.path.isfile("C:/Users/Slezak Attila/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+user_name = getpass.getuser()
+if not os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
     print("You have to install the colorama module first!")
     save = input("Do you want it? ('Yes' or 'No'): ")
     if save.lower() == "yes" or save.lower() == "y":
