@@ -8,6 +8,7 @@ import time
 if os.path.isfile("C:/Users/Slezak Attila/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
     from save_menu import SaveMenu
 
+
 class Person(object):
     @staticmethod
     def test_mod(test_data):
@@ -15,11 +16,12 @@ class Person(object):
         return test_variable
 
     @staticmethod
-    def write_in_file(name,weight,gender,birth_date,last_donation,sick,uniqeid,expuniqeid,blood_type,hemoglobin,email,phone_number):
+    def write_in_file(name, weight, gender, birth_date, last_donation, sick, uniqeid, expuniqeid, blood_type, \
+                      hemoglobin, email, phone_number):
         file = open("Data/donors.csv", "a", encoding='utf-8')
-        file.write(str(name) + "," + str(weight) + "," + str(gender) + "," + str(birth_date) + "," + str(last_donation) + "," \
-        + str(sick) + "," + str(uniqeid[1]) + "," + str(expuniqeid) + "," + str(blood_type) + "," + str(hemoglobin) + "," \
-        + str(email) + "," + str(phone_number) + "\n")
+        file.write(str(name) + "," + str(weight) + "," + str(gender) + "," + str(birth_date) + "," +\
+                   str(last_donation) + "," + str(sick) + "," + str(uniqeid[1]) + "," + str(expuniqeid) + "," +\
+                   str(blood_type) + "," + str(hemoglobin) + "," + str(email) + "," + str(phone_number) + "\n")
         file.close()
         return
 
@@ -61,6 +63,8 @@ class Person(object):
 
         save = SaveMenu.save_menu(2)
         if save:
-            Person.write_in_file(name,weight,gender,birth_date,last_donation,sick,uniqeid,expuniqeid,blood_type,hemoglobin,email,phone_number)
-            print("Save is successful!")
+            Person.write_in_file(name, weight, gender, birth_date, last_donation, sick, uniqeid, expuniqeid, blood_type\
+                                 , hemoglobin, email, phone_number)
+            print("Save was successful!")
             time.sleep(3)
+

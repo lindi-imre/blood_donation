@@ -9,6 +9,7 @@ import time
 if os.path.isfile("C:/Users/Slezak Attila/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
     from save_menu import SaveMenu
 
+
 class Event(object):
     @staticmethod
     def test_mod(test_data):
@@ -17,7 +18,8 @@ class Event(object):
 
     @staticmethod
     def write_in_file(every_file_data):
-        header = "id,date_of_event,start_time,end_time,zip_code,city,address,number_of_available_beds,planned_donor_number,final_donor_number\n"
+        header = "id,date_of_event,start_time,end_time,zip_code,city,address,number_of_available\
+        _beds,planned_donor_number,final_donor_number\n"
         header_exists = True
         next_id = 1
         id_s = []
@@ -89,7 +91,10 @@ class Event(object):
 
         save = SaveMenu.save_menu(2)
         if save:
-            every_file_data = [str(date_of_event).replace("-", "."), str(start_time)[:len(str(start_time))-3], str(end_time)[:len(str(end_time))-3], zip_code, city, address, available_beds, planned_donor_number, final_donor_number]
+            every_file_data = [str(date_of_event).replace("-", "."), str(start_time)[:len(str(start_time))-3],\
+                               str(end_time)[:len(str(end_time))-3], zip_code, city, address, available_beds, \
+                               planned_donor_number, final_donor_number]
             Event.write_in_file(every_file_data)
-            print("*** Save was successfull ***")
+            print("Save was successful!")
             time.sleep(3)
+

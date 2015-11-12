@@ -5,6 +5,7 @@ from msvcrt import getch
 from donor import Person
 from event import Event
 from search import Search
+from listing import ListingDonors
 
 init()
 
@@ -204,6 +205,10 @@ class Menu:
                 if menu == 3:
                     Menu.select_menu(1)
                 if menu == 1:
-                    pass
+                    ListingDonors.open_donors("Data/donors.csv")
+                    input()
+                if menu == 2:
+                    ListingDonors.open_donations("Data/donations.csv")
+                    input()
 
 Menu.select_menu(1)
