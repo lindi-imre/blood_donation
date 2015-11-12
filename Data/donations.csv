@@ -1,3 +1,4 @@
+id,date_of_event,start_time,end_time,zip_code,city,address,number_of_available        _beds,planned_donor_number,final_donor_number
 
 ﻿Miskolc,Sik Utca 88,6453
 2020-12-10,14:00:00,15:00:00,500,Sik U 6,50,5555,Miskolc
@@ -17,3 +18,4 @@ id,date_of_event,start_time,end_time,zip_code,city,address,number_of_available_b
 8,2017.01.04,10:00,15:00,5555,Miskolc,Valahol,44,55,396
 9,2017.01.03,12:45,17:45,3456,Miskolc,Srfhdgh,4,45,36
 
+10,2020.12.03,13:00,14:00,5555,Miskolc,Sik U 666,6666,66666,6666
