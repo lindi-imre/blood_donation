@@ -3,9 +3,13 @@ __author__ = 'Péter'
 
 from switch import Switch
 from donor_validations import Validations
+from save_menu_old import SaveMenuOldFashioned
 import os
 import time
-if os.path.isfile("C:/Users/Slezak Attila/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+import getpass
+
+user_name = getpass.getuser()
+if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
     from save_menu import SaveMenu
 
 
@@ -61,7 +65,11 @@ class Person(object):
 
         print("\n" + "-" * 32)
 
-        save = SaveMenu.save_menu(2)
+        if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+            save = SaveMenu.save_menu(2)
+        else:
+            save = SaveMenuOldFashioned.save_menu(2)
+            print()
         if save:
             Person.write_in_file(name, weight, gender, birth_date, last_donation, sick, uniqeid, expuniqeid, blood_type\
                                  , hemoglobin, email, phone_number)

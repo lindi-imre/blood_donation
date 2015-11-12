@@ -4,9 +4,13 @@ __author__ = 'Slezak Attila'
 import os.path
 from switch import Switch
 from event_calculations import EventCalculations
+from save_menu_old import SaveMenuOldFashioned
 import os
 import time
-if os.path.isfile("C:/Users/Slezak Attila/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+import getpass
+
+user_name = getpass.getuser()
+if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
     from save_menu import SaveMenu
 
 
@@ -18,8 +22,8 @@ class Event(object):
 
     @staticmethod
     def write_in_file(every_file_data):
-        header = "id,date_of_event,start_time,end_time,zip_code,city,address,number_of_available\
-        _beds,planned_donor_number,final_donor_number\n"
+        header = "id,date_of_event,start_time,end_time,zip_code,city,address,number_of_available_beds,"
+        header += "planned_donor_number,final_donor_number\n"
         header_exists = True
         next_id = 1
         id_s = []
@@ -42,13 +46,13 @@ class Event(object):
             file.close()
         file = open("Data/donations.csv", "a", encoding='utf-8')
         first = True
-        for one_date in every_file_data:
+        for one_data in every_file_data:
             if first:
-                file.write(str(next_id) + "," + str(one_date))
+                file.write("\n" + str(next_id) + "," + str(one_data))
                 first = False
             else:
-                file.write("," + str(one_date))
-        file.write("\n")
+                file.write("," + str(one_data))
+        # file.write("\n")
         file.close()
         return
 
@@ -89,7 +93,11 @@ class Event(object):
         print("Efficiency:", success_text)
         print("\n" + "-" * 32)
 
-        save = SaveMenu.save_menu(2)
+        if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+            save = SaveMenu.save_menu(2)
+        else:
+            save = SaveMenuOldFashioned.save_menu(2)
+            print()
         if save:
             every_file_data = [str(date_of_event).replace("-", "."), str(start_time)[:len(str(start_time))-3],\
                                str(end_time)[:len(str(end_time))-3], zip_code, city, address, available_beds, \
