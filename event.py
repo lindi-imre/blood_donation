@@ -94,9 +94,9 @@ class Event(object):
         print("\n" + "-" * 32)
 
         if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
-            save = SaveMenu.save_menu(2)
+            save = SaveMenu.save_menu(2,21)
         else:
-            save = SaveMenuOldFashioned.save_menu(2)
+            save = SaveMenuOldFashioned.save_menu(2,21)
             print()
         if save:
             every_file_data = [str(date_of_event).replace("-", "."), str(start_time)[:len(str(start_time))-3],\

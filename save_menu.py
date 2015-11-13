@@ -8,9 +8,9 @@ pos = lambda y, x: '\x1b[%d;%dH' % (y, x)
 
 class SaveMenu:
     @staticmethod
-    def save_menu(select):
+    def save_menu(select,y_pos):
         while True:
-            print('%s%s%s%s' % (pos(20, 1), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
+            print('%s%s%s%s' % (pos(y_pos, 1), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
             if select == 1:
                 print("Do you want to save? " + "yes " + Back.WHITE + Fore.BLACK + "no" + Back.RESET + Fore.RESET + "")
             if select == 2:
