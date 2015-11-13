@@ -10,7 +10,7 @@ if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Pyth
 class Search(object):
     @staticmethod
     def search_in_file(which_file):
-        is_any_find = False
+        num_of_find = 0
         first = True
         finder = 0
         search_term = input("Search term: ")
@@ -37,12 +37,16 @@ class Search(object):
                         finder += one_element.find(search_term, finder) - finder + 1
                     finder = 0
                 if found:
-                    is_any_find = True
+                    num_of_find += 1
+                    is_first_element = True
                     for (header, one_element) in zip(first_row, row):
                         if found.get(header) is not None and os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
                             results = found[header].split(",")
                             print_digit = 0
-                            print(" " * (25-len(header)) + header + ": ", end="")
+                            if is_first_element:
+                                print(str(num_of_find) + "." + " " * (24-len(header)-len(str(num_of_find))) + header + ": ", end="")
+                            else:
+                                print(" " * (25-len(header)) + header + ": ", end="")
                             for next_result in results:
                                 one_result = int(next_result)
                                 print(one_element[print_digit:one_result] + Fore.RED + \
@@ -50,9 +54,13 @@ class Search(object):
                                 print_digit = one_result + len(search_term)
                             print(one_element[print_digit:])
                         else:
-                            print(" " * (25-len(header)) + header + ": " + one_element)
+                            if is_first_element:
+                                print(str(num_of_find) + "." + " " * (24-len(header)-len(str(num_of_find))) + header + ": " + one_element)
+                            else:
+                                print(" " * (25-len(header)) + header + ": " + one_element)
+                        is_first_element = False
                     found = {}
                     print("-" * 52)
-        if not is_any_find:
+        if num_of_find == 0:
             print("There is no data corresponding to this query...")
         return True
