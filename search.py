@@ -1,15 +1,20 @@
 # -- coding: utf-8 --
 import csv
-import itertools
-from colorama import Fore, Style
+import os.path
+import getpass
+
+user_name = getpass.getuser()
+if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+    from colorama import Fore, Style
 
 class Search(object):
     @staticmethod
     def search_in_file(which_file):
+        is_any_find = False
         first = True
         finder = 0
         search_term = input("Search term: ")
-        print("-" * 40)
+        print("-" * 52)
         found = {}
         with open(which_file, "r", encoding="utf-8") as csvfile:
             filereader = csv.reader(csvfile, delimiter=",", quotechar='"')
@@ -32,8 +37,9 @@ class Search(object):
                         finder += one_element.find(search_term, finder) - finder + 1
                     finder = 0
                 if found:
+                    is_any_find = True
                     for (header, one_element) in zip(first_row, row):
-                        if found.get(header) is not None:
+                        if found.get(header) is not None and os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
                             results = found[header].split(",")
                             print_digit = 0
                             print(" " * (25-len(header)) + header + ": ", end="")
@@ -46,5 +52,7 @@ class Search(object):
                         else:
                             print(" " * (25-len(header)) + header + ": " + one_element)
                     found = {}
-                    print("-" * 40)
+                    print("-" * 52)
+        if not is_any_find:
+            print("There is no data corresponding to this query...")
         return True
