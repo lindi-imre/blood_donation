@@ -5,19 +5,19 @@ from check_date_format import CheckDateFormat
 from datetime import datetime, timedelta
 from name_correct_form import NameFormat
 
+
 class Validations(object):
     @staticmethod
     def check_name(name):
-        splitted = name.split()
+        splitted = name.split(" ")
         if len(splitted) < 2:
             print("Please enter your full name!")
             return False
         for one_name in splitted:
-            if one_name.isalpha():
-                return True
-            else:
+            if not one_name.isalpha():
                 print("Please enter valid name!")
                 return False
+        return True
 
     @staticmethod
     def check_weight(weight):

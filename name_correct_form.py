@@ -6,7 +6,7 @@ class NameFormat(object):
     def name_corr_format(get_name):
         is_list = type(get_name) == list
         if not is_list:
-            get_name = get_name.split( )
+            get_name = get_name.split()
         for i, one_name in enumerate(get_name):
             if len(one_name) > 1:
                 get_name[i] = one_name[0].upper() + one_name[1:].lower()
