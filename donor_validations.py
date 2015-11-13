@@ -5,20 +5,19 @@ from check_date_format import CheckDateFormat
 from datetime import datetime, timedelta
 from name_correct_form import NameFormat
 
+
 class Validations(object):
     @staticmethod
     def check_name(name):
-        splitted = name.split()
+        splitted = name.split(" ")
         if len(splitted) < 2:
             print("Please enter your full name!")
             return False
         for one_name in splitted:
-            if one_name.isalpha():
-                return True
-            else:
+            if not one_name.isalpha():
                 print("Please enter valid name!")
                 return False
-
+        return True
 
     @staticmethod
     def check_weight(weight):
@@ -27,9 +26,8 @@ class Validations(object):
              return False
         else:
             if not int(weight) >= 50:
-                print("You are too skinny!")
-                return weight
-            return True
+                return [weight, "weight is too thin"]
+            return [weight]
 
     @staticmethod
     def validate_gender(gender):
@@ -54,10 +52,9 @@ class Validations(object):
     @staticmethod
     def exp_uniqueid(uniqeid):
         if uniqeid >= datetime.now().date():
-            return True
+            return [uniqeid]
         else:
-            print("You are not suitable because your ID is out of date!")
-            return uniqeid
+            return [uniqeid,"expired uniqeid"]
 
     @staticmethod
     def last_donation_more_than_three_month_ago(last_donation_date):
@@ -83,19 +80,18 @@ class Validations(object):
         date_three_month_ago = today.replace(month=today.month + modifier)
 
         if last_donation_date <= date_three_month_ago:
-            return True
+            return [last_donation_date]
         else:
-            print("You are not suitable because your last donation was within 3 months!")
-            return last_donation_date
+            return [last_donation_date,"last blood donation in 3 months"]
 
     @staticmethod
     def check_arusicklastmonth(sick):
         sick_words = ["y", "yes"]
         healthy_words = ["n", "no"]
         if sick.lower() in sick_words:
-            return "yes"
+            return ["yes","sick in last month"]
         elif sick.lower() in healthy_words:
-            return "no"
+            return ["no"]
         else:
             print("Please give a correct answer like yes or no!")
             return False
@@ -135,10 +131,9 @@ class Validations(object):
     def validate_hmg():
         hmg_lvl = Validations.rnd_hmg_generate()
         if hmg_lvl <= 110:
-            print("Your hemoglobin level is %s which is not suitable!")
-            return hmg_lvl
+            return [hmg_lvl,"hemoglobin level is too low"]
         else:
-            return hmg_lvl
+            return [hmg_lvl]
 
     @staticmethod
     def validate_email(email):
@@ -150,16 +145,15 @@ class Validations(object):
         return True
 
     @staticmethod
-    def validate_birthdate(birthdate):
+    def validate_birthdate(birth_date):
         today = datetime.now().date()
         if today.month == 2 and today.day == 29:
             today = today.replace(day=today.day - 1)
         eighteen_years_ago = today.replace(year=today.year - 18)
-        if birthdate <= eighteen_years_ago:
-            return True
+        if birth_date <= eighteen_years_ago:
+            return [birth_date]
         else:
-            print("If You are under 18 years you must not be donor!")
-            return birthdate
+            return [birth_date, "under 18 years old"]
 
     @staticmethod
     def count_age_of_donor(birth_date):
@@ -179,3 +173,17 @@ class Validations(object):
         else:
             print("Invalid blood type, please choose one of the following: A+, A-, B+, B-, AB+, AB-, 0+, 0-")
             return False
+
+    @staticmethod
+    def donor_suitable(is_suitable):
+        notsuitableprefix = ""
+        for one_data in is_suitable:
+            if len(one_data) > 1:
+                if notsuitableprefix == "":
+                    notsuitableprefix = "The donor is not suitable because: " + one_data[1]
+                else:
+                    notsuitableprefix += " & " + one_data[1]
+        if notsuitableprefix != "":
+            return ["no", notsuitableprefix]
+        else:
+            return ["yes", "The donor is suitable."]

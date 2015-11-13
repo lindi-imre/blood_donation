@@ -61,11 +61,11 @@ class Event(object):
     def event_data():
         print("Please enter the following informations!")
         date_of_event = Switch.general_data_inputer(["Date of the event", "Date of the event (YYYY.MM.DD)"])
-        start_time = Switch.general_data_inputer(["Start time", "Start time"])
-        end_time = Switch.general_data_inputer(["End time", "End time", start_time])
+        start_time = Switch.general_data_inputer(["Start time", "Start time (hh:mm)"])
+        end_time = Switch.general_data_inputer(["End time", "End time (hh:mm)", start_time])
         zip_code = Switch.general_data_inputer(["Zip code", "Zip code"])
         city = Switch.general_data_inputer(["City", "City"])
-        address = Switch.general_data_inputer(["Address","Address"])
+        address = Switch.general_data_inputer(["Address", "Address"])
         available_beds = Switch.general_data_inputer(["Available beds", "Available beds"])
         planned_donor_number = Switch.general_data_inputer(["Planned donor number", "Planned donor number"])
         event_duration_time = EventCalculations.duration_in_time(start_time, end_time)
@@ -105,4 +105,3 @@ class Event(object):
             Event.write_in_file(every_file_data)
             print("Save was successful!")
             time.sleep(2)
-
