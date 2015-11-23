@@ -26,7 +26,7 @@ class Validations(object):
              return False
         else:
             if not int(weight) >= 50:
-                return [weight, "weight is too thin"]
+                return [weight, "weight is too low"]
             return [weight]
 
     @staticmethod
