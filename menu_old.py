@@ -132,14 +132,18 @@ class MenuOld:
                 if menu == 7:
                     #clear()         #print("Press any key to exit!")
                     exit()          #getch()
-                if menu == 6:
-                    MenuOld.search_menu(1)
-                if menu == 1:
+                elif menu == 1:
                     Person.donor_register_app()
-                if menu == 2:
+                elif menu == 2:
                     Event.event_data()
-                if menu == 5:
-                    MenuOld.listing_menu(1)
+                elif menu == 3:
+                    DeleteMenu.delete_menu("Data/donors.csv")
+                elif menu == 4:
+                    DeleteMenu.delete_menu("Data/donations.csv")
+                elif menu == 5:
+                    Menu.listing_menu(1)
+                elif menu == 6:
+                    Menu.search_menu(1)
             MenuOld.select_menu(menu)
 
         elif menu_type == "search":
