@@ -1,7 +1,7 @@
 class DonorObject(object):
 
     def __init__(self, name, birth_date, weight, gender, uniqeid, expuniqeid, blood_type, last_donation, sick, \
-                 phone_number, email, age_of_donor, hemoglobin, suitable):
+                 phone_number, email, hemoglobin, suitable):
       self.name = name
       self.birth_date = birth_date
       self.weight = weight
@@ -13,6 +13,5 @@ class DonorObject(object):
       self.sick = sick
       self.phone_number = phone_number
       self.email = email
-      self.age_of_donor = age_of_donor
       self.hemoglobin = hemoglobin
       self.suitable = suitable
