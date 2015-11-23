@@ -3,12 +3,12 @@ from msvcrt import getch
 
 class SaveMenuOldFashioned:
     @staticmethod
-    def save_menu(select):
+    def save_menu(select, question):
         while True:
             if select == 1:
-                print("\rDo you want to save? " + "    yes"+ "  --> no ", end='')
+                print("\r" + question + "     yes"+ "  --> no ", end='')
             elif select == 2:
-                print("\rDo you want to save? " + "--> yes" + "      no", end='')
+                print("\r" + question + " --> yes" + "      no", end='')
 
             button = ord(getch())
             if button == 224:

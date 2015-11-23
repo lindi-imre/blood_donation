@@ -147,13 +147,17 @@ class Validations(object):
     @staticmethod
     def validate_birthdate(birth_date):
         today = datetime.now().date()
-        if today.month == 2 and today.day == 29:
-            today = today.replace(day=today.day - 1)
-        eighteen_years_ago = today.replace(year=today.year - 18)
-        if birth_date <= eighteen_years_ago:
-            return [birth_date]
+        hundred_years_old = today.replace(year=today.year - 100)
+        if birth_date < hundred_years_old:
+            if today.month == 2 and today.day == 29:
+                today = today.replace(day=today.day - 1)
+            eighteen_years_ago = today.replace(year=today.year - 18)
+            if birth_date <= eighteen_years_ago:
+                return [birth_date]
+            else:
+                return [birth_date, "under 18 years old"]
         else:
-            return [birth_date, "under 18 years old"]
+            return [birth_date, "invalid age"]
 
     @staticmethod
     def count_age_of_donor(birth_date):

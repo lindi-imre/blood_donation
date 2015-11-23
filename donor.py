@@ -64,13 +64,12 @@ class Person(object):
         print("\n" + "-" * 32)
 
         if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
-            save = SaveMenu.save_menu(2,24)
+            save = SaveMenu.save_menu(2, 24)
         else:
-            save = SaveMenuOldFashioned.save_menu(2,24)
+            save = SaveMenuOldFashioned.save_menu(2, "Do you want to save?")
             print()
         if save:
-            Person.write_in_file(name,weight,gender,birth_date,last_donation,sick,uniqeid,expuniqeid,blood_type,hemoglobin, \
-                                    email,phone_number,suitable)
-            print("Save is successful!")
-            time.sleep(3)
-
+            Person.write_in_file(name, weight, gender, birth_date, last_donation, sick, uniqeid, expuniqeid, blood_type\
+                                 , hemoglobin, email, phone_number, suitable)
+            print("Save was successful!")
+            time.sleep(2)
