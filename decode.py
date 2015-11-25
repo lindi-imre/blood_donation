@@ -41,13 +41,7 @@ class Accents:
             return "í"
         elif letter == 214:
             return "Í"
-        elif letter == 8:
-            return "\b"+" "
         else:
             return chr(letter)
 
-# test = ["ö", "ü", "ú", "ó", "é", "ő", "á", "ű", "Ö", "Ü", "Ó", "É", "Á", "Ű", "Ő", "Ú", "í", "í"]
-#
-# a = getch()
-# print(Accents.letter_decode(ord(a)))
 
