@@ -26,3 +26,23 @@ class SaveMenu:
                     return False
                 elif select == 2:
                     return True
+
+    @staticmethod
+    def yes_no_menu_relative_position(select, question):
+        while True:
+            print('%s%s%s' % (Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
+            if select == 1:
+                print("\r" + question + " " + "yes " + Back.WHITE + Fore.BLACK + "no" + Back.RESET + Fore.RESET + "", end="")
+            if select == 2:
+                print("\r" + question + " " + Back.WHITE + Fore.BLACK + "yes" + Back.RESET + Fore.RESET + "" + " no", end="")
+
+            button = ord(getch())
+            if button == 224:
+                select += 1
+                if select == 3:
+                    select = 1
+            elif button == 13:
+                if select == 1:
+                    return False
+                elif select == 2:
+                    return True

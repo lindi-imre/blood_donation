@@ -74,3 +74,6 @@ class FileOperator(object):
             print("The deletion was unsuccessful.")
 
         input()
+
+    @staticmethod
+    def save_changes(file_path, changed_obj):

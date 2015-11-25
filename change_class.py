@@ -10,6 +10,15 @@ from change_options_menu import ChangeOptionsMenu
 from switch import Switch
 from event_calculations import EventCalculations
 from donor_validations import Validations
+from save_menu_old import SaveMenuOldFashioned
+import getpass
+import os.path
+
+user_name = getpass.getuser()
+if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+    from save_menu import SaveMenu
+    from colorama import Fore, Style, init
+    init()
 
 
 class ChangeClass(object):
@@ -80,21 +89,21 @@ class ChangeClass(object):
 
             if select == 1:
                 changed[which_result].date_of_event = Switch.general_data_inputer([header[0],\
-                                "Date of the event (YYYY.MM.DD)",original[which_result].date_of_event,"Change"])
+                                "Date of the event (YYYY.MM.DD)",changed[which_result].date_of_event,"Change"])
                 changed[which_result].start_time = Switch.general_data_inputer([header[1],"Start time (hh:mm)",\
-                                original[which_result].start_time,"Change"])
+                                changed[which_result].start_time,"Change"])
                 changed[which_result].end_time = Switch.general_data_inputer([header[2],"End time (hh:mm)",\
-                                changed[which_result].start_time,original[which_result].end_time,"Change"])
+                                changed[which_result].start_time,changed[which_result].end_time,"Change"])
                 changed[which_result].zip_code = Switch.general_data_inputer([header[3],\
-                                header[3],original[which_result].zip_code,"Change"])
+                                header[3],changed[which_result].zip_code,"Change"])
                 changed[which_result].city = Switch.general_data_inputer([header[4],\
-                                header[4],original[which_result].city,"Change"])
+                                header[4],changed[which_result].city,"Change"])
                 changed[which_result].address = Switch.general_data_inputer([header[5],\
-                                header[5],original[which_result].address,"Change"])
+                                header[5],changed[which_result].address,"Change"])
                 changed[which_result].available_beds = Switch.general_data_inputer([header[6],\
-                                header[6],original[which_result].available_beds,"Change"])
+                                header[6],changed[which_result].available_beds,"Change"])
                 changed[which_result].planned_donor_number = Switch.general_data_inputer([header[7],\
-                                header[7],original[which_result].planned_donor_number,"Change"])
+                                header[7],changed[which_result].planned_donor_number,"Change"])
                 changed[which_result].final_donor_number = EventCalculations.maximum_donor_number(\
                     changed[which_result].available_beds,changed[which_result].start_time,changed[which_result].end_time)
                 ChangeClass.print_preprocessor_event(original,changed,header,which_result,-1)
@@ -103,33 +112,37 @@ class ChangeClass(object):
                 ChangeClass.print_preprocessor_event(original,changed,header,which_result,[0,7])
                 if ChangeClass.change_select_arrow == 0:
                     changed[which_result].date_of_event = Switch.general_data_inputer([header[0],\
-                                "Date of the event (YYYY.MM.DD)",original[which_result].date_of_event,"Change"])
+                                "Date of the event (YYYY.MM.DD)",changed[which_result].date_of_event,"Change"])
                 elif ChangeClass.change_select_arrow == 1:
                     changed[which_result].start_time = Switch.general_data_inputer([header[1],"Start time (hh:mm)",\
-                                original[which_result].start_time,"Change"])
+                                changed[which_result].start_time,"Change"])
                 elif ChangeClass.change_select_arrow == 2:
                     changed[which_result].end_time = Switch.general_data_inputer([header[2],"End time (hh:mm)",\
-                                changed[which_result].start_time,original[which_result].end_time,"Change"])
+                                changed[which_result].start_time,changed[which_result].end_time,"Change"])
                 elif ChangeClass.change_select_arrow == 3:
                     changed[which_result].zip_code = Switch.general_data_inputer([header[3],\
-                                header[3],original[which_result].zip_code,"Change"])
+                                header[3],changed[which_result].zip_code,"Change"])
                 elif ChangeClass.change_select_arrow == 4:
                     changed[which_result].city = Switch.general_data_inputer([header[4],\
-                                header[4],original[which_result].city,"Change"])
+                                header[4],changed[which_result].city,"Change"])
                 elif ChangeClass.change_select_arrow == 5:
                     changed[which_result].address = Switch.general_data_inputer([header[5],\
-                                header[5],original[which_result].address,"Change"])
+                                header[5],changed[which_result].address,"Change"])
                 elif ChangeClass.change_select_arrow == 6:
                     changed[which_result].available_beds = Switch.general_data_inputer([header[6],\
-                                header[6],original[which_result].available_beds,"Change"])
+                                header[6],changed[which_result].available_beds,"Change"])
                 elif ChangeClass.change_select_arrow == 7:
                     changed[which_result].planned_donor_number = Switch.general_data_inputer([header[7],\
-                                header[7],original[which_result].planned_donor_number,"Change"])
+                                header[7],changed[which_result].planned_donor_number,"Change"])
                 changed[which_result].final_donor_number = EventCalculations.maximum_donor_number(\
                     changed[which_result].available_beds,changed[which_result].start_time,changed[which_result].end_time)
                 ChangeClass.print_preprocessor_event(original,changed,header,which_result,-1)
             elif select == 3:
-                print("Save")
+                if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+                    save = SaveMenu.yes_no_menu_relative_position(2, "Do you really want to save?")
+                else:
+                    save = SaveMenuOldFashioned.save_menu(2, "Do you really want to save?")
+                print()
             elif select == 4:
                 break
             menu_number = ChangeClass.is_there_any_changes(original, changed, header, which_result, "Event")
@@ -169,30 +182,30 @@ class ChangeClass(object):
 
             if select == 1:
                 changed[which_result].name = Switch.general_data_inputer([header[0],"Enter your full name",\
-                                original[which_result].name,"Change"])
+                                changed[which_result].name,"Change"])
                 changed[which_result].weight = Switch.general_data_inputer([header[1],header[1],\
-                                original[which_result].weight,"Change"])
+                                changed[which_result].weight,"Change"])
                 changed[which_result].gender = Switch.general_data_inputer([header[2],header[2],\
-                                original[which_result].gender,"Change"])
+                                changed[which_result].gender,"Change"])
                 changed[which_result].birth_date = Switch.general_data_inputer([header[3],"Birth date (YYYY.MM.DD)",\
-                                original[which_result].birth_date,"Change"])
+                                changed[which_result].birth_date,"Change"])
                 changed[which_result].last_donation = Switch.general_data_inputer([header[4],\
-                                "Last donation date (type 'never' if never before)",original[which_result].last_donation,\
+                                "Last donation date (type 'never' if never before)",changed[which_result].last_donation,\
                                 "Change"])
                 changed[which_result].sick = Switch.general_data_inputer([header[5],"Were you sick in the last month?",\
-                                original[which_result].sick,"Change"])
+                                changed[which_result].sick,"Change"])
                 changed[which_result].uniqeid = Switch.general_data_inputer([header[6],"Unique identifier number",\
-                                original[which_result].uniqeid,"Change"])
+                                changed[which_result].uniqeid,"Change"])
                 changed[which_result].expuniqeid = Switch.general_data_inputer([header[7],"Expiration date of your ID",\
-                                original[which_result].expuniqeid,"Change"])
+                                changed[which_result].expuniqeid,"Change"])
                 changed[which_result].blood_type = Switch.general_data_inputer([header[8],\
-                                "Blood type (A, B, AB, 0 with +/-)",original[which_result].blood_type,"Change"])
+                                "Blood type (A, B, AB, 0 with +/-)",changed[which_result].blood_type,"Change"])
                 changed[which_result].hemoglobin = Switch.general_data_inputer([header[9],"Hemoglobin level",\
-                                original[which_result].hemoglobin,"Change"])
+                                changed[which_result].hemoglobin,"Change"])
                 changed[which_result].email = Switch.general_data_inputer([header[10],"E-mail address",\
-                                original[which_result].email,"Change"])
+                                changed[which_result].email,"Change"])
                 changed[which_result].phone_number = Switch.general_data_inputer([header[11],header[11],\
-                                original[which_result].phone_number,"Change"])
+                                changed[which_result].phone_number,"Change"])
                 changed[which_result].suitable = Validations.donor_suitable([changed[which_result].birth_date,\
                                 changed[which_result].weight,changed[which_result].last_donation,\
                                 changed[which_result].sick,changed[which_result].hemoglobin])
@@ -203,48 +216,52 @@ class ChangeClass(object):
                 ChangeClass.print_preprocessor_donor(original,changed,header,which_result,[0,11])
                 if ChangeClass.change_select_arrow == 0:
                     changed[which_result].name = Switch.general_data_inputer([header[0],"Enter your full name",\
-                                original[which_result].name,"Change"])
+                                changed[which_result].name,"Change"])
                 elif ChangeClass.change_select_arrow == 1:
                     changed[which_result].weight = Switch.general_data_inputer([header[1],header[1],\
-                                original[which_result].weight,"Change"])
+                                changed[which_result].weight,"Change"])
                 elif ChangeClass.change_select_arrow == 2:
                     changed[which_result].gender = Switch.general_data_inputer([header[2],header[2],\
-                                original[which_result].gender,"Change"])
+                                changed[which_result].gender,"Change"])
                 elif ChangeClass.change_select_arrow == 3:
                     changed[which_result].birth_date = Switch.general_data_inputer([header[3],"Birth date (YYYY.MM.DD)",\
-                                original[which_result].birth_date,"Change"])
+                                changed[which_result].birth_date,"Change"])
                 elif ChangeClass.change_select_arrow == 4:
                     changed[which_result].last_donation = Switch.general_data_inputer([header[4],\
-                                "Last donation date (type 'never' if never before)",original[which_result].last_donation,\
+                                "Last donation date (type 'never' if never before)",changed[which_result].last_donation,\
                                 "Change"])
                 elif ChangeClass.change_select_arrow == 5:
                     changed[which_result].sick = Switch.general_data_inputer([header[5],"Were you sick in the last month?",\
-                                original[which_result].sick,"Change"])
+                                changed[which_result].sick,"Change"])
                 elif ChangeClass.change_select_arrow == 6:
                     changed[which_result].uniqeid = Switch.general_data_inputer([header[6],"Unique identifier number",\
-                                original[which_result].uniqeid,"Change"])
+                                changed[which_result].uniqeid,"Change"])
                 elif ChangeClass.change_select_arrow == 7:
                     changed[which_result].expuniqeid = Switch.general_data_inputer([header[7],"Expiration date of your ID",\
-                                original[which_result].expuniqeid,"Change"])
+                                changed[which_result].expuniqeid,"Change"])
                 elif ChangeClass.change_select_arrow == 8:
                     changed[which_result].blood_type = Switch.general_data_inputer([header[8],\
-                                "Blood type (A, B, AB, 0 with +/-)",original[which_result].blood_type,"Change"])
+                                "Blood type (A, B, AB, 0 with +/-)",changed[which_result].blood_type,"Change"])
                 elif ChangeClass.change_select_arrow == 9:
                     changed[which_result].hemoglobin = Switch.general_data_inputer([header[9],"Hemoglobin level",\
-                                original[which_result].hemoglobin,"Change"])
+                                changed[which_result].hemoglobin,"Change"])
                 elif ChangeClass.change_select_arrow == 10:
                     changed[which_result].email = Switch.general_data_inputer([header[10],"E-mail address",\
-                                original[which_result].email,"Change"])
+                                changed[which_result].email,"Change"])
                 elif ChangeClass.change_select_arrow == 11:
                     changed[which_result].phone_number = Switch.general_data_inputer([header[11],header[11],\
-                                original[which_result].phone_number,"Change"])
+                                changed[which_result].phone_number,"Change"])
                 changed[which_result].suitable = Validations.donor_suitable([changed[which_result].birth_date,\
                                 changed[which_result].weight,changed[which_result].last_donation,\
                                 changed[which_result].sick,changed[which_result].hemoglobin])
                 ChangeClass.print_preprocessor_donor(original,changed,header,which_result,-1)
                 print(changed[which_result].suitable[1])
             elif select == 3:
-                print("Save")
+                if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+                    save = SaveMenu.yes_no_menu_relative_position(2, "Do you really want to save?")
+                else:
+                    save = SaveMenuOldFashioned.save_menu(2, "Do you really want to save?")
+                print()
             elif select == 4:
                 break
             menu_number = ChangeClass.is_there_any_changes(original, changed, header, which_result, "Donor")

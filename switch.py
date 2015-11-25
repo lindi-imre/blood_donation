@@ -25,15 +25,23 @@ class Switch(object):
     def general_data_inputer(get_data):
         input_data = ""
         while input_data == "":
+
             if len(get_data) > 2 and get_data[len(get_data)-1] == "Test":
                 input_data = get_data[len(get_data)-2]
+
             elif get_data[len(get_data)-1] == "Change":
                 if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+                    if type(get_data[-2]) == list:
+                        if get_data[-2][0] == "Passport" or get_data[-2][0] == "Identity card":
+                            get_data[-2] = get_data[-2][1]
+                        else:
+                            get_data[-2] = get_data[-2][0]
                     print(Fore.GREEN + "Default data (press ENTER to keep it): " + Fore.CYAN +\
                           get_data[len(get_data)-2] + Style.RESET_ALL)
                 else:
                     print("Default data (press ENTER to keep it): ", get_data[len(get_data)-2])
                 input_data = input(get_data[1] + ": ") or get_data[len(get_data)-2]
+
             else:
                 input_data = input(get_data[1] + ": ")
             if input_data == "":
