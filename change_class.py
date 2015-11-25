@@ -7,7 +7,7 @@ from event_object import DonationObject
 class ChangeSearch(object):
    @staticmethod
    def search_in_ids(id):
-      id = input("Search ID: ")
+      #id = input("Search ID: ")
       if id.isdigit():
          file = open("Data/donations.csv", "r", encoding="utf-8")
          reader = csv.reader(file)
@@ -32,4 +32,4 @@ class ChangeSearch(object):
          return ("The input is not correct.")
 
 
-print(ChangeSearch.search_in_ids(id))
+"""print(ChangeSearch.search_in_ids(id))"""
