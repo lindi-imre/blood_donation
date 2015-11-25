@@ -7,9 +7,12 @@ from event import Event
 from search import Search
 from listing import ListingDataBase
 from delete import DeleteMenu
+import sys
+from decode import Accents
+
+#from change_class import ChangeSearch
 
 init()
-
 clear = lambda: os.system('cls')
 pos = lambda y, x: '\x1b[%d;%dH' % (y, x)
 
@@ -66,7 +69,8 @@ class Menu:
             print("*   4. Delete a donation event")
             print("*   5. List donors or donation events")
             print("*   6. Search")
-            print("*   7. Exit")
+            print("*   7. Change")
+            print("*   8. Exit")
         elif menu == 2:
             print("*   1. Add new donor")
             print("*   " + Back.WHITE + Fore.BLACK + "2. Add new donation event" + Back.RESET + Fore.RESET + "")
@@ -74,7 +78,8 @@ class Menu:
             print("*   4. Delete a donation event")
             print("*   5. List donors or donation events")
             print("*   6. Search")
-            print("*   7. Exit")
+            print("*   7. Change")
+            print("*   8. Exit")
         elif menu == 3:
             print("*   1. Add new donor")
             print("*   2. Add new donation event")
@@ -82,7 +87,8 @@ class Menu:
             print("*   4. Delete a donation event")
             print("*   5. List donors or donation events")
             print("*   6. Search")
-            print("*   7. Exit")
+            print("*   7. Change")
+            print("*   8. Exit")
         elif menu == 4:
             print("*   1. Add new donor")
             print("*   2. Add new donation event")
@@ -90,7 +96,8 @@ class Menu:
             print("*   " + Back.WHITE + Fore.BLACK + "4. Delete a donation event" + Back.RESET + Fore.RESET + "")
             print("*   5. List donors or donation events")
             print("*   6. Search")
-            print("*   7. Exit")
+            print("*   7. Change")
+            print("*   8. Exit")
         elif menu == 5:
             print("*   1. Add new donor")
             print("*   2. Add new donation event")
@@ -98,7 +105,8 @@ class Menu:
             print("*   4. Delete a donation event")
             print("*   " + Back.WHITE + Fore.BLACK + "5. List donors or donation events" + Back.RESET + Fore.RESET + "")
             print("*   6. Search")
-            print("*   7. Exit")
+            print("*   7. Change")
+            print("*   8. Exit")
         elif menu == 6:
             print("*   1. Add new donor")
             print("*   2. Add new donation event")
@@ -106,7 +114,8 @@ class Menu:
             print("*   4. Delete a donation event")
             print("*   5. List donors or donation events")
             print("*   " + Back.WHITE + Fore.BLACK + "6. Search" + Back.RESET + Fore.RESET + "")
-            print("*   7. Exit")
+            print("*   7. Change")
+            print("*   8. Exit")
         elif menu == 7:
             print("*   1. Add new donor")
             print("*   2. Add new donation event")
@@ -114,19 +123,57 @@ class Menu:
             print("*   4. Delete a donation event")
             print("*   5. List donors or donation events")
             print("*   6. Search")
-            print("*   " + Back.WHITE + Fore.BLACK + "7. Exit" + Back.RESET + Fore.RESET + "")
+            print("*   " + Back.WHITE + Fore.BLACK + "7. Change" + Back.RESET + Fore.RESET + "")
+            print("*   8. Exit")
+        elif menu == 8:
+            print("*   1. Add new donor")
+            print("*   2. Add new donation event")
+            print("*   3. Delete a donor")
+            print("*   4. Delete a donation event")
+            print("*   5. List donors or donation events")
+            print("*   6. Search")
+            print("*   7. Change")
+            print("*   " + Back.WHITE + Fore.BLACK + "8. Exit" + Back.RESET + Fore.RESET + "")
         print("*\n****************************************************************")
         Menu.draw_menu("main")
         Menu.enter_menu("main", menu)
 
     @staticmethod
+    def change_menu():
+        clear()
+
+        print("************ Please enter a donor or donation ID ************\n*\n*   ID:\n*")
+        print("*************************************************************")
+        i = 2
+        while i < 5:
+                print('%s%s%s%s' % (pos(i, 61), Fore.WHITE, Back.BLACK, Style.NORMAL), end='*')
+                i += 1
+        print('%s%s%s%s' % (pos(3, 9), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
+
+        getkey = True
+        id = ""
+        while getkey:
+            button = ord(getch())
+            if button == 13:
+                getkey = False
+            elif button == 27:
+                Menu.select_menu(7)
+            else:
+                decoded_char = Accents.letter_decode(button)
+                id += decoded_char
+                sys.stdout.write(decoded_char)
+        print('%s%s%s%s' % (pos(6, 1), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
+        print("*")
+
+
+    @staticmethod
     def draw_menu(menu_type):
         if menu_type == "main":
             i = 2
-            while i < 13:
+            while i < 14:
                 print('%s%s%s%s' % (pos(i, 64), Fore.WHITE, Back.BLACK, Style.NORMAL), end='*')
                 i += 1
-            print('%s%s%s%s' % (pos(14, 1), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
+            print('%s%s%s%s' % (pos(15, 1), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
         elif menu_type == "search":
             i = 2
             while i < 10:
@@ -152,11 +199,11 @@ class Menu:
                 elif key == 80:
                     menu += 1
                 if menu == 0:
-                    menu = 7
-                if menu == 8:
+                    menu = 8
+                if menu == 9:
                     menu = 1
             elif key == 13:
-                if menu == 7:
+                if menu == 8:
                     #clear()         #print("Press any key to exit!")
                     exit()          #getch()
                 elif menu == 1:
@@ -171,6 +218,8 @@ class Menu:
                     Menu.listing_menu(1)
                 elif menu == 6:
                     Menu.search_menu(1)
+                elif menu == 7:
+                    Menu.change_menu()
             Menu.select_menu(menu)
 
         elif menu_type == "search":
