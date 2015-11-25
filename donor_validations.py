@@ -89,9 +89,9 @@ class Validations(object):
         sick_words = ["y", "yes"]
         healthy_words = ["n", "no"]
         if sick.lower() in sick_words:
-            return ["yes","sick in last month"]
+            return ["Yes","sick in last month"]
         elif sick.lower() in healthy_words:
-            return ["no"]
+            return ["No"]
         else:
             print("Please give a correct answer like yes or no!")
             return False
@@ -136,6 +136,21 @@ class Validations(object):
             return [hmg_lvl]
 
     @staticmethod
+    def validate_hmg_from_keypad(hmg):
+        if hmg.isdigit():
+            if 80 <= int(hmg) <= 200:
+                if int(hmg) <= 110:
+                    return [hmg,"hemoglobin level is too low"]
+                else:
+                    return [hmg]
+            else:
+                print("Please enter a valid hemoglobin level between 80 and 200!")
+                return False
+        else:
+            print("Hemoglobin level can contain only number!")
+            return False
+
+    @staticmethod
     def validate_email(email):
         is_valid = (email.count("@") == 1) and email[0].isalpha() and \
                    ((email.endswith(".hu") and len(email) > 5) or (email.endswith(".com") and len(email) > 6))
@@ -148,7 +163,7 @@ class Validations(object):
     def validate_birthdate(birth_date):
         today = datetime.now().date()
         hundred_years_old = today.replace(year=today.year - 100)
-        if birth_date < hundred_years_old:
+        if birth_date > hundred_years_old:
             if today.month == 2 and today.day == 29:
                 today = today.replace(day=today.day - 1)
             eighteen_years_ago = today.replace(year=today.year - 18)
@@ -157,7 +172,7 @@ class Validations(object):
             else:
                 return [birth_date, "under 18 years old"]
         else:
-            return [birth_date, "invalid age"]
+            return [birth_date, "more than 100 years old"]
 
     @staticmethod
     def count_age_of_donor(birth_date):
@@ -188,6 +203,6 @@ class Validations(object):
                 else:
                     notsuitableprefix += " & " + one_data[1]
         if notsuitableprefix != "":
-            return ["no", notsuitableprefix]
+            return ["No", notsuitableprefix]
         else:
-            return ["yes", "The donor is suitable."]
+            return ["Yes", "The donor is suitable."]

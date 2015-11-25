@@ -12,6 +12,13 @@ from date_ten_day_before_event import DateTenDayBeforeEvent
 from date_is_weekday import DateIsWeekday
 from event_calculations import EventCalculations
 from name_correct_form import NameFormat
+import getpass
+import os.path
+
+user_name = getpass.getuser()
+if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+    from colorama import Fore, Style, init
+    init()
 
 class Switch(object):
     @staticmethod
@@ -20,6 +27,13 @@ class Switch(object):
         while input_data == "":
             if len(get_data) > 2 and get_data[len(get_data)-1] == "Test":
                 input_data = get_data[len(get_data)-2]
+            elif get_data[len(get_data)-1] == "Change":
+                if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
+                    print(Fore.GREEN + "Default data (press ENTER to keep it): " + Fore.CYAN +\
+                          get_data[len(get_data)-2] + Style.RESET_ALL)
+                else:
+                    print("Default data (press ENTER to keep it): ", get_data[len(get_data)-2])
+                input_data = input(get_data[1] + ": ") or get_data[len(get_data)-2]
             else:
                 input_data = input(get_data[1] + ": ")
             if input_data == "":
@@ -63,9 +77,11 @@ class Switch(object):
                 return False
         elif get_data[0] == "Blood type":
             return Validations.blood_type_validation(input_data)
+        elif get_data[0] == "Hemoglobin":
+            return Validations.validate_hmg_from_keypad(input_data)
         elif get_data[0] == "Last donation date":
             if "never" in input_data.lower() or input_data.lower() == "n":
-                return ["never"]
+                return ["Never"]
             elif CheckDateFormat.check_date_format(input_data):
                 input_data = donor_dates.get_date(input_data)
                 input_data = Validations.last_donation_more_than_three_month_ago(input_data)
@@ -113,6 +129,8 @@ class Switch(object):
         elif get_data[0] == "Address":
             if Address.validate_address(input_data):
                 return NameFormat.name_corr_format(input_data)
+            else:
+                return False
 
     @staticmethod
     def empty_field_error_message(empty_field):

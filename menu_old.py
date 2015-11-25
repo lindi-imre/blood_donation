@@ -5,6 +5,7 @@ from donor import Person
 from event import Event
 from search import Search
 from listing import ListingDataBase
+from delete import DeleteMenu
 
 clear = lambda: os.system('cls')
 
@@ -141,9 +142,9 @@ class MenuOld:
                 elif menu == 4:
                     DeleteMenu.delete_menu("Data/donations.csv")
                 elif menu == 5:
-                    Menu.listing_menu(1)
+                    MenuOld.listing_menu(1)
                 elif menu == 6:
-                    Menu.search_menu(1)
+                    MenuOld.search_menu(1)
             MenuOld.select_menu(menu)
 
         elif menu_type == "search":
