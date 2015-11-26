@@ -37,7 +37,7 @@ class Accents:
             return "ó"
         elif letter == 224:
             return "Ó"
-        if letter == 161:
+        elif letter == 161:
             return "í"
         elif letter == 214:
             return "Í"

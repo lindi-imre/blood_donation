@@ -77,3 +77,4 @@ class FileOperator(object):
 
     @staticmethod
     def save_changes(file_path, changed_obj):
+        pass
