@@ -10,6 +10,7 @@ from change_class import ChangeClass
 from delete import DeleteMenu
 import sys
 from decode import Accents
+from generate_button_numbers import GenerateButtons
 
 #from change_class import ChangeSearch
 
@@ -141,6 +142,7 @@ class Menu:
 
     @staticmethod
     def change_menu():
+        valid_buttons = GenerateButtons.generate()
         clear()
 
         print("************ Please enter a donor or donation ID ************\n*\n*   ID:\n*")
@@ -159,10 +161,18 @@ class Menu:
                 getkey = False
             elif button == 27:
                 Menu.select_menu(7)
-            else:
-                decoded_char = Accents.letter_decode(button)
-                id += decoded_char
-                sys.stdout.write(decoded_char)
+            elif button == 8:
+                if len(id) > 0:
+                    sys.stdout.write('\b')
+                    sys.stdout.write(' ')
+                    sys.stdout.write('\b')
+                    id = id[:-1]
+
+            elif button in valid_buttons:
+                if len(id) < 8:
+                    decoded_char = Accents.letter_decode(button)
+                    id += decoded_char
+                    sys.stdout.write(decoded_char)
         print('%s%s%s%s' % (pos(6, 1), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
         ChangeClass.search_in_ids(id)
 
@@ -194,15 +204,23 @@ class Menu:
         key = ord(getch())  #billentyuleutes
 
         if menu_type == "main":
-            if key != 13:
-                if key == 72:   #menuszam tulcsordulas ellen
-                    menu -= 1
-                elif key == 80:
-                    menu += 1
-                if menu == 0:
-                    menu = 8
-                if menu == 9:
-                    menu = 1
+            if key == 49:
+                Person.donor_register_app()
+            elif key == 50:
+                Event.event_data()
+            elif key == 51:
+                DeleteMenu.delete_menu("Data/donors.csv")
+            elif key == 52:
+                DeleteMenu.delete_menu("Data/donations.csv")
+            elif key == 53:
+                Menu.listing_menu(1)
+            elif key == 54:
+                Menu.search_menu(1)
+            elif key == 55:
+                Menu.change_menu()
+            elif key == 56:
+                exit()
+
             elif key == 13:
                 if menu == 8:
                     #clear()         #print("Press any key to exit!")
@@ -221,10 +239,28 @@ class Menu:
                     Menu.search_menu(1)
                 elif menu == 7:
                     Menu.change_menu()
-            Menu.select_menu(menu)
+
+            if key != 13:
+                if key == 72:   #menuszam tulcsordulas ellen
+                    menu -= 1
+                elif key == 80:
+                    menu += 1
+                if menu == 0:
+                    menu = 8
+                if menu == 9:
+                    menu = 1
+                Menu.select_menu(menu)
 
         elif menu_type == "search":
-            if key != 13:
+            if key == 49:
+                Search.search_in_file("Data/donors.csv")
+                waiting = input()
+            elif key == 50:
+                Search.search_in_file("Data/donations.csv")
+                waiting = input()
+            elif key == 51:
+                Menu.select_menu(1)
+            elif key != 13:
                 if key == 72:
                     menu -= 1
                 elif key == 80:
@@ -246,7 +282,15 @@ class Menu:
                 Menu.search_menu(menu)
 
         elif menu_type == "listing":
-            if key != 13:
+            if key == 49:
+                ListingDataBase.listing_database("Data/donors.csv")
+                input()
+            elif key == 50:
+                ListingDataBase.listing_database("Data/donations.csv")
+                input()
+            elif key == 51:
+                Menu.select_menu(1)
+            elif key != 13:
                 if key == 72:
                     menu -= 1
                 elif key == 80:
@@ -257,14 +301,14 @@ class Menu:
                     menu = 1
                 Menu.listing_menu(menu)
             elif key == 13:
-                if menu == 3:
-                    Menu.select_menu(1)
                 if menu == 1:
-                    ListingDataBase.listing_database("Data/donors.csv")
-                    input()
-                if menu == 2:
                     ListingDataBase.listing_database("Data/donations.csv")
                     input()
+                if menu == 2:
+                    ListingDataBase.listing_database("Data/donors.csv")
+                    input()
+                if menu == 3:
+                    Menu.select_menu(1)
                 Menu.listing_menu(menu)
 
 Menu.select_menu(1)

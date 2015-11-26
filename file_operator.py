@@ -105,25 +105,21 @@ class FileOperator(object):
         file = open(file_path, "r", encoding='utf-8')
         reader = csv.reader(file)
         lines_in_file = []
-        line_number_in_file = 0
         for i, line in enumerate(reader):
             if i == file_line_number:
                 lines_in_file.append(change_val)
             else:
                 lines_in_file.append(line)
-            line_number_in_file = i
         file.close()
+
         file = open(file_path, "w", encoding='utf-8', newline="")
-        # csvwrite = csv.writer(file, dialect="excel", lineterminator="\n")
         for i, line in enumerate(lines_in_file):
             first = True
             for one_data in line:
-            # csvwrite.writerow(line)
                 if first:
                     file.write(one_data)
                     first = False
                 else:
                     file.write("," + str(one_data))
-            if True: # i != line_number_in_file:
-                file.write("\n")
+            file.write("\n")
         file.close()
