@@ -4,7 +4,7 @@ __author__ = 'Slezak Attila'
 class CheckTimeFormat(object):
     @staticmethod
     def check_time_form(get_time):
-        time_parts = get_time.split(":")
+        time_parts = str(get_time).split(":")
         for part in time_parts:
             if not part.isdigit():
                 print("Bad time format! It should be 'hh:mm'!")

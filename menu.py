@@ -6,6 +6,7 @@ from donor import Person
 from event import Event
 from search import Search
 from listing import ListingDataBase
+from change_class import ChangeClass
 from delete import DeleteMenu
 import sys
 from decode import Accents
@@ -163,7 +164,7 @@ class Menu:
                 id += decoded_char
                 sys.stdout.write(decoded_char)
         print('%s%s%s%s' % (pos(6, 1), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
-        print("*")
+        ChangeClass.search_in_ids(id)
 
 
     @staticmethod

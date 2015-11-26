@@ -37,7 +37,7 @@ class Switch(object):
                         else:
                             get_data[-2] = get_data[-2][0]
                     print(Fore.GREEN + "Default data (press ENTER to keep it): " + Fore.CYAN +\
-                          get_data[len(get_data)-2] + Style.RESET_ALL)
+                          str(get_data[len(get_data)-2]) + Style.RESET_ALL)
                 else:
                     print("Default data (press ENTER to keep it): ", get_data[len(get_data)-2])
                 input_data = input(get_data[1] + ": ") or get_data[len(get_data)-2]
