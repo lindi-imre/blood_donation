@@ -44,15 +44,15 @@ class Event(object):
             file.write(header)
             file.write(whole_file)
             file.close()
-        file = open("Data/donations.csv", "a", encoding='utf-8')
+        file = open("Data/donations.csv", "a", encoding='utf-8', newline="")
         first = True
         for one_data in every_file_data:
             if first:
-                file.write("\n" + str(next_id) + "," + str(one_data))
+                file.write(str(next_id) + "," + str(one_data))
                 first = False
             else:
                 file.write("," + str(one_data))
-        # file.write("\n")
+        file.write("\n")
         file.close()
         return
 
