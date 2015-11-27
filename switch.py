@@ -141,7 +141,7 @@ class Switch(object):
             return CheckIfPositiveInteger.check_if_positive_integer(input_data)
         elif get_data[0] == "Address":
             if Address.validate_address(input_data):
-                return NameFormat.name_corr_format(input_data)
+                return NameFormat.address_name_correct_form(input_data)
             else:
                 return False
 

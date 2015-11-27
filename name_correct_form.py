@@ -17,6 +17,11 @@ class NameFormat(object):
         return get_name
 
     @staticmethod
+    def address_name_correct_form(get_data):
+        get_data = get_data[0].upper() + get_data[1:]
+        return get_data.strip()
+
+    @staticmethod
     def upper_case_letters(get_data):
         if type(get_data) is str:
             return get_data.upper()
