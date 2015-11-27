@@ -76,5 +76,50 @@ class FileOperator(object):
         input()
 
     @staticmethod
-    def save_changes(file_path, changed_obj):
-        pass
+    def save_changes(file_path, file_line_number, changed_obj):
+
+        if file_path == "Data/donations.csv":
+            change_val = [changed_obj.id, str(changed_obj.date_of_event), str(changed_obj.start_time),
+                          str(changed_obj.end_time), changed_obj.zip_code, changed_obj.city, changed_obj.address,
+                          changed_obj.available_beds, changed_obj.planned_donor_number, changed_obj.final_donor_number]
+            for j in range(len(change_val)):
+                if j == 1:
+                    change_val[j] = str(change_val[j]).replace("-", ".")
+                elif j in [2, 3] and len(str(change_val[j])) > 5:
+                    change_val[j] = str(change_val[j])[:len(str(change_val[j]))-3]
+
+        elif file_path == "Data/donors.csv":
+            change_val = [changed_obj.name,changed_obj.weight,changed_obj.gender,changed_obj.birth_date,
+                          changed_obj.last_donation,changed_obj.sick,changed_obj.uniqeid,
+                          changed_obj.expuniqeid, changed_obj.blood_type,changed_obj.hemoglobin,
+                          changed_obj.email,changed_obj.phone_number, changed_obj.suitable]
+            for j in range(len(change_val)):
+                if type(change_val[j]) == list:
+                    if change_val[j][0] == "Passport" or change_val[j][0] == "Identity card":
+                        change_val[j] = change_val[j][1]
+                    else:
+                        change_val[j] = change_val[j][0]
+                if j in [3, 4, 7]:
+                    change_val[j] = str(change_val[j]).replace("-", ".")
+
+        file = open(file_path, "r", encoding='utf-8')
+        reader = csv.reader(file)
+        lines_in_file = []
+        for i, line in enumerate(reader):
+            if i == file_line_number:
+                lines_in_file.append(change_val)
+            else:
+                lines_in_file.append(line)
+        file.close()
+
+        file = open(file_path, "w", encoding='utf-8', newline="")
+        for i, line in enumerate(lines_in_file):
+            first = True
+            for one_data in line:
+                if first:
+                    file.write(one_data)
+                    first = False
+                else:
+                    file.write("," + str(one_data))
+            file.write("\n")
+        file.close()

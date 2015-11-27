@@ -63,3 +63,4 @@ target/
 #dirs
 
 .idea/
+__pycache__/

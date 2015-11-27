@@ -6,6 +6,7 @@ from donor import Person
 from event import Event
 from search import Search
 from listing import ListingDataBase
+from change_class import ChangeClass
 from delete import DeleteMenu
 import sys
 from decode import Accents
@@ -174,6 +175,7 @@ class Menu:
                     id += decoded_char
                     sys.stdout.write(decoded_char)
         print('%s%s%s%s' % (pos(6, 1), Fore.WHITE, Back.BLACK, Style.NORMAL), end='')
+        ChangeClass.search_in_ids(id)
 
 
     @staticmethod
@@ -238,6 +240,7 @@ class Menu:
                     Menu.search_menu(1)
                 elif menu == 7:
                     Menu.change_menu()
+                Menu.select_menu(menu)
 
             if key != 13:
                 if key == 72:   #menuszam tulcsordulas ellen
@@ -251,16 +254,16 @@ class Menu:
                 Menu.select_menu(menu)
 
         elif menu_type == "search":
-            if key == 49:
-                Search.search_in_file("Data/donors.csv")
-                waiting = input()
-            elif key == 50:
-                Search.search_in_file("Data/donations.csv")
-                waiting = input()
-            elif key == 51:
-                Menu.select_menu(1)
-            elif key != 13:
-                if key == 72:
+            if key != 13:
+                if key == 49:
+                    Search.search_in_file("Data/donors.csv")
+                    waiting = input()
+                elif key == 50:
+                    Search.search_in_file("Data/donations.csv")
+                    waiting = input()
+                elif key == 51:
+                    Menu.select_menu(1)
+                elif key == 72:
                     menu -= 1
                 elif key == 80:
                     menu += 1
@@ -281,16 +284,16 @@ class Menu:
                 Menu.search_menu(menu)
 
         elif menu_type == "listing":
-            if key == 49:
-                ListingDataBase.listing_database("Data/donors.csv")
-                input()
-            elif key == 50:
-                ListingDataBase.listing_database("Data/donations.csv")
-                input()
-            elif key == 51:
-                Menu.select_menu(1)
-            elif key != 13:
-                if key == 72:
+            if key != 13:
+                if key == 49:
+                    ListingDataBase.listing_database("Data/donors.csv")
+                    input()
+                elif key == 50:
+                    ListingDataBase.listing_database("Data/donations.csv")
+                    input()
+                elif key == 51:
+                    Menu.select_menu(1)
+                elif key == 72:
                     menu -= 1
                 elif key == 80:
                     menu += 1

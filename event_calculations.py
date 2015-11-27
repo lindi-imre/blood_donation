@@ -33,7 +33,10 @@ class EventCalculations(object):
 
     @staticmethod
     def time_to_datetime(get_time):
-        return datetime.strptime(str(get_time), "%H:%M:%S")
+        if type(get_time) is str and len(get_time.split(":")) == 2:
+            return datetime.strptime(str(get_time), "%H:%M")
+        else:
+            return datetime.strptime(str(get_time), "%H:%M:%S")
 
     @staticmethod
     def success_rate(planned_donor_number, max_donor_number):

@@ -4,6 +4,7 @@ from random import randint
 from check_date_format import CheckDateFormat
 from datetime import datetime, timedelta
 from name_correct_form import NameFormat
+import csv
 
 
 class Validations(object):
@@ -38,6 +39,19 @@ class Validations(object):
         elif len(gender) == 1:
             gender = enable_genders[enable_genders.index(gender)-1]
         return NameFormat.name_corr_format(gender)
+
+
+    @staticmethod
+    def check_uniqeid_exist(uniqeid):
+        file = open("Data/donors.csv", "r", encoding="utf-8")
+        reader = csv.reader(file)
+        for line in reader:
+            if len(line) != 0 and uniqeid.upper() == line[6].upper():
+                print("Already in the database.")
+                file.close()
+                return False
+        file.close()
+        return True
 
     @staticmethod
     def validate_uniqeid(uniqeid):

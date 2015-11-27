@@ -27,6 +27,8 @@ class Switch(object):
         while input_data == "":
 
             if len(get_data) > 2 and get_data[len(get_data)-1] == "Test":
+                if type(get_data[-2]) == list:
+                    get_data[-2] = get_data[-2][0]
                 input_data = get_data[len(get_data)-2]
 
             elif get_data[len(get_data)-1] == "Change":
@@ -37,7 +39,7 @@ class Switch(object):
                         else:
                             get_data[-2] = get_data[-2][0]
                     print(Fore.GREEN + "Default data (press ENTER to keep it): " + Fore.CYAN +\
-                          get_data[len(get_data)-2] + Style.RESET_ALL)
+                          str(get_data[len(get_data)-2]) + Style.RESET_ALL)
                 else:
                     print("Default data (press ENTER to keep it): ", get_data[len(get_data)-2])
                 input_data = input(get_data[1] + ": ") or get_data[len(get_data)-2]
@@ -75,7 +77,10 @@ class Switch(object):
         elif get_data[0] == "Gender":
             return Validations.validate_gender(input_data)
         elif get_data[0] == "Unique ID":
-            return Validations.validate_uniqeid(input_data)
+            if Validations.check_uniqeid_exist(input_data):
+                return Validations.validate_uniqeid(input_data)
+            else:
+                return False
         elif get_data[0] == "Expiration of ID":
             if CheckDateFormat.check_date_format(input_data):
                 input_data = donor_dates.get_date(input_data)
