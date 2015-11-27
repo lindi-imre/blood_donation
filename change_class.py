@@ -44,6 +44,7 @@ class ChangeClass(object):
                 ChangeClass.change_process_event(original, changed, file_line_number)
             else:
                 print("Not included in the database.")
+                time.sleep(1.5)
         elif (id[:6].isdigit() and id[6:8].isalpha() and len(id) == 8) or (id[:6].isalpha() and id[6:8].isdigit() and len(id) == 8):
             file = open("Data/donors.csv", "r", encoding="utf-8")
             reader = csv.reader(file)
@@ -57,8 +58,10 @@ class ChangeClass(object):
                 ChangeClass.change_process_donor(original, changed, file_line_number)
             else:
                 print("Not included in the database.")
+                time.sleep(1.5)
         else:
             print("The input is not correct.")
+            time.sleep(1.5)
 
     @staticmethod
     def change_process_event(original, changed, file_line_number):
