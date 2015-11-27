@@ -167,6 +167,7 @@ class Menu:
                     sys.stdout.write('\b')
                     id = id[:-1]
 
+
             elif button in valid_buttons:
                 if len(id) < 8:
                     decoded_char = Accents.letter_decode(button)
