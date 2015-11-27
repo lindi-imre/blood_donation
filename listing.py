@@ -1,4 +1,5 @@
 __author__ = 'Kozma Balazs'
+from msvcrt import getch
 
 import csv
 
@@ -11,7 +12,6 @@ class ListingDataBase(object):
         with open(which_file, "r", encoding="utf-8") as csvfile:
             filereader = csv.reader(csvfile, delimiter=",", quotechar='"')
             is_first_row = True
-
             for i, row in enumerate(filereader):
                 if is_first_row:
                     first_row = row
@@ -31,6 +31,6 @@ class ListingDataBase(object):
                         print(" " * (25 - len(header)) + header + ": " + one_element)
                 print("-" * 52)
                 if i % 2 == 0 and i != 0:
-                    input()
+                    getch()
             if not is_there_any_data:
                 print("Sorry, the database is empty...")
