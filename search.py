@@ -16,6 +16,7 @@ class Search(object):
         search_term = input("Search term: ")
         print("-" * 52)
         found = {}
+        j = 0
         with open(which_file, "r", encoding="utf-8") as csvfile:
             filereader = csv.reader(csvfile, delimiter=",", quotechar='"')
             for row in filereader:
@@ -61,6 +62,9 @@ class Search(object):
                         is_first_element = False
                     found = {}
                     print("-" * 52)
+                    j += 1
+                    if j % 2 == 0 and j != 0:
+                        input()
         if num_of_find == 0:
             print("There is no data corresponding to this query...")
         return True

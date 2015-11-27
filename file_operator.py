@@ -1,6 +1,7 @@
 __author__ = 'Slezak Attila'
 import os
 import csv
+import time
 from save_menu_old import SaveMenuOldFashioned
 
 class FileOperator(object):
@@ -18,7 +19,7 @@ class FileOperator(object):
                     is_first_row = False
                     continue
                 for (header, one_element) in zip(first_row, row):
-                    if header == where and one_element == value:
+                    if header == where and one_element.upper() == value.upper():
                         result_lines.append(i)
                         num_of_deletion += 1
 
@@ -68,12 +69,13 @@ class FileOperator(object):
                     file.close()
                 os.remove(which_file)
                 os.rename("Data/temporary.csv", which_file)
-                print("Delete is successfully finished.")
+                print("\nDeletion has been successfully finished.")
+                time.sleep(2)
         else:
             print("There is no data corresponding to this query...")
             print("The deletion was unsuccessful.")
+            time.sleep(2)
 
-        input()
 
     @staticmethod
     def save_changes(file_path, file_line_number, changed_obj):
@@ -117,7 +119,7 @@ class FileOperator(object):
             first = True
             for one_data in line:
                 if first:
-                    file.write(one_data)
+                    file.write(str(one_data))
                     first = False
                 else:
                     file.write("," + str(one_data))

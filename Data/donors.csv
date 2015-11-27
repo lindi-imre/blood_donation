@@ -1,23 +1,23 @@
 name,weight,gender,date_of_birth,last_donation,last_month_sickness,unique_identifier,expiration_of_id,blood_type,hemoblogin,email,mobil,is_suitable
-Molnár Attila,66,Male,1980-10-11,Never,yes,543216CD,2020-11-11,A+,196,molnar.attila@cc.com,06305678911,yes
-Bagoly Péter,55,Male,1995-01-12,Never,no,345612BA,2020-11-11,A+,160,peet.owl@hotmail.com,06307830312,no
-Hibas Vagyok,40,Male,1999-01-12,2015-10-01,yes,567891CD,2015-10-01,AB+,189,newmail@lol.hu,06307089999,yes
-Asdf Asdf,77,Male,1999-01-01,Never,no,123456AA,2015-12-01,0+,193,asdf@asdf.hu,06201112222,no
-Valaki John,77,Male,1991-01-01,Never,no,543211BB,2020-02-02,B-,153,vami@asd.hu,06201112222,no
-Normális Joe,95,Male,1910-01-01,Never,no,124356CC,2016-01-01,A+,147,fdsa@ff.hu,06302222111,yes
-Bagoly Peter,49,Male,1999-11-11,2015-11-10,yes,123456AB,2016-01-01,A+,97,peet@mail.com,06307830312,Yes
-Bagoly Péter,49,Male,1999-11-12,Never,yes,123456AB,2014-01-12,A+,131,mail@mail.com,06307830312,No
-Bagoly Péter,55,Male,1995-01-01,Never,no,123454AB,2020-10-10,AB+,96,prer@mail.com,06308991111,No
-Bagoly Péter,49,Male,1999-11-11,Never,yes,124523AB,2020-11-11,AB+,89,pete@mail.com,06307830312,No
-Lindi Imre,67,Male,1990-07-23,Never,no,345345MJ,2016-01-01,A+,185,sdf@sdf.hu,06203453455,No
-Lindiii Imre,56,Male,1990-01-01,Never,no,345345GH,2018-10-10,A+,132,pontazok@freemail.hu,06205676756
-Sdg Sdh,900,Male,1900-12-12,Never,no,HGHGHG66,2020-12-12,B+,165,b@b.com,06309842872,No
-Ablak Ödön,66,Male,2011-01-01,2015-01-01,no,123456AS,2017-01-01,A+,194,masa@fs.com,06201112222,no
-Nem Adom Meg,65,Male,2016-04-02,Never,no,123456SS,2015-12-01,A+,148,agtr@tt.com,06201112222,yes
-No Name,44,Male,2016-04-21,2014-03-05,no,434322GG,2017-01-01,A+,120,arte@mpa.hu,06201112233,yes
-Tóth József,67,Male,1990-02-02,Never,no,345345GH,2016-10-10,A+,121,po@g.hu,06203453455,no
-Jg Fdg,913,Female,1992-12-12,never,yes,ZQJAHH90,2020-05-22,AB-,147,blaah@hmhm.com,06309998211,no
-Sdfh Sdfh,49,Male,1000-12-12,never,no,HAHAHA66,2020-12-12,A-,116,sdgsdg@sdg.com,06309842871,no
-Dfhdf Shfsfh,50,Male,1200-12-12,never,no,ADASAS54,2020-12-12,AB-,128,asg@w.com,06309842871,yes
-Dfh Sh,50,Male,1800-12-12,never,no,MMMMMM55,2020-12-12,B+,166,bb@bb.com,06309842871,yes
-Adf Adfg,44,Male,2000-01-01,never,no,ASDFGH22,2015-01-01,A+,90,asdf@fea.hu,06201122112,no
+Molnár Attila,66,Male,1980-10-11,Never,Yes,543216CD,2020-11-11,A+,196,molnar.attila@cc.com,06305678911,Yes
+Bagoly Péter,55,Male,1995-01-12,Never,No,345612BA,2020-11-11,A+,160,peet.owl@hotmail.com,06307830312,No
+Hibas Vagyok,40,Male,1999-01-12,2015-10-01,Yes,567891CD,2015-10-01,AB+,189,newmail@lol.hu,06307089999,Yes
+Asdf Asdf,77,Male,1999-01-01,Never,No,123456AA,2015-12-01,0+,193,asdf@asdf.hu,06201112222,No
+Valaki John,77,Male,1991-01-01,Never,No,543211BB,2020-02-02,B-,153,vami@asd.hu,06201112222,No
+Normális Joe,95,Male,1910-01-01,Never,No,124356CC,2016-01-01,A+,147,fdsa@ff.hu,06302222111,Yes
+Bagoly Peter,49,Male,1999-11-11,2015-11-10,Yes,123456AB,2016-01-01,A+,97,peet@mail.com,06307830312,Yes
+Bagoly Péter,49,Male,1999-11-12,Never,Yes,123456AB,2014-01-12,A+,131,mail@mail.com,06307830312,No
+Bagoly Péter,55,Male,1995-01-01,Never,No,123454AB,2020-10-10,AB+,96,prer@mail.com,06308991111,No
+Bagoly Péter,49,Male,1999-11-11,Never,Yes,124523AB,2020-11-11,AB+,89,pete@mail.com,06307830312,No
+Lindi Imre,67,Male,1990-07-23,Never,No,345345MJ,2016-01-01,A+,185,sdf@sdf.hu,06203453455,No
+Lindiii Imre,56,Male,1990-01-01,Never,No,345345GH,2018-10-10,A+,132,pontazok@freemail.hu,06205676756
+Sdg Sdh,900,Male,1900-12-12,Never,No,HGHGHG66,2020-12-12,B+,165,b@b.com,06309842872,No
+Ablak Ödön,66,Male,2011-01-01,2015-01-01,No,123456AS,2017-01-01,A+,194,masa@fs.com,06201112222,No
+Nem Adom Meg,65,Male,2016-04-02,Never,No,123456SS,2015-12-01,A+,148,agtr@tt.com,06201112222,Yes
+No Name,44,Male,2016-04-21,2014-03-05,No,434322GG,2017-01-01,A+,120,arte@mpa.hu,06201112233,Yes
+Tóth József,67,Male,1990-02-02,Never,No,345345GH,2016-10-10,A+,121,po@g.hu,06203453455,No
+Jg Fdg,913,Female,1992-12-12,Never,Yes,ZQJAHH90,2020-05-22,AB-,147,blaah@hmhm.com,06309998211,No
+Sdfh Sdfh,49,Male,1000-12-12,Never,No,HAHAHA66,2020-12-12,A-,116,sdgsdg@sdg.com,06309842871,No
+Dfhdf Shfsfh,50,Male,1200-12-12,Never,No,ADASAS54,2020-12-12,AB-,128,asg@w.com,06309842871,Yes
+Dfh Sh,50,Male,1800-12-12,Never,No,MMMMMM55,2020-12-12,B+,166,bb@bb.com,06309842871,Yes
+Adf Adfg,44,Male,2000-01-01,Never,No,ASDFGH22,2015-01-01,A+,90,asdf@fea.hu,06201122112,No

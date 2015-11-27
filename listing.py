@@ -30,5 +30,7 @@ class ListingDataBase(object):
                     else:
                         print(" " * (25 - len(header)) + header + ": " + one_element)
                 print("-" * 52)
+                if i % 2 == 0 and i != 0:
+                    input()
             if not is_there_any_data:
                 print("Sorry, the database is empty...")

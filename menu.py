@@ -304,10 +304,10 @@ class Menu:
                 Menu.listing_menu(menu)
             elif key == 13:
                 if menu == 1:
-                    ListingDataBase.listing_database("Data/donations.csv")
+                    ListingDataBase.listing_database("Data/donors.csv")
                     input()
                 if menu == 2:
-                    ListingDataBase.listing_database("Data/donors.csv")
+                    ListingDataBase.listing_database("Data/donations.csv")
                     input()
                 if menu == 3:
                     Menu.select_menu(1)
