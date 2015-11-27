@@ -11,7 +11,6 @@ class ListingDataBase(object):
         with open(which_file, "r", encoding="utf-8") as csvfile:
             filereader = csv.reader(csvfile, delimiter=",", quotechar='"')
             is_first_row = True
-
             for i, row in enumerate(filereader):
                 if is_first_row:
                     first_row = row
