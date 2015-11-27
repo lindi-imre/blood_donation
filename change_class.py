@@ -198,6 +198,7 @@ class ChangeClass(object):
                 ChangeClass.print_preprocessor_donor(original, 0, header, which_result, -1)
 
         menu_number = 3
+        first_suitable_check = True
         while True:
             print("What would you like to change about this donor's data?\n")
             select = ChangeOptionsMenu.change_options(2, "  ", menu_number)
@@ -274,11 +275,28 @@ class ChangeClass(object):
                 elif ChangeClass.change_select_arrow == 11:
                     changed[which_result].phone_number = Switch.general_data_inputer([header[11],header[11],
                                 changed[which_result].phone_number,"Change"])
+
+                if first_suitable_check:
+                    changed[which_result].weight = Switch.general_data_inputer([header[1],header[1],
+                                changed[which_result].weight,"Test"])
+                    changed[which_result].birth_date = Switch.general_data_inputer([header[3],"Birth date (YYYY.MM.DD)",
+                                changed[which_result].birth_date,"Test"])
+                    changed[which_result].last_donation = Switch.general_data_inputer([header[4],
+                                "Last donation date (type 'never' if never before)",changed[which_result].last_donation,
+                                "Test"])
+                    changed[which_result].sick = Switch.general_data_inputer([header[5],"Were you sick in the last month?",
+                                changed[which_result].sick,"Test"])
+                    changed[which_result].expuniqeid = Switch.general_data_inputer([header[7],"Expiration date of your ID",
+                                changed[which_result].expuniqeid,"Test"])
+                    changed[which_result].hemoglobin = Switch.general_data_inputer([header[9],"Hemoglobin level",
+                                changed[which_result].hemoglobin,"Test"])
+                    first_suitable_check = False
                 changed[which_result].suitable = Validations.donor_suitable([changed[which_result].birth_date,
                                 changed[which_result].weight,changed[which_result].last_donation,
                                 changed[which_result].sick,changed[which_result].hemoglobin])
                 ChangeClass.print_preprocessor_donor(original,changed,header,which_result,-1)
                 print(changed[which_result].suitable[1])
+
             elif select == 3:
                 if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
                     save = SaveMenu.yes_no_menu_relative_position(2, "Do you really want to save?")

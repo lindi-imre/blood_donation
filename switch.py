@@ -27,6 +27,8 @@ class Switch(object):
         while input_data == "":
 
             if len(get_data) > 2 and get_data[len(get_data)-1] == "Test":
+                if type(get_data[-2]) == list:
+                    get_data[-2] = get_data[-2][0]
                 input_data = get_data[len(get_data)-2]
 
             elif get_data[len(get_data)-1] == "Change":
