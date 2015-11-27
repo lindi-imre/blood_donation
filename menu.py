@@ -257,10 +257,12 @@ class Menu:
             if key != 13:
                 if key == 49:
                     Search.search_in_file("Data/donors.csv")
-                    waiting = input()
+                    print("Press any key to exit to menu!")
+                    getch()
                 elif key == 50:
                     Search.search_in_file("Data/donations.csv")
-                    waiting = input()
+                    print("Press any key to exit to menu!")
+                    getch()
                 elif key == 51:
                     Menu.select_menu(1)
                 elif key == 72:
@@ -275,10 +277,12 @@ class Menu:
             elif key == 13:
                 if menu == 1:
                     Search.search_in_file("Data/donors.csv")
-                    waiting = input()
+                    print("Press any key to exit to menu!")
+                    getch()
                 elif menu == 2:
                     Search.search_in_file("Data/donations.csv")
-                    waiting = input()
+                    print("Press any key to exit to menu!")
+                    getch()
                 elif menu == 3:
                     Menu.select_menu(1)
                 Menu.search_menu(menu)
@@ -287,10 +291,12 @@ class Menu:
             if key != 13:
                 if key == 49:
                     ListingDataBase.listing_database("Data/donors.csv")
-                    input()
+                    print("Press any key to exit to menu!")
+                    getch()
                 elif key == 50:
                     ListingDataBase.listing_database("Data/donations.csv")
-                    input()
+                    print("Press any key to exit to menu!")
+                    getch()
                 elif key == 51:
                     Menu.select_menu(1)
                 elif key == 72:
@@ -305,10 +311,12 @@ class Menu:
             elif key == 13:
                 if menu == 1:
                     ListingDataBase.listing_database("Data/donors.csv")
-                    input()
+                    print("Press any key to exit to menu!")
+                    getch()
                 if menu == 2:
                     ListingDataBase.listing_database("Data/donations.csv")
-                    input()
+                    print("Press any key to exit to menu!")
+                    getch()
                 if menu == 3:
                     Menu.select_menu(1)
                 Menu.listing_menu(menu)

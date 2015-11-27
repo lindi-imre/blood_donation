@@ -2,10 +2,12 @@
 import csv
 import os.path
 import getpass
+from msvcrt import getch
 
 user_name = getpass.getuser()
 if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
     from colorama import Fore, Style
+
 
 class Search(object):
     @staticmethod
@@ -64,7 +66,7 @@ class Search(object):
                     print("-" * 52)
                     j += 1
                     if j % 2 == 0 and j != 0:
-                        input()
+                        getch()
         if num_of_find == 0:
             print("There is no data corresponding to this query...")
         return True
