@@ -24,7 +24,7 @@ class FileOperator(object):
         sql_command.append("SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE " + \
                      "`TABLE_SCHEMA`='" + database_name + "' AND `TABLE_NAME`='" + table_name[1:] + "';")
         sql_command.append("SELECT * FROM " + database_name + table_name + " WHERE " + where + " = '" + value + "';")
-        dbcon = mysql.connector.connect(user=user_name, password=user_password, host=server_name)
+        dbcon = mysql.connector.connect(user=user_name, password=user_password, host=server_name, database=database_name)
         cursor = dbcon.cursor()
         result = []
         header = []
@@ -200,7 +200,7 @@ class FileOperator(object):
             else:
                 sql_command += ", '" + str(one_data) + "'"
         sql_command += ");"
-        dbcon = mysql.connector.connect(user=user_name, password=user_password, host=server_name)
+        dbcon = mysql.connector.connect(user=user_name, password=user_password, host=server_name, database=database_name)
         cursor = dbcon.cursor()
         cursor.execute(sql_command)
         dbcon.close()
