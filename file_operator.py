@@ -23,17 +23,45 @@ class FileOperator(object):
         sql_command = []
         sql_command.append("SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE " + \
                      "`TABLE_SCHEMA`='" + database_name + "' AND `TABLE_NAME`='" + table_name[1:] + "';")
-        sql_command.append("SELECT * FROM " + database_name + table_name + " WHERE " + where + " = " + value + ";")
-        print(sql_command)
+        sql_command.append("SELECT * FROM " + database_name + table_name + " WHERE " + where + " = '" + value + "';")
         dbcon = mysql.connector.connect(user=user_name, password=user_password, host=server_name)
         cursor = dbcon.cursor()
-        for one_command in sql_command:
+        result = []
+        header = []
+        print(sql_command)
+        for i, one_command in enumerate(sql_command):
             cursor.execute(one_command)
             for cursor_message in cursor:
-                for one_message in cursor_message:
-                    print(one_message)
+                if i == 0:
+                    header.append(cursor_message[0])
+                else:
+                    result.append(cursor_message)
+        if len(result) != 0:
+            if len(result) == 1:
+                print("The result:")
+            elif len(result) > 1:
+                print("There are " + str(len(result)) + " results:")
+            print("-" * 52)
+            for i in range(len(result)):
+                is_first_element = True
+                for (head, one_element) in zip(header, result[i]):
+                    one_element = str(one_element)
+                    if is_first_element:
+                        print(str(i+1) + "." + " " * (24 - len(str(i+1)) - len(head)) + head + ": " + one_element)
+                        is_first_element = False
+                    else:
+                        print(" " * (25 - len(head)) + head + ": " + one_element)
+                print("-" * 52)
+            select = SaveMenuOldFashioned.save_menu(2, "Do you really want to delete?")
+            if select:
+                sql_command = "DELETE FROM " + database_name + table_name + " WHERE " + where + " = '" + value + "';"
+                cursor.execute(sql_command)
+                print("\nDeletion has been successfully finished.")
+        else:
+            print("There is no data corresponding to this query...")
+            print("The deletion was unsuccessful.")
         dbcon.close()
-        input()
+        time.sleep(2)
 
     @staticmethod
     def delete_from_csv_database(which_file, where, value):
