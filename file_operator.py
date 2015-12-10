@@ -1,4 +1,5 @@
 __author__ = 'Slezak Attila'
+import mysql.connector
 import os
 import csv
 import time
@@ -7,6 +8,35 @@ from save_menu_old import SaveMenuOldFashioned
 class FileOperator(object):
     @staticmethod
     def delete_from_database(which_file, where, value):
+        if FileOperator.csv_or_db() == 'db':
+            FileOperator.delete_from_sql_database(which_file, where, value)
+        else:
+            FileOperator.delete_from_csv_database(which_file, where, value)
+
+    @staticmethod
+    def delete_from_sql_database(which_file, where, value):
+        server_name, user_name, user_password, database_name = FileOperator.app_config_reader()
+        if where == 'id':
+            table_name = '.Event'
+        else:
+            table_name = '.Donor'
+        sql_command = []
+        sql_command.append("SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE " + \
+                     "`TABLE_SCHEMA`='" + database_name + "' AND `TABLE_NAME`='" + table_name[1:] + "';")
+        sql_command.append("SELECT * FROM " + database_name + table_name + " WHERE " + where + " = " + value + ";")
+        print(sql_command)
+        dbcon = mysql.connector.connect(user=user_name, password=user_password, host=server_name)
+        cursor = dbcon.cursor()
+        for one_command in sql_command:
+            cursor.execute(one_command)
+            for cursor_message in cursor:
+                for one_message in cursor_message:
+                    print(one_message)
+        dbcon.close()
+        input()
+
+    @staticmethod
+    def delete_from_csv_database(which_file, where, value):
         num_of_deletion = False
         result_lines = []
         with open(which_file, "r", encoding="utf-8") as csvfile:
@@ -76,6 +106,76 @@ class FileOperator(object):
             print("The deletion was unsuccessful.")
             time.sleep(2)
 
+    @staticmethod
+    def save_new_data(every_file_data, header, path):
+        if FileOperator.csv_or_db() == 'db':
+            FileOperator.save_new_data_db(every_file_data, header, path)
+        else:
+            FileOperator.save_new_data_csv(every_file_data, header, path)
+
+    @staticmethod
+    def save_new_data_csv(every_file_data, header, path):
+        header_exists = True
+        next_id = 1
+        file = open(path, "r", encoding='utf-8')
+        one_line = file.readline()
+        if 'donations' in path:
+            id_s = []
+            for line in file:
+                first_colon = line.find(",")
+                id_s.append(line[0:first_colon])
+            while str(next_id) in id_s:
+                next_id += 1
+        file.seek(0)
+        whole_file = file.read()
+        file.close()
+        if one_line != header:
+            header_exists = False
+        if not header_exists:
+            file = open(path, "w", encoding='utf-8')
+            file.write(header)
+            file.write(whole_file)
+            file.close()
+        file = open(path, "a", encoding='utf-8', newline="")
+        first = True
+        for one_data in every_file_data:
+            if first and 'donations' in path:
+                file.write(str(next_id) + "," + str(one_data))
+                first = False
+            elif first:
+                file.write(str(one_data))
+                first = False
+            else:
+                file.write("," + str(one_data))
+        file.write("\n")
+        file.close()
+
+    @staticmethod
+    def save_new_data_db(every_file_data, header, path):
+        table_name = ""
+        if 'donations' in path:
+            table_name = ".Event"
+            header = header[3:]
+        else:
+            table_name = ".Donor"
+        FileOperator.create_database()
+        server_name, user_name, user_password, database_name = FileOperator.app_config_reader()
+
+        sql_command = "INSERT INTO " + database_name + table_name + " ("+ header + ") VALUES ("
+        first = True
+        for one_data in every_file_data:
+            if first:
+                sql_command += "'" + str(one_data) + "'"
+                first = False
+            elif one_data == 'Never' and 'donors' in path:
+                sql_command += ", " + "NULL"
+            else:
+                sql_command += ", '" + str(one_data) + "'"
+        sql_command += ");"
+        dbcon = mysql.connector.connect(user=user_name, password=user_password, host=server_name)
+        cursor = dbcon.cursor()
+        cursor.execute(sql_command)
+        dbcon.close()
 
     @staticmethod
     def save_changes(file_path, file_line_number, changed_obj):
@@ -125,3 +225,50 @@ class FileOperator(object):
                     file.write("," + str(one_data))
             file.write("\n")
         file.close()
+
+    @staticmethod
+    def csv_or_db():
+        file = open('app.config', 'r', encoding='utf-8')
+        get_file = file.read()
+        file.close()
+        for i in range(3):
+            where_is_data = get_file.find('"')
+            get_file = get_file[where_is_data + 1:]
+        if get_file[:2] == 'db':
+            return 'db'
+        else:
+            return 'csv'
+
+    @staticmethod
+    def app_config_reader():
+        app_config_data_types = ['Server=', 'Uid=', 'Pwd=', 'Database=']
+        app_config_values = []
+        file = open('app.config', 'r', encoding='utf-8')
+        app_file = file.read()
+        file.close()
+        for what in app_config_data_types:
+            where_is_data = app_file.find(what)
+            data_value = app_file[where_is_data + len(what):]
+            where_is_data = data_value.find(';')
+            app_config_values.append(data_value[:where_is_data])
+        return app_config_values
+
+    @staticmethod
+    def create_database():
+        create_files = ['create_db.sql', 'create_donor.sql', 'create_event.sql', 'create_relations.sql']
+        sql_commands = []
+        server_name, user_name, user_password, database_name = FileOperator.app_config_reader()
+
+        for one_file in create_files:
+            file = open('Data/' + one_file, 'r', encoding='utf-8')
+            sql_commands.append(file.read())
+            file.close()
+        dbcon = mysql.connector.connect(user=user_name, password=user_password, host=server_name)
+        cursor = dbcon.cursor()
+        for one_command in sql_commands:
+            if database_name != 'BloodDonationStorage':
+                where_is_database_name = one_command.find('BloodDonationStorage')
+                one_command = one_command[:where_is_database_name] + database_name + \
+                              one_command[where_is_database_name+20:]
+            cursor.execute(one_command)
+        dbcon.close()

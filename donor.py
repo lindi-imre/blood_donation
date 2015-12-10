@@ -4,6 +4,7 @@ __author__ = 'Péter'
 from switch import Switch
 from donor_validations import Validations
 from save_menu_old import SaveMenuOldFashioned
+from file_operator import FileOperator
 import os
 import time
 import getpass
@@ -19,12 +20,12 @@ class Person(object):
         test_variable = Switch.general_data_inputer(test_data)
         return test_variable
 
-    @staticmethod
-    def write_in_file(name,weight,gender,birth_date,last_donation,sick,uniqeid,expuniqeid,blood_type,hemoglobin,email,phone_number,suitable):
-        file = open("Data/donors.csv", "a", encoding='utf-8')
-        file.write(str(name) + "," + str(weight[0]) + "," + str(gender) + "," + str(birth_date[0]) + "," + str(last_donation[0]) + "," \
-        + str(sick[0]) + "," + str(uniqeid[1]) + "," + str(expuniqeid[0]) + "," + str(blood_type) + "," + str(hemoglobin[0]) + "," \
-        + str(email) + "," + str(phone_number) + "," + str(suitable[0]) + "\n")
+    # @staticmethod
+    # def write_in_file(name,weight,gender,birth_date,last_donation,sick,uniqeid,expuniqeid,blood_type,hemoglobin,email,phone_number,suitable):
+    #     file = open("Data/donors.csv", "a", encoding='utf-8')
+    #     file.write(str(name) + "," + str(weight[0]) + "," + str(gender) + "," + str(birth_date[0]) + "," + str(last_donation[0]) + "," \
+    #     + str(sick[0]) + "," + str(uniqeid[1]) + "," + str(expuniqeid[0]) + "," + str(blood_type) + "," + str(hemoglobin[0]) + "," \
+    #     + str(email) + "," + str(phone_number) + "," + str(suitable[0]) + "\n")
 
     @staticmethod
     def donor_register_app():
@@ -69,7 +70,11 @@ class Person(object):
             save = SaveMenuOldFashioned.save_menu(2, "Do you want to save?")
             print()
         if save:
-            Person.write_in_file(name, weight, gender, birth_date, last_donation, sick, uniqeid, expuniqeid, blood_type\
-                                 , hemoglobin, email, phone_number, suitable)
+            every_file_data = [str(name), str(weight[0]), str(gender), str(birth_date[0]), str(last_donation[0]),
+                               str(sick[0]), str(uniqeid[1]), str(expuniqeid[0]), str(blood_type), str(hemoglobin[0]),
+                               str(email), str(phone_number), str(suitable[0])]
+            header = "name,weight,gender,date_of_birth,last_donation,last_month_sickness,unique_identifier," + \
+                     "expiration_of_id,blood_type,hemoglobin,email,mobil,is_suitable"
+            FileOperator.save_new_data(every_file_data, header, 'Data/donors.csv')
             print("Save was successful!")
             time.sleep(2)

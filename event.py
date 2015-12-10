@@ -5,6 +5,7 @@ import os.path
 from switch import Switch
 from event_calculations import EventCalculations
 from save_menu_old import SaveMenuOldFashioned
+from file_operator import FileOperator
 import os
 import time
 import getpass
@@ -19,43 +20,6 @@ class Event(object):
     def test_mod(test_data):
         test_variable = Switch.general_data_inputer(test_data)
         return test_variable
-
-    @staticmethod
-    def write_in_file(every_file_data):
-        header = "id,date_of_event,start_time,end_time,zip_code,city,address,number_of_available_beds,"
-        header += "planned_donor_number,final_donor_number\n"
-        header_exists = True
-        next_id = 1
-        id_s = []
-        file = open("Data/donations.csv", "r", encoding='utf-8')
-        one_line = file.readline()
-        for line in file:
-            first_colon = line.find(",")
-            id_s.append(line[0:first_colon])
-        while str(next_id) in id_s:
-            next_id += 1
-        file.seek(0)
-        whole_file = file.read()
-        file.close()
-        if one_line != header:
-            header_exists = False
-        if not header_exists:
-            file = open("Data/donations.csv", "w", encoding='utf-8')
-            file.write(header)
-            file.write(whole_file)
-            file.close()
-        file = open("Data/donations.csv", "a", encoding='utf-8', newline="")
-        first = True
-        for one_data in every_file_data:
-            if first:
-                file.write(str(next_id) + "," + str(one_data))
-                first = False
-            else:
-                file.write("," + str(one_data))
-        file.write("\n")
-        file.close()
-        return
-
 
     @staticmethod
     def event_data():
@@ -102,6 +66,8 @@ class Event(object):
             every_file_data = [str(date_of_event).replace("-", "."), str(start_time)[:len(str(start_time))-3],\
                                str(end_time)[:len(str(end_time))-3], zip_code, city, address, available_beds, \
                                planned_donor_number, final_donor_number]
-            Event.write_in_file(every_file_data)
+            header = "id,date_of_event,start_time,end_time,zip_code,city,address,number_of_available_beds," + \
+                     "planned_donor_number,final_donor_number\n"
+            FileOperator.save_new_data(every_file_data, header, 'Data/donations.csv')
             print("Save was successful!")
             time.sleep(2)
