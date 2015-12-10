@@ -295,8 +295,9 @@ class FileOperator(object):
         cursor = dbcon.cursor()
         for one_command in sql_commands:
             if database_name != 'BloodDonationStorage':
-                where_is_database_name = one_command.find('BloodDonationStorage')
-                one_command = one_command[:where_is_database_name] + database_name + \
-                              one_command[where_is_database_name+20:]
+                while one_command.find('BloodDonationStorage') != -1:
+                    where_is_database_name = one_command.find('BloodDonationStorage')
+                    one_command = one_command[:where_is_database_name] + database_name + \
+                                one_command[where_is_database_name+20:]
             cursor.execute(one_command)
         dbcon.close()
