@@ -64,3 +64,6 @@ target/
 
 .idea/
 __pycache__/
+app.config
+Data/donors.csv
+Data/donations.csv
