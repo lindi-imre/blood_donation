@@ -11,6 +11,7 @@ from event_calculations import EventCalculations
 from donor_validations import Validations
 from save_menu_old import SaveMenuOldFashioned
 from file_operator import FileOperator
+import mysql.connector
 import getpass
 import os.path
 import time
@@ -27,10 +28,53 @@ class ChangeClass(object):
 
     @staticmethod
     def search_in_ids(id):
+        if FileOperator.csv_or_db() == 'db':
+            ChangeClass.search_in_ids_db(id)
+        else:
+            ChangeClass.search_in_ids_csv(id)
+
+    @staticmethod
+    def search_in_ids_db(id):
+        server_name, user_name, user_password, database_name = FileOperator.app_config_reader()
+        original, changed, sql_command, line, header, table_name = [], [], [], [], [], ""
+        if id.isdigit():
+            table_name, id_name = ".Event", "id"
+        elif (id[:6].isdigit() and id[6:8].isalpha() and len(id) == 8) or (id[:6].isalpha() and id[6:8].isdigit() and len(id) == 8):
+            table_name, id_name = ".Donor", "unique_identifier"
+        else:
+            print("The input is not correct.")
+            time.sleep(1.5)
+            return
+        sql_command.append("SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE " + \
+                     "`TABLE_SCHEMA`='" + database_name + "' AND `TABLE_NAME`='" + table_name[1:] + "';")
+        sql_command.append("SELECT * FROM " + database_name + table_name + " WHERE " + id_name + " = '" + id + "';")
+        dbcon = mysql.connector.connect(user=user_name, password=user_password, host=server_name, database=database_name)
+        cursor = dbcon.cursor()
+        cursor.execute(sql_command[0])
+        for cursor_message in cursor:
+            header.append(cursor_message[0])
+        cursor.execute(sql_command[1])
+        for cursor_message in cursor:
+            for one_message in cursor_message:
+                line.append(str(one_message))
+            if id_name == "id":
+                original.append(EventObject(line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9]))
+                changed.append(EventObject(line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9]))
+                line = []
+            else:
+                original.append(DonorObject(line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9],line[10],line[11],line[12]))
+                changed.append(DonorObject(line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9],line[10],line[11],line[12]))
+                line = []
+        if id_name == 'id':
+            ChangeClass.change_process_event(original, changed, id)
+        else:
+            ChangeClass.change_process_donor(original, changed, id)
+
+    @staticmethod
+    def search_in_ids_csv(id):
         file_line_number = -1
         # id = input("Search ID: ")
-        original = []
-        changed = []
+        original, changed = [], []
         if id.isdigit():
             file = open("Data/donations.csv", "r", encoding="utf-8")
             reader = csv.reader(file)

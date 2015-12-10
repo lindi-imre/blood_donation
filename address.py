@@ -6,7 +6,7 @@ class Address(object):
 
     @staticmethod
     def validate_city(city):
-        available_cities = ('miskolc', 'szerencs', 'sarospatak', 'kazincbarcika')
+        available_cities = ('miskolc', 'szerencs', 'sárospatak', 'kazincbarcika')
         if city.lower() in available_cities:
             return True
         else:

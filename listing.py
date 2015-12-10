@@ -20,15 +20,12 @@ class ListingDataBase(object):
             table_name = '.Donor'
         else:
             table_name = '.Event'
-        sql_command = []
+        sql_command, result, header = [], [], []
         sql_command.append("SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE " + \
                      "`TABLE_SCHEMA`='" + database_name + "' AND `TABLE_NAME`='" + table_name[1:] + "';")
         sql_command.append("SELECT * FROM " + database_name + table_name)
-        dbcon = mysql.connector.connect(user=user_name, password=user_password, host=server_name)
+        dbcon = mysql.connector.connect(user=user_name, password=user_password, host=server_name, database=database_name)
         cursor = dbcon.cursor()
-        result = []
-        header = []
-        print(sql_command)
         for i, one_command in enumerate(sql_command):
             cursor.execute(one_command)
             for cursor_message in cursor:
@@ -38,24 +35,16 @@ class ListingDataBase(object):
                     result.append(cursor_message)
         if len(result) != 0:
             if len(result) == 1:
-                print("The result:")
+                print("There is only one result:")
             elif len(result) > 1:
                 print("There are " + str(len(result)) + " results:")
             print("-" * 52)
             for i in range(len(result)):
-                is_first_element = True
-                for (head, one_element) in zip(header, result[i]):
-                    one_element = str(one_element)
-                    if is_first_element:
-                        print(str(i+1) + "." + " " * (24 - len(str(i+1)) - len(head)) + head + ": " + one_element)
-                        is_first_element = False
-                    else:
-                        print(" " * (25 - len(head)) + head + ": " + one_element)
-                print("-" * 52)
+                ListingDataBase.printer(i + 1, header, result[i])
         else:
             print("There is no data corresponding to this query...")
         dbcon.close()
-        input()
+        getch()
 
     @staticmethod
     def listing_database_csv(which_file):
@@ -72,17 +61,21 @@ class ListingDataBase(object):
                         first_row[i] = header[0].upper() + header[1:]
                     is_first_row = False
                     continue
-
                 is_there_any_data = True
-                is_first_element = True
-                for (header, one_element) in zip(first_row, row):
-                    if is_first_element:
-                        print(str(i) + "." + " " * (24 - len(str(i)) - len(header)) + header + ": " + one_element)
-                        is_first_element = False
-                    else:
-                        print(" " * (25 - len(header)) + header + ": " + one_element)
-                print("-" * 52)
-                if i % 2 == 0 and i != 0:
-                    getch()
-            if not is_there_any_data:
-                print("Sorry, the database is empty...")
+                ListingDataBase.printer(i, first_row, row)
+        if not is_there_any_data:
+            print("Sorry, the database is empty...")
+
+    @staticmethod
+    def printer(i, first_row, row):
+        is_first_element = True
+        for (head, one_element) in zip(first_row, row):
+            one_element = str(one_element)
+            if is_first_element:
+                print(str(i) + "." + " " * (24 - len(str(i)) - len(head)) + head + ": " + one_element)
+                is_first_element = False
+            else:
+                print(" " * (25 - len(head)) + head + ": " + one_element)
+        print("-" * 52)
+        if i % 2 == 0 and i != 0:
+            getch()
