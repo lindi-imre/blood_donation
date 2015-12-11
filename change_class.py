@@ -62,13 +62,16 @@ class ChangeClass(object):
                 changed.append(EventObject(line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9]))
                 line = []
             else:
-                original.append(DonorObject(line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9],line[10],line[11],line[12]))
-                changed.append(DonorObject(line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9],line[10],line[11],line[12]))
+                original.append(DonorObject(line[0],line[1],line[2],line[3],str(line[4]).replace("None", "Never"),line[5],line[6],line[7],line[8],line[9],line[10],line[11],line[12]))
+                changed.append(DonorObject(line[0],line[1],line[2],line[3],str(line[4]).replace("None", "Never"),line[5],line[6],line[7],line[8],line[9],line[10],line[11],line[12]))
                 line = []
-        if id_name == 'id':
+        if id_name == 'id' and original:
             ChangeClass.change_process_event(original, changed, [id, header])
-        else:
+        elif original:
             ChangeClass.change_process_donor(original, changed, [id, header])
+        else:
+            print("Not included in the database.")
+            time.sleep(1.5)
 
     @staticmethod
     def search_in_ids_csv(id):
@@ -359,7 +362,7 @@ class ChangeClass(object):
                             print("Save was successful!")
                         time.sleep(2)
                         break
-                    except:
+                    except ValueError:
                         if os.path.isfile("C:/Users/" + user_name + "/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/colorama-0.3.3-py3.5.egg"):
                             print(Fore.RED + "Unfortunately, save was unsuccessful!" + Style.RESET_ALL)
                         else:
