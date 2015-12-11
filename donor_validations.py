@@ -227,7 +227,7 @@ class Validations(object):
     def donor_suitable(is_suitable):
         notsuitableprefix = ""
         for one_data in is_suitable:
-            if one_data and len(one_data) > 1:
+            if len(one_data) > 1:
                 if notsuitableprefix == "":
                     notsuitableprefix = "The donor is not suitable because: " + one_data[1]
                 else:
