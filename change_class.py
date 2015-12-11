@@ -66,9 +66,9 @@ class ChangeClass(object):
                 changed.append(DonorObject(line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9],line[10],line[11],line[12]))
                 line = []
         if id_name == 'id':
-            ChangeClass.change_process_event(original, changed, id)
+            ChangeClass.change_process_event(original, changed, [id, header])
         else:
-            ChangeClass.change_process_donor(original, changed, id)
+            ChangeClass.change_process_donor(original, changed, [id, header])
 
     @staticmethod
     def search_in_ids_csv(id):

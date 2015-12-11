@@ -213,7 +213,7 @@ class FileOperator(object):
                           str(changed_obj.end_time), changed_obj.zip_code, changed_obj.city, changed_obj.address,
                           changed_obj.available_beds, changed_obj.planned_donor_number, changed_obj.final_donor_number]
             for j in range(len(change_val)):
-                if j == 1:
+                if j == 1 and FileOperator.csv_or_db() == 'csv':
                     change_val[j] = str(change_val[j]).replace("-", ".")
                 elif j in [2, 3] and len(str(change_val[j])) > 5:
                     change_val[j] = str(change_val[j])[:len(str(change_val[j]))-3]
@@ -229,9 +229,32 @@ class FileOperator(object):
                         change_val[j] = change_val[j][1]
                     else:
                         change_val[j] = change_val[j][0]
-                if j in [3, 4, 7]:
+                if j in [3, 4, 7] and FileOperator.csv_or_db() == 'csv':
                     change_val[j] = str(change_val[j]).replace("-", ".")
+        if FileOperator.csv_or_db() == 'db':
+            FileOperator.save_changes_db(file_path, file_line_number, change_val)
+        else:
+            FileOperator.save_changes_csv(file_path, file_line_number, change_val)
 
+    @staticmethod
+    def save_changes_db(file_path, id_and_header, change_val):
+        server_name, user_name, user_password, database_name = FileOperator.app_config_reader()
+        if 'donors' in file_path:
+            table_name, id_name = '.Donor', 'unique_identifier'
+        else:
+            table_name, id_name = '.Event', 'id'
+        sql_command = "UPDATE " + database_name + table_name + " SET "
+        for one_header, one_value in zip(id_and_header[1], change_val):
+            sql_command += one_header + " = '" + one_value + "' AND "
+        sql_command = sql_command[0:len(sql_command)-4] + "WHERE " + id_name + " = '" + id_and_header[0] + "';"
+        print(sql_command)
+        dbcon = mysql.connector.connect(user=user_name, password=user_password, host=server_name, database=database_name)
+        cursor = dbcon.cursor()
+        cursor.execute(sql_command)
+        dbcon.close()
+
+    @staticmethod
+    def save_changes_csv(file_path, file_line_number, change_val):
         file = open(file_path, "r", encoding='utf-8')
         reader = csv.reader(file)
         lines_in_file = []
