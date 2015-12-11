@@ -245,11 +245,8 @@ class FileOperator(object):
             table_name, id_name = '.Event', 'id'
         sql_command = "UPDATE " + database_name + table_name + " SET "
         for one_header, one_value in zip(id_and_header[1], change_val):
-            print(one_header)
-            # if one_header != 'id':
             sql_command += one_header + " = '" + one_value + "', "
         sql_command = sql_command[0:len(sql_command)-2] + " WHERE " + id_name + " = '" + id_and_header[0] + "';"
-        print(sql_command)
         dbcon = mysql.connector.connect(user=user_name, password=user_password, host=server_name, database=database_name)
         cursor = dbcon.cursor()
         cursor.execute(sql_command)
