@@ -4,6 +4,8 @@ from random import randint
 from check_date_format import CheckDateFormat
 from datetime import datetime, timedelta
 from name_correct_form import NameFormat
+from file_operator import FileOperator
+import mysql.connector as sql
 import csv
 
 
@@ -32,8 +34,9 @@ class Validations(object):
 
     @staticmethod
     def validate_gender(gender):
+        gender = gender.lower()
         enable_genders = ["male", "m", "female", "f"]
-        if not gender.lower() in enable_genders:
+        if not gender in enable_genders:
             print("Enter your gender like an example: 'm', 'male', 'f', 'female'")
             return False
         elif len(gender) == 1:
@@ -43,16 +46,29 @@ class Validations(object):
 
     @staticmethod
     def check_uniqeid_exist(uniqeid):
-        file = open("Data/donors.csv", "r", encoding="utf-8")
-        reader = csv.reader(file)
-        for line in reader:
-            if len(line) != 0 and uniqeid.upper() == line[6].upper():
+        uniqeid = uniqeid.upper()
+        if FileOperator.csv_or_db() == "db":
+            server_name, user_name, user_password, database_name = FileOperator.app_config_reader()
+            db = sql.connect(host=server_name,user=user_name,password=user_password,charset='utf8',use_unicode=True, autocommit=True)
+            cursor = db.cursor()
+            query_in_users_exist = "SELECT unique_identifier FROM BloodDonationStorage.Donor WHERE unique_identifier = '"+uniqeid+"';"
+            cursor.execute(query_in_users_exist)
+            allusers = cursor.fetchall()
+            if allusers:
                 print("Already in the database.")
-                file.close()
                 return False
-        file.close()
-        return True
-
+            else:
+                return True
+        else:
+            file = open("Data/donors.csv", "r", encoding="utf-8")
+            reader = csv.reader(file)
+            for line in reader:
+                if len(line) != 0 and uniqeid == line[6].upper():
+                    print("Already in the database.")
+                    file.close()
+                    return False
+            file.close()
+            return True
     @staticmethod
     def validate_uniqeid(uniqeid):
         if uniqeid[:6].isdigit() and uniqeid[6:8].isalpha() and len(uniqeid) == 8:
